@@ -1,0 +1,85 @@
+libaam_code - a library for efficient fitting of active appearance models
+=========================================================================
+
+  This is a C++ implementation of the method CODE in [Amberg09]. CODE is a
+  compositional appearance model fitter using gradient descent in a suitable
+  prepared compositional space. It is much more robust than "Inverse
+  Compositional Image Alignment (ICIA)" while being about as fast. 
+
+  The most current version of this library can be found at
+  http://www.cs.unibas.ch/personen/amberg_brian/aam/
+
+Prerequisites
+=============
+  - Blas, Lapack
+  - Cmake
+  - Matlab
+  - Boost
+
+  Only the fitting algorithms have been ported to C++, learning and
+  precomputation are done with matlab. You will therefore need matlab to learn
+  new active appearance models. An active apperance model of a face is included
+  in this distribution.
+
+  The algorithm relies on BLAS+LAPACK for its matrix operations. You will
+  therefore need a working BLAS+LAPACK installation. The algorithm was tested
+  with the Atlas and MKL implementations under 64 bit Linux.
+
+  The build system used is cmake, so you will also require a cmake installation.
+
+  And the example applications use boost to parse the commandline, so you also
+  need a boost installation.
+
+Installation
+============
+
+Linux
+-----
+    tar -xvvjf libaam_code-1.0.tar.bz2
+    cd libaam_code
+    make
+
+  will compile libaam_code in the directory ../build, install it to ../install.
+  
+  You can then run the example application in ../install/share/doc/aam_code_mex/example/
+ 
+  You can edit Makefile to change the installation directory. If you do that after the first compilation
+  you need to remove the directory ../build.
+ 
+  add the directory ../install/matlab/code-1 to your matlab search path to be
+  able to create new AAMs. See ../install/share/doc/aam_code_mex/example/*.m
+  for a usage example.
+
+Apple Macintosh
+---------------
+  The library was not tested under the Apple OS
+
+
+Windows
+-------
+  The library was not tested under windows
+
+Usage
+=====
+  After building you can refer to ../install/share/doc/libcode/ for usage instructions.
+
+Licence
+=======
+
+Usage Restriction
+-----------------
+  I am releasing the code under the LGPL with the additional restrictions that you
+  may freely use this software and data, as long as you 
+    (1) cite the above paper
+    (2) redistribute this usage restriction
+    (3) do not hold me or the university liable for any kind of damage
+
+Other licences
+--------------
+  In this package I also ship the ppmb_io library from John Burkardt, which is distributed under the GNU LGPL licence.
+
+Bibliography
+============
+  [Amberg09] On Compositional Image Alignment with an Application to Active Appearance Models
+             Brian Amberg, Andrew Blake and Thomas Vetter
+             IN: CVPR'09, IEEE International Conference on Computer Vision and Pattern Recognition, Miama, USA, June. 2009a
