@@ -1,5 +1,5 @@
-classdef TM_Igo < TM
-  %TM_IGO Summary of this class goes here
+classdef TM_Gi < TM
+  %TM_Gi Summary of this class goes here
   %   Detailed explanation goes here
   
   properties
@@ -9,10 +9,10 @@ classdef TM_Igo < TM
   end
   
   methods
-    function obj = TM_Igo(img,n_img,mask,n_face_pixels,res,mask2,n_face_pixels2,smoother,g_type)
+    function obj = TM_Gi(img,n_img,mask,n_face_pixels,res,mask2,n_face_pixels2,smoother,g_type)
       obj@TM(mask,n_face_pixels,res,mask2,n_face_pixels2,smoother);
       
-      obj.pca = PCA_Noncent();
+      obj.pca = PCA_C();
       
       obj.g_type = g_type;
       
@@ -20,11 +20,11 @@ classdef TM_Igo < TM
       
       obj.n_ch = 2*n_img_ch;
       
-      igo_tex = obj.TransformAll(img,n_img,n_img_ch);
+      gi_tex = obj.TransformAll(img,n_img,n_img_ch);
       
-      [obj.mu,obj.pc,obj.ev,obj.n_pc] = obj.pca.Compute(igo_tex,n_img);
+      [obj.mu,obj.pc,obj.ev,obj.n_pc] = obj.pca.Compute(gi_tex,n_img);
       
-      obj.A = obj.Img2Tex(obj.Tex2Img2(obj.pc(:,2:end)));
+      obj.A = obj.Img2Tex(obj.Tex2Img2(obj.pc));
       [obj.A, ~] = qr(obj.A,0);
       
       obj.n_c = obj.n_pc;
@@ -32,8 +32,8 @@ classdef TM_Igo < TM
     
     igo_tex = Transform(obj,img,n_img_ch)
     
-    t = GetMean(obj);
-    t = ProjectOut(obj,t)
+    [t] = GetMean(obj);
+    t = ProjectOut(obj,t,n_c)
   end
 
 end
