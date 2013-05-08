@@ -1,5 +1,0 @@
-- Df_Igo & Igo classes are the same when training..
-- SIMILARITY inside of SM must be handled with PCA functions whenever possible!!!!
-- Color and align methods inside of tex and shape models? (Think about it...)
-- Check the derivative of igo-complex when xy are complex (Not sure is correct!!!!)
-- Think how to get a consistent ann from the different shape representation in euler shape model.
