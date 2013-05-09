@@ -38,8 +38,7 @@ classdef DS
       obj.n_parts = dB.n_parts;
     end
     
-    ann = getAnn(obj)
-    
+    ann = GetAnn(obj)
     ref_ann = ComputeRefAnn(obj)
   end
   

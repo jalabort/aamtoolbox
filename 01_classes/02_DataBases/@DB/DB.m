@@ -32,7 +32,6 @@ classdef DB
       dB_bin_path = [bin_root name '.mat'];
       if exist(dB_bin_path,'file')
         load(dB_bin_path,'obj');
-        display([obj.name ' binary DB ready to be used']);
       else
         obj.name = name;
         obj.bin_path = dB_bin_path;

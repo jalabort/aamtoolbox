@@ -14,6 +14,7 @@ function Build(obj,scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch)
   if exist(obj.bin_path,'file')
     delete(obj.bin_path);
   end
+  
   obj.scale = scale;
   obj.img_path = img_path;
   obj.ann_path = ann_path;
@@ -21,20 +22,24 @@ function Build(obj,scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch)
   obj.ann_type = ann_type;
   obj.n_vert = n_vert;
   obj.n_ch = n_ch;
-  assert(exist([ann_path 'tri.mat'],'file')==2,'Could not find tri.mat in');
-  load([ann_path 'tri.mat']);
+  
+  [~,aux_path] = strtok(fliplr(ann_path),filesep);
+  aux_path = fliplr(aux_path);
+  assert(exist([aux_path 'tri.mat'],'file')==2,'Could not find tri.mat in');
+  load([aux_path 'tri.mat']);
   obj.tri = tri;
   obj.n_tri = length(obj.tri);
-  assert(exist([ann_path 'comp.mat'],'file')==2,'Could not find comp.mat in');
-  load([ann_path 'comp.mat']);
+  assert(exist([aux_path 'comp.mat'],'file')==2,'Could not find comp.mat in');
+  load([aux_path 'comp.mat']);
   obj.comp = comp;
   obj.n_comp = length(obj.comp);
-  assert(exist([ann_path 'parts.mat'],'file')==2,'Could not find parts.mat in');
-  load([ann_path 'parts.mat']);
+  assert(exist([aux_path 'parts.mat'],'file')==2,'Could not find parts.mat in');
+  load([aux_path 'parts.mat']);
   obj.parts = parts;
   obj.n_parts = length(obj.parts);
+  
   assert(exist([ann_path 'list.mat'],'file')==2,'Could not find lists.mat in');
-  load([obj.ann_path 'list.mat']);
+  load([ann_path 'list.mat']);
   obj.list = list;
   
   save(obj.bin_path,'obj');
@@ -46,13 +51,13 @@ function Build(obj,scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch)
 
     for i = 1:n_ann
 
-      img_name = strtok(img_list(i).name,'.');
+      [~,img_name] = fileparts([img_path img_list(i).name]);
 
       img = imread([img_path img_list(i).name]);
-      img =  imresize(img,scale);
+      img = imresize(img,scale);
       
       ann = annread([ann_path ann_list(i).name], n_vert);
-      ann =  ann .* scale;
+      ann = ann .* scale;
 
       struct_name{i} = ['x' img_name];
       eval(sprintf([struct_name{i} '.img = img;']));

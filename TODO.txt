@@ -1,2 +1,3 @@
 - Implement WLCPA
 - Finish PCAs_Test for WLCPCA
+- Try to reimplement Stefanos PCA functions 

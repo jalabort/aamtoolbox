@@ -1,4 +1,4 @@
-function [ann] = getAnn(obj)
+function [ann] = GetAnn(obj)
   %GETANN Summary of this function goes here
   %   Detailed explanation goes here
   

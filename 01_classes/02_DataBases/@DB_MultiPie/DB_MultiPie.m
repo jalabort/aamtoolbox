@@ -10,6 +10,7 @@ classdef DB_MultiPie < DB
     function obj = DB_MultiPie(name,binRoot)
       obj = obj@DB(name,binRoot);
     end
+    
     [regExpQuery] = RegExpQuery(obj,id,exp,pose,light)
   end
   
