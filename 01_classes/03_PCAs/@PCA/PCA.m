@@ -3,13 +3,13 @@ classdef (Abstract) PCA
   %   Detailed explanation goes here
   
   methods (Static)
-    [mu,pc,ev,n_dim] = Compute(data,n_data)
+    [mu,pc,ev] = Compute(data)
     
-    [cov] = ComputeCovMatrix(data,n_data)
-    [pc,ev,n_dim] = ComputeFromCov(cov,n_data)
+    cov = ComputeCovMatrix(data)
+    [pc,ev] = ComputeFromCov(cov,data)
     
-    [coeff] = Data2Coeff(mu,pc,data)
-    [data] = Coeff2Data(mu,pc,coeff)
+    coeff = Data2Coeff(mu,pc,data)
+    data = Coeff2Data(mu,pc,coeff)
   end
   
 end

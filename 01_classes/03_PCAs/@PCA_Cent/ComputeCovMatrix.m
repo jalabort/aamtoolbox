@@ -1,7 +1,9 @@
-function [sigma] = ComputeCovMatrix(data,n_data)
+function [sigma] = ComputeCovMatrix(data)
   %COMPUTECOVMATRIX Summary of this function goes here
   %   Detailed explanation goes here
 
+  n_data = size(data,2);
+  
   mu = mean(data,2);
   data = data - repmat(mu,[1,n_data]);
 
@@ -12,4 +14,3 @@ function [sigma] = ComputeCovMatrix(data,n_data)
   end
   
 end
-

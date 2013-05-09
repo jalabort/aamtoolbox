@@ -1,12 +1,12 @@
-function [MU,PC,EV,nDim] = Compute(data,nData)
+function [mu,pc,ev] = Compute(data)
   %COMPUTE Summary of this function goes here
   %   Detailed explanation goes here
 
-  MU = mean(data,2);
-  centData = data - repmat(MU,[1,nData]);
+  n_data = size(data,2);
+  
+  mu = mean(data,2);
+  cent_data = data - repmat(mu,[1,n_data]);
 
-  [PC,EV] = myGPCA(centData,nData,0,0);   
-  nDim = length(EV);
+  [pc,ev] = myGPCA(cent_data,n_data,0,0);   
   
 end
-

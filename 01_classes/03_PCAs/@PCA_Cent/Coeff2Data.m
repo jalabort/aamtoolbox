@@ -5,4 +5,3 @@ function [data] = Coeff2Data(MU,PC,coeff)
   data = MU + PC(:,1:length(coeff)) * coeff;
   
 end
-

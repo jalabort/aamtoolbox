@@ -1,10 +1,11 @@
-function [MU,PC,EV,nDim] = Compute(data,nData)
+function [mu,pc,ev] = Compute(data)
   %COMPUTE Summary of this function goes here
   %   Detailed explanation goes here
-  
-  MU = [];
-  [PC, EV] = myGPCA(data,nData,0,0);    
-  nDim = length(EV);
 
+  n_data = size(data,2);
+  [pc,ev] = myGPCA(data,n_data,0,0);   
+  
+  mu = [];
+  
 end
 
