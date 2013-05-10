@@ -7,13 +7,15 @@ classdef RF
     
     tc
     n_vert
+    
     res
     n_pixels
     
+    xy
     mask1
-    mask2
+    n_face_pixels1
     
-    n_face_pixels1 
+    mask2 
     n_face_pixels2
     
     parts
@@ -21,11 +23,11 @@ classdef RF
   end
 
   methods
-    function obj = RF(ref_ann,parts,n_parts,erode1,erode2)
+    function obj = RF(ref_ann,parts,erode1,erode2)
       obj.ref_ann = ref_ann;
       obj.n_vert = size(ref_ann,1);
       obj.parts = parts;
-      obj.n_parts = n_parts;
+      obj.n_parts = length(parts);
       
       minimum = min(obj.ref_ann);
       maximum = max(obj.ref_ann);
@@ -38,6 +40,8 @@ classdef RF
       obj.n_face_pixels1 = length(find(obj.mask1==1));
       obj.mask2 = obj.ComputeMask(obj.parts{1},erode2); 
       obj.n_face_pixels2 = length(find(obj.mask2==1));
+      
+      [obj.xy(:,2),obj.xy(:,1)] = find(obj.mask1 == true);
     end
     
     mask = ComputeMask(obj,contour,erode)

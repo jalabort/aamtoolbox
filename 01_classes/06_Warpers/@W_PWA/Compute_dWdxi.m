@@ -1,8 +1,8 @@
-function [dw_dxy] = ComputeDWDXY(obj)
-  %COMPUTEDWDXY Summary of this function goes here
+function [dWdxi] = Compute_dWdxi(obj)
+  %COMPUTE_DWDXI Summary of this function goes here
   %   Detailed explanation goes here
 
-  dw_dxy = zeros(obj.rf.n_face_pixels,obj.rf.n_vert);
+  dWdxi = zeros(obj.rf.n_face_pixels,obj.rf.n_vert);
   
   for i = 1:obj.rf.n_vert
     
@@ -34,7 +34,7 @@ function [dw_dxy] = ComputeDWDXY(obj)
       dxy = zeros(obj.rf.res);
       dxy(sub2ind(obj.rf.res,y,x)) = (1 - alpha / den - beta / den);
       aux = dxy(obj.rf.mask);
-      dw_dxy(:,i) = dw_dxy(:,i) + aux;
+      dWdxi(:,i) = dWdxi(:,i) + aux;
     
     end
     

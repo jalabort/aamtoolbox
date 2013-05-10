@@ -39,10 +39,10 @@ classdef W_PWA < W
   end
   
   methods
-    function obj = W_PWA(rf,tri,n_tri,interp)
+    function obj = W_PWA(rf,tri,interp)
       obj = obj@W(rf,interp);
       obj.tri = tri;
-      obj.n_tri = n_tri;
+      obj.n_tri = size(tri,1);
       obj.tri_base = obj.ComputeTriBase();
       obj.sorted_tri = obj.SortTri();
       for i = 1:obj.n_tri
@@ -68,17 +68,6 @@ classdef W_PWA < W
     
     tri_base = ComputeTriBase(obj)
     sorted_tri = SortTri(obj)
-    
-    dw_dxy = ComputeDXDXY(obj)
-    
-    wimg = Warp(obj,ann,img,img_res)
-    wimg = Warp1Ch(obj,ann,img,img_res)
-    wimg = Warp2Ch(obj,ann,img,img_res)
-    wimg = Warp3Ch(obj,ann,img,img_res)
-    wimg = WarpOpt(obj,ann,img,img_res)
-    wimg = Warp1ChOpt(obj,ann,img,img_res)
-    wimg = Warp2ChOpt(obj,ann,img,img_res)
-    wimg = Warp3ChOpt(obj,ann,img,img_res)
   end
   
 end

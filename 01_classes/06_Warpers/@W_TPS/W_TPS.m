@@ -10,7 +10,7 @@ classdef W_TPS < W
     r
     K
     L
-    inv_L
+    invL
     
     k
   end
@@ -37,7 +37,7 @@ classdef W_TPS < W
       obj.L(1:end-3,end-2:end) = obj.S;
       obj.L(end-2:end,1:end-3) = obj.S';
       obj.L(1:end-3,1:end-3) = obj.K;
-      obj.inv_L = inv(obj.L);
+      obj.invL = inv(obj.L);
       
       r2 = zeros(rf.n_face_pixels2,rf.n_vert); 
       for v = 1:rf.n_vert
@@ -46,13 +46,7 @@ classdef W_TPS < W
       obj.k = [r2.^2 .* log(r2.^2),ones(obj.rf.n_face_pixels2,1),obj.pos(:,1),obj.pos(:,2)];
     end
     
-    W = GetWeights(obj,ann);
-    wimg = WarpOpt(obj,ann,img,img_res)
-    wimg = Warp1ChOpt(obj,ann,img)
-    wimg = Warp3ChOpt(obj,ann,img)
-    
-    dW_dxy = ComputeDWDXY(obj);
-    dW_dp = ComputeDWDXYQPR(obj,A,ann)
+    U = GetWeights(obj,ann);
     
     [qpr_ann,q,p,r] = UpdateAnn(obj,sm,ann,delta,q,p,r,H)
   end

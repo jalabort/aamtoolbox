@@ -1,5 +1,5 @@
-function [dW_dxy] = ComputeDWDXY(obj)
-  %COMPUTEDWDXY Summary of this function goes here
+function [dWdxi] = Compute_dWdxi(obj)
+  %COMPUTE_DWDXI Summary of this function goes here
   %   Detailed explanation goes here
 
   rSize = size(obj.r);
@@ -64,7 +64,7 @@ function [dW_dxy] = ComputeDWDXY(obj)
     
   end
 
-  dW_dxy = dw_dx;
+  dWdxi = dw_dx;
   
 end
 

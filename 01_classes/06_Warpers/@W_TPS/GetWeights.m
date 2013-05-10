@@ -3,6 +3,6 @@ function [W] = GetWeights(obj,ann)
   %   Detailed explanation goes here
   
   T = [ann; zeros(3,2)];
-  W = obj.inv_L * T;
+  W = obj.invL * T;
 
 end
