@@ -1,3 +1,10 @@
+- Implement method KillRotations for ShapeModel classes
+
 - Implement WLCPA
 - Finish PCAs_Test for WLCPCA
 - Try to reimplement Stefanos PCA functions 
+
+- Copy & structure multipie files to db
+- Write Build_Bin_MultiPie_DB
+
+- Finish Test_FaceDetectors

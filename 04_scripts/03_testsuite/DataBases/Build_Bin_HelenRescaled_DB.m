@@ -2,16 +2,17 @@ clear all
 close all
 clc
 
-bin_root = '../BinaryDataBases/';
-type = 'Test';
-ann = 'Original';
-name1 = 'HelenRescaled';
-name2 = [name1 '-' type '-' ann];
 
-db = DB(name2,bin_root);
+%% Build helen_rescaled binary databases
 
-img_path = ['../AnnotatedFaceImageDataBases/' name1 '/' type 'Images/'];
-ann_path = ['../AnnotatedFaceImageDataBases/' name1 '/' type 'Annotations/' ann '/'];
+bin_root = ['..' filesep 'binarydb' filesep];
+name = 'helen-rescaled';
+type = 'test';
+ann = 'original';
+db = DB([name '-' type  '-' ann],bin_root);
+
+img_path = [filesep 'data' filesep 'db' filesep name filesep 'images' filesep type filesep];
+ann_path = [filesep 'data' filesep 'db' filesep name filesep 'annotations'  filesep ann filesep type filesep];
 img_type = 'jpg';
 ann_type = 'pts';
 n_vert = 194;

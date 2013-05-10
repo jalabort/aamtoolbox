@@ -6,7 +6,7 @@ classdef S_None < S
   end
   
   methods
-    [sImg] = Run(obj,img)
+    [simg] = Run(obj,img)
   end
   
 end

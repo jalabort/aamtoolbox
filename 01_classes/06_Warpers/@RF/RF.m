@@ -10,10 +10,10 @@ classdef RF
     res
     n_pixels
     
-    mask
+    mask1
     mask2
     
-    n_face_pixels 
+    n_face_pixels1 
     n_face_pixels2
     
     parts
@@ -21,19 +21,22 @@ classdef RF
   end
 
   methods
-    function obj = RF(ref_ann,n_vert,parts,n_parts,erode)
+    function obj = RF(ref_ann,parts,n_parts,erode1,erode2)
       obj.ref_ann = ref_ann;
-      obj.n_vert = n_vert;
+      obj.n_vert = size(ref_ann,1);
       obj.parts = parts;
       obj.n_parts = n_parts;
+      
       minimum = min(obj.ref_ann);
       maximum = max(obj.ref_ann);
       obj.tc = obj.ref_ann - repmat(minimum-2,[obj.n_vert,1]);
+      
       obj.res = fliplr(ceil(maximum - minimum + 3));
       obj.n_pixels = obj.res(1) * obj.res(2);
-      obj.mask = obj.ComputeMask(obj.parts{1},erode); 
-      obj.n_face_pixels = length(find(obj.mask==1));
-      obj.mask2 = obj.ComputeMask2(obj.parts{1}); 
+      
+      obj.mask1 = obj.ComputeMask(obj.parts{1},erode1); 
+      obj.n_face_pixels1 = length(find(obj.mask1==1));
+      obj.mask2 = obj.ComputeMask(obj.parts{1},erode2); 
       obj.n_face_pixels2 = length(find(obj.mask2==1));
     end
     

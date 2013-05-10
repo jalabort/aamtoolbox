@@ -11,8 +11,6 @@ classdef S_Gaus < S
       siz = 2*sigma+1;
       obj.H = fspecial('gaussian',[siz siz],sigma);
     end
-    
-    [sImg] = Run(obj,img)
   end
   
 end

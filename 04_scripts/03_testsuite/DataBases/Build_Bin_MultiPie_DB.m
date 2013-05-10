@@ -2,18 +2,22 @@ clear all
 close all
 clc
 
-light = '06';
-bin_root = '..\BinaryDataBases\';
-name = ['MultiPIE-Light' light];
 
-db = DB_MultiPie(name,bin_root);
+%% Build lfpw binary databases
 
-img_path = ['..\AnnotatedFaceImageDataBases\MultiPIE\Light_' light '\'];
-ann_path = '..\AnnotatedFaceImageDataBases\MultiPIE\Annotations\Ours\';
-img_type = 'png';
-ann_type = 'pts';
-n_vert = 68;
-n_ch = 3;
-scale = 1;
+% bin_root = ['..' filesep 'binarydb' filesep];
+% name = 'multipie';
+% type = 'light05';
+% ann = 'our';
+% db = DB([name '-' type  '-' ann],bin_root);
+% 
+% img_path = [filesep 'data' filesep 'db' filesep name filesep 'images' filesep type filesep];
+% ann_path = [filesep 'data' filesep 'db' filesep name filesep 'annotations'  filesep ann filesep type filesep];
+% img_type = 'png';
+% ann_type = 'pts';
+% n_vert = 68;
+% n_ch = 3;
+% scale = 1;
+% 
+% db.Build(scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch);
 
-db.Build(scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch);

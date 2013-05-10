@@ -3,7 +3,7 @@ close all
 clc
 
 
-%% Build lfpw binary databases
+%% Build helen binary databases
 
 bin_root = ['..' filesep 'binarydb' filesep];
 name = 'helen';

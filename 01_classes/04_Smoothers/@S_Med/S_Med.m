@@ -10,8 +10,6 @@ classdef S_Med < S
     function obj = S_Med(sigma)
       obj.K = [sigma, sigma];
     end
-    
-    [sImg] = Run(obj,img)
   end
   
 end

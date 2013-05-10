@@ -1,8 +1,6 @@
-function [simg] = Run(obj,img)
+function [img] = Run(~,img)
   %RUN Summary of this function goes here
   %   Detailed explanation goes here
-  
-  simg = img;
 
 end
 
