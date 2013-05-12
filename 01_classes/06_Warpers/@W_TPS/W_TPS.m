@@ -3,8 +3,6 @@ classdef W_TPS < W
   %   Detailed explanation goes here
   
   properties
-    pos
-    
     S
     s
     r
@@ -18,8 +16,6 @@ classdef W_TPS < W
   methods
     function obj = W_TPS(rf,interp)
       obj = obj@W(rf,interp);
-      
-      [obj.pos(:,2),obj.pos(:,1)] = find(obj.rf.mask2 == true);
       
       obj.S = [ones(rf.n_vert,1),rf.tc];
       
@@ -39,11 +35,11 @@ classdef W_TPS < W
       obj.L(1:end-3,1:end-3) = obj.K;
       obj.invL = inv(obj.L);
       
-      r2 = zeros(rf.n_face_pixels2,rf.n_vert); 
+      r2 = zeros(rf.n_face_pixels1,rf.n_vert); 
       for v = 1:rf.n_vert
-        r2(:,v) = sqrt(sum((obj.pos - repmat(obj.rf.tc(v,:),[obj.rf.n_face_pixels2,1])).^2,2));
+        r2(:,v) = sqrt(sum((obj.rf.xy - repmat(obj.rf.tc(v,:),[obj.rf.n_face_pixels1,1])).^2,2));
       end
-      obj.k = [r2.^2 .* log(r2.^2),ones(obj.rf.n_face_pixels2,1),obj.pos(:,1),obj.pos(:,2)];
+      obj.k = [r2.^2 .* log(r2.^2),ones(obj.rf.n_face_pixels1,1),obj.rf.xy(:,1),obj.rf.xy(:,2)];
     end
     
     U = GetWeights(obj,ann);

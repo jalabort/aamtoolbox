@@ -2,7 +2,7 @@ function [wxy,xy] = Compute_Wxy(obj,ann,res)
 %Compute_Wxy Summary of this function goes here
 %   Detailed explanation goes here
 
-  xy = obj.pos;
+  xy = obj.rf.xy;
 
   U = obj.GetWeights(ann);
   wxy = obj.k * U;
