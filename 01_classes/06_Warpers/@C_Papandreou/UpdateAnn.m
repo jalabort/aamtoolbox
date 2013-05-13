@@ -1,35 +1,20 @@
-function [qpr_ann,q,p,r] = UpdateAnn(obj,sm,ann,delta,q,p,r)
-  %UPDATEANN Summary of this function goes here
+function [uann,p] = UpdateAnn(obj,sm,ann,delta,p)
+  %UpdateAnn Summary of this function goes here
   %   Detailed explanation goes here
   
-  vec_r = sm.VectorizeR(r);
-  dxdqpr = sm.Compute_dxdqpr();  
+  dWdp_u0 = sm.Compute_dudp();
+  [dWdp_up,A] = sm.Compute_dWdp_up();
+
+  dWdu_up = sm.Ann2Shape(obj.Compute_dWdu_up(A,ann)); 
+  block_dWdu_p = repmat(dWdu_up(:,1),[1,sm.n_p]);
+  block_dWdv_p = repmat(dWdu_up(:,2),[1,sm.n_p]); 
   
-  if sm.has_nwarp
-    % if warp defined as N(x;q) o W(x;p,r)
-    [A,~] = sm.Q2MatForm(q);
-    
-    dxdpr = sm.Compute_dxdpr();
-    dsdpr = A(1,1) * dxdpr + A(2,1) *  ...
-      [-dxdpr(1+obj.rf.n_vert:end,:);dxdpr(1:obj.rf.n_vert,:)];   
-    dWdqpr = [sm.Compute_dxdq(),dsdpr];
-  else
-    % warp defined as W(x;q,p,r)
-    A = [1,0;0,1];
-    
-    dWdqpr = dxdqpr;
-  end
-  
-  dWdui_qpr = sm.Ann2Shape(obj.Compute_dWdu_qpr(A,ann));
+  dWdu_up_x_dWdp_u0 = block_dWdu_p .* dWdp_u0 + block_dWdv_p .* dWdp_u0;
    
-  block_dWdu_qpr = repmat(dWdui_qpr(:,1),[1,sm.n_qpr]);
-  block_dWdv_qpr = repmat(dWdui_qpr(:,2),[1,sm.n_qpr]); 
-  dWdx_x_dWdqpr_0 = dxdqpr .* block_dWdu_qpr + dxdqpr .* block_dWdv_qpr;
-   
-  Jp = - (dWdqpr' * dWdqpr) \ dWdqpr' * dWdx_x_dWdqpr_0;
+  Jp = - (dWdp_up' * dWdp_up) \ dWdp_up' * dWdu_up_x_dWdp_u0;
   
-  qpr = [q;p;vec_r] + Jp * delta;
+  qpr = p + Jp * delta;
   
-  [qpr_ann,q,p,r] = sm.QPR2Ann(qpr);
+  [uann,p] = sm.P2Ann(qpr);
   
 end

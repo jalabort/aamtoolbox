@@ -1,5 +1,5 @@
-function [dWdu_qpr] = Compute_dWdu_qpr(obj,A,~)
-  %Compute_dWdu_qpr Summary of this function goes here
+function [dWdu_qpr] = Compute_dWdu_uqpr(obj,A,~)
+  %Compute_dWdu_uqpr Summary of this function goes here
   %   Detailed explanation goes here
 
   dWdu_qpr = zeros(obj.rf.n_vert,2,2);

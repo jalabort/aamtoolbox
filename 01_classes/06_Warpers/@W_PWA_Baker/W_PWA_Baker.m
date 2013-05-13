@@ -7,8 +7,7 @@ classdef W_PWA_Baker < W_PWA & C_Baker
       obj = obj@W_PWA(w.rf,w.tri,w.interp);
     end
     
-    [cann] = dWodW(obj,mu_ann,qpr_ann,ann)
-    [cann] = Compose_dWodW(obj,mu_ann,qpr_ann,ann)
+    [cann] = WoW(obj,mu_ann,qpr_ann,ann)
   end
   
 end

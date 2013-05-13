@@ -1,5 +1,5 @@
 function [wimg] = WarpDS(obj,ds)
-  %WARPDS Summary of this function goes here
+  %WarpDS Summary of this function goes here
   %   Detailed explanation goes here
   
   wimg = zeros([obj.rf.res,ds.n_ch,ds.n_data]);

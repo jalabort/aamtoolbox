@@ -1,6 +1,6 @@
 function [xy,uv_vec] = Compute_Wuv(obj,ann,res)
-%Compute_Wuv Summary of this function goes here
-%   Detailed explanation goes here
+  %Compute_Wuv Summary of this function goes here
+  %   Detailed explanation goes here
 
   U = obj.GetWeights(ann);
   xy = obj.k * U;

@@ -71,7 +71,7 @@ classdef W_PWA < W
     tri_base = ComputeTriBase(obj)
     sorted_tri = SortTri(obj)
     
-    [xy,uv] = Wxy(obj,ann,res);
+    [xy,uv] = Wuv(obj,ann,res);
   end
   
 end

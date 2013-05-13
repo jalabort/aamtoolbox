@@ -1,5 +1,5 @@
-function [cann] = dWodW(obj,mu_ann,qpr_ann,ann)
-  %DWODW Summary of this function goes here
+function [cann] = WoW(obj,mu_ann,qpr_ann,ann)
+  %WoW Summary of this function goes here
   %   Detailed explanation goes here
 
   cann = zeros(size(ann));

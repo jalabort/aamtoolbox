@@ -6,8 +6,6 @@ classdef W_PWA_Papandreou < W_PWA & C_Papandreou
     function obj = W_PWA_Papandreou(w)
       obj = obj@W_PWA(w.rf,w.tri,w.interp);
     end
-    
-    dWdui_qpr = Compute_dWdui_qpr(obj,A)
   end
   
 end

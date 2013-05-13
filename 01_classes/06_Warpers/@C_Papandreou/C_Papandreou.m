@@ -4,7 +4,7 @@ classdef (Abstract) C_Papandreou < C
   
   % Interface Class
   methods
-    dWdu_qpr = Compute_dWdu_qpr(obj,A,ann)
+    dWdu_qpr = Compute_dWdu_uqpr(obj,A,ann)
   end
   
 end

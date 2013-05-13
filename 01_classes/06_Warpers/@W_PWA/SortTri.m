@@ -1,5 +1,5 @@
 function [sorted_tri] = SortTri(obj)
-  %SORTTRI Summary of this function goes here
+  %SortTri Summary of this function goes here
   %   Detailed explanation goes here
   
   sorted_tri = num2cell(1:obj.rf.n_vert);

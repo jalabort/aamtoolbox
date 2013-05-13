@@ -1,11 +1,11 @@
 function [wimg] = Warp(obj,ann,img)
-%WARP Summary of this function goes here
-%   Detailed explanation goes here
+  %Warp Summary of this function goes here
+  %   Detailed explanation goes here
 
   [res(1),res(2),n_ch] = size(img);
   wimg = zeros([obj.rf.res,n_ch]);
   
-  [xy,uv_vec] = obj.Compute_Wxy(ann,res);
+  [xy,uv_vec] = obj.Compute_Wuv(ann,res);
 
   for i = 1:n_ch
     aux = zeros(obj.rf.res);

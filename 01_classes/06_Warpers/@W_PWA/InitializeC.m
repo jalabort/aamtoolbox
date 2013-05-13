@@ -1,5 +1,5 @@
 function [obj] = InitializeC(obj)
-  %INITIALIZEC Summary of this function goes here
+  %InitializeC Summary of this function goes here
   %   Detailed explanation goes here
   
   for i = 1:obj.n_tri

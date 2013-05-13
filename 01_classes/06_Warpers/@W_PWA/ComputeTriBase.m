@@ -1,5 +1,5 @@
 function [tri_base] = ComputeTriBase(obj)
-  %COMPUTETRIBASE Summary of this function goes here
+  %ComputeTriBase Summary of this function goes here
   %   Detailed explanation goes here
   
   tri_base = zeros(obj.rf.res);

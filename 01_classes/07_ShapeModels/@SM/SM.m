@@ -12,6 +12,7 @@ classdef (Abstract) SM
     
     mu_ann
       
+    n_q
     n_p
     n_qpr
     
@@ -19,18 +20,24 @@ classdef (Abstract) SM
   end
   
   methods
-    function obj = SM(n_vert)
-      obj.n_vert = n_vert;
+    function obj = SM(ann)
+      obj.n_vert = size(ann,1);
     end
     
     ann = Shape2Ann(obj,shape)
     shape = Ann2Shape(obj,ann)
     [x,y] = Shape2XY(obj,shape)
     
-    [p] = Shape2P(obj,shape)
-    [shape] = P2Shape(obj,p)
+    p = Shape2P(obj,shape)
+    shape = P2Shape(obj,p)
     
-    [dx_dp,dy_dp] = ComputeDXYDP(obj)
+    dxdq = Compute_dxdq(obj)
+    dxdp = Compute_dxdp(obj)
+    dxdr = Compute_dxdr(obj)
+    dxdpr = Compute_dxdpr(obj)
+    dxdqpr = Compute_dxdqpr(obj)
+    
+    dWdqpr = Compute_dWdqpr(obj,dw_dxy)
   end
 
   

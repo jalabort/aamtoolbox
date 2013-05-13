@@ -4,7 +4,7 @@ classdef (Abstract) C_Baker < C
   
   % Interface Class
   methods
-    cann = Compose_dWodW(obj,mu_ann,qpr_ann,ann)
+    cann = Compute_WoW(obj,mu_ann,qpr_ann,ann)
   end
   
 end

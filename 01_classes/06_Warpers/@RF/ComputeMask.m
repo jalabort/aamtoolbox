@@ -1,5 +1,5 @@
 function mask = ComputeMask(obj,contour,erode)
-  %COMPUTEMASK Summary of this function goes here
+  %ComputeMask Summary of this function goes here
   %   Detailed explanation goes here
   
   xy = obj.tc(contour,:);

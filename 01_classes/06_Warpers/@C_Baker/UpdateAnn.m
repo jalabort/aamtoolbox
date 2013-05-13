@@ -1,10 +1,10 @@
-function [qpr_ann,q,p,r] = UpdateAnn(obj,sm,ann,delta,q,p,r)
-  %UPDATEANN Summary of this function goes here
+function [uann,p] = UpdateAnn(obj,sm,ann,delta,p)
+  %UpdateAnnSummary of this function goes here
   %   Detailed explanation goes here
   
-  qpr_ann = sm.QPR2Ann(delta);
-  cann = obj.ComposeWarp(qpr_ann,sm.mu_ann,ann); 
-  [qpr_ann] = sm.ProjectAnn(cann);
+  uann = sm.P2Ann(delta);
+  cann = obj.Compute_WoW(uann,sm.mu_ann,ann); 
+  [uann] = sm.ProjectAnn(cann);
   
 end
 
