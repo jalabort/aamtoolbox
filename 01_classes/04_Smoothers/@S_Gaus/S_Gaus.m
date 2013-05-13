@@ -1,5 +1,5 @@
 classdef S_Gaus < S
-  %S_GAUS Summary of this class goes here
+  %S_Gaus Summary of this class goes here
   %   Detailed explanation goes here
   
   properties

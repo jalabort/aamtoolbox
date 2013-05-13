@@ -1,5 +1,5 @@
 function [regExpQuery] = RegExpQuery(obj,id,exp,pose,light)
-  %REGEXPQUERY Summary of this function goes here
+  %RegExpQuery Summary of this function goes here
   %   Detailed explanation goes here
   
   ids = '(';

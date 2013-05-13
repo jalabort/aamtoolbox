@@ -1,5 +1,5 @@
 classdef FD_Mat < FD
-  %FD_MAT Summary of this class goes here
+  %FD_Mat Summary of this class goes here
   %   Detailed explanation goes here
   
   properties

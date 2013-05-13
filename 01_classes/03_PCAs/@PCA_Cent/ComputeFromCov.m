@@ -1,5 +1,5 @@
 function [pc,ev] = ComputeFromCov(sigma,data)
-  %COMPUTEFROMCOV Summary of this function goes here
+  %ComputeFromCov Summary of this function goes here
   %   Detailed explanation goes here
   
   d1 = size(data,1);

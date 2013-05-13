@@ -1,5 +1,5 @@
 classdef DB_MultiPie < DB
-  %DB_MULTIPIE Summary of this class goes here
+  %DB_MultiPie Summary of this class goes here
   %   Detailed explanation goes here
   
   properties

@@ -1,15 +1,18 @@
 function Build(obj,scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch)
-  %BUILD Summary of this function goes here
+  %Build Summary of this function goes here
   %   Detailed explanation goes here
 
-  assert(exist(img_path,'dir')==7,'Specified image directory does not exist\n');
-  assert(exist(ann_path,'dir')==7,'Specified annotation directory does not exist\n');
+  assert(exist(img_path,'dir')==7, ...
+    'image directory does not exist\n');
+  assert(exist(ann_path,'dir')==7,...
+    'annotation directory does not exist\n');
   img_list = dir([img_path '*.' img_type]);
   ann_list = dir([ann_path '*.' ann_type]);
   n_img = length(img_list);
   n_ann = length(ann_list);
   
-  assert(n_img == n_ann,'Number of image and annotation files in DataBase must be related\n');
+  assert(n_img == n_ann, ... 
+    '# image and annotation files in db must be related\n');
   
   if exist(obj.bin_path,'file')
     delete(obj.bin_path);
@@ -25,20 +28,20 @@ function Build(obj,scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch)
   
   [~,aux_path] = strtok(fliplr(ann_path),filesep);
   aux_path = fliplr(aux_path);
-  assert(exist([aux_path 'tri.mat'],'file')==2,'Could not find tri.mat in');
+  assert(exist([aux_path 'tri.mat'],'file')==2,'tri.mat not found');
   load([aux_path 'tri.mat']);
   obj.tri = tri;
   obj.n_tri = length(obj.tri);
-  assert(exist([aux_path 'comp.mat'],'file')==2,'Could not find comp.mat in');
+  assert(exist([aux_path 'comp.mat'],'file')==2,'comp.mat not found');
   load([aux_path 'comp.mat']);
   obj.comp = comp;
   obj.n_comp = length(obj.comp);
-  assert(exist([aux_path 'parts.mat'],'file')==2,'Could not find parts.mat in');
+  assert(exist([aux_path 'parts.mat'],'file')==2,'parts.mat not found');
   load([aux_path 'parts.mat']);
   obj.parts = parts;
   obj.n_parts = length(obj.parts);
   
-  assert(exist([ann_path 'list.mat'],'file')==2,'Could not find lists.mat in');
+  assert(exist([ann_path 'list.mat'],'file')==2,'lists.mat  not found');
   load([ann_path 'list.mat']);
   obj.list = list;
   
@@ -46,7 +49,7 @@ function Build(obj,scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch)
   
   try
   
-    h = waitbar(0,sprintf('Building %s DataBase',obj.name));
+    h = waitbar(0,sprintf('building binary db %s',obj.name));
     struct_name = cell(n_ann,1);
 
     for i = 1:n_ann

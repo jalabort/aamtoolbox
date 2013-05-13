@@ -1,5 +1,5 @@
 function [sigma] = ComputeCovMatrix(data)
-  %COMPUTECOVMATRIX Summary of this function goes here
+  %ComputeCovMatrix Summary of this function goes here
   %   Detailed explanation goes here
 
   if size(data, 1)<size(data, 2)

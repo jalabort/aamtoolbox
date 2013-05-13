@@ -1,5 +1,5 @@
 function [ann] = GetAnn(obj)
-  %GETANN Summary of this function goes here
+  %GetAnnSummary of this function goes here
   %   Detailed explanation goes here
   
   ann = zeros(obj.n_vert,2,obj.n_data);

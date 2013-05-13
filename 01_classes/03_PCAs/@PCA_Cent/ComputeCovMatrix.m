@@ -1,5 +1,5 @@
 function [sigma] = ComputeCovMatrix(data)
-  %COMPUTECOVMATRIX Summary of this function goes here
+  %ComputeCovMatrix Summary of this function goes here
   %   Detailed explanation goes here
 
   n_data = size(data,2);

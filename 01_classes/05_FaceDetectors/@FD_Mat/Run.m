@@ -1,5 +1,5 @@
 function [ann,q,detected] = Run(obj,sm,img,~)
-  %RUN Summary of this function goes here
+  %Run Summary of this function goes here
   %   Detailed explanation goes here
   
   obj.detector.release();

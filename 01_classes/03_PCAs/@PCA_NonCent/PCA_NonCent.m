@@ -1,5 +1,5 @@
-classdef PCA_Noncent < PCA
-  %PCA_NONCENT Summary of this class goes here
+classdef PCA_NonCent < PCA
+  %PCA_NonCent Summary of this class goes here
   %   Detailed explanation goes here
   
   methods (Static)

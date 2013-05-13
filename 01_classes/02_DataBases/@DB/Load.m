@@ -1,5 +1,5 @@
 function [ds,loaded] = Load(obj,reg_exp_query)
-  %LOAD Summary of this function goes here
+  %Load Summary of this function goes here
   %   Detailed explanation goes here
 
   load(obj.bin_path,'obj');

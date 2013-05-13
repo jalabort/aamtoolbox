@@ -1,5 +1,5 @@
 classdef S_Med < S 
-  %S_MED Summary of this class goes here
+  %S_Med Summary of this class goes here
   %   Detailed explanation goes here
   
   properties
