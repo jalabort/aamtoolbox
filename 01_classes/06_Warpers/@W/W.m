@@ -13,10 +13,10 @@ classdef (Abstract) W
       obj.interp = interp;
     end
     
-    dWdxi = Compute_dWdxi(obj)
+    dWdui = Compute_dWdui(obj)
     [qpr_ann,q,p,r] = UpdateAnn(sm,ann,delta,q,p,r)
     
-    [Wxy,xy] = Compute_Wxy(obj,ann,res);
+    [xy,uv] = Compute_Wuv(obj,ann,res);
     wimg = Warp(obj,ann,img)
     wimg = WarpDS(obj,ds)
   end

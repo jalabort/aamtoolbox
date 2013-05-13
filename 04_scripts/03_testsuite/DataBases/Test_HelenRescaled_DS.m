@@ -8,7 +8,9 @@ clc
 disp('- DS test');
 
 % specify database
-bin_root = ['..' filesep 'binarydb' filesep];
+bin_root = ['..' ...
+  filesep 'binarydb' ...
+  filesep];
 name = 'helen-rescaled';
 type = 'train';
 ann = 'original';

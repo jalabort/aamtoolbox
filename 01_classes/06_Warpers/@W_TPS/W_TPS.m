@@ -37,15 +37,12 @@ classdef W_TPS < W
       
       r2 = zeros(rf.n_face_pixels1,rf.n_vert); 
       for v = 1:rf.n_vert
-        r2(:,v) = sqrt(sum((obj.rf.xy - repmat(obj.rf.tc(v,:),[obj.rf.n_face_pixels1,1])).^2,2));
+        r2(:,v) = sqrt(sum((obj.rf.uv - repmat(obj.rf.tc(v,:),[obj.rf.n_face_pixels1,1])).^2,2));
       end
-      obj.k = [r2.^2 .* log(r2.^2),ones(obj.rf.n_face_pixels1,1),obj.rf.xy(:,1),obj.rf.xy(:,2)];
+      obj.k = [r2.^2 .* log(r2.^2),ones(obj.rf.n_face_pixels1,1),obj.rf.uv(:,1),obj.rf.uv(:,2)];
     end
     
     U = GetWeights(obj,ann);
-    
-    [qpr_ann,q,p,r] = UpdateAnn(obj,sm,ann,delta,q,p,r,H)
   end
 
 end
-

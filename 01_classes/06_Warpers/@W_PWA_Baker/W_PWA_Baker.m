@@ -1,17 +1,14 @@
-classdef W_PWA_1 < W_PWA
-  %W_PWA_1 Summary of this class goes here
+classdef W_PWA_Baker < W_PWA & C_Baker
+  %W_PWA_Baker Summary of this class goes here
   %   Detailed explanation goes here
-  
-  properties
-  end
-  
+
   methods
-    function obj = W_PWA_1(w)
-      obj = obj@W_PWA(w.rf,w.tri,w.n_tri,w.interp);
+    function obj = W_PWA_Baker(w)
+      obj = obj@W_PWA(w.rf,w.tri,w.interp);
     end
     
-    [cann] = ComposeWarp(obj,mu_ann,qpr_ann,ann)
-    [qpr_ann,q,p,r] = UpdateAnn(obj,sm,ann,delta,q,p,r,H)
+    [cann] = dWodW(obj,mu_ann,qpr_ann,ann)
+    [cann] = Compose_dWodW(obj,mu_ann,qpr_ann,ann)
   end
   
 end

@@ -3,16 +3,7 @@ classdef W_PWA < W
   %   Detailed explanation goes here
   
   properties
-    u2u1
-    u3u1
-    v2v1
-    v3v1
-    den
-    num1
-    num2
-    u
-    v
-    ind_base
+    uv_vec_triangle
     alphas
     betas
     gammas
@@ -45,29 +36,42 @@ classdef W_PWA < W
       obj.n_tri = size(tri,1);
       obj.tri_base = obj.ComputeTriBase();
       obj.sorted_tri = obj.SortTri();
+      
+      u2u1 = cell(obj.n_tri,1);
+      u3u1 = cell(obj.n_tri,1);
+      v2v1 = cell(obj.n_tri,1);
+      v3v1 = cell(obj.n_tri,1);
+      den = cell(obj.n_tri,1);
+      num1 = cell(obj.n_tri,1);
+      num2 = cell(obj.n_tri,1);
+      v = cell(obj.n_tri,1);
+      u = cell(obj.n_tri,1);
       for i = 1:obj.n_tri
         uu = obj.rf.tc(obj.tri(i,:),1);
         vv = obj.rf.tc(obj.tri(i,:),2);
-        obj.u2u1{i} = uu(2) - uu(1);
-        obj.u3u1{i} = uu(3) - uu(1);
-        obj.v2v1{i} = vv(2) - vv(1);
-        obj.v3v1{i} = vv(3) - vv(1);
-        obj.den{i} = obj.u2u1{i} * obj.v3v1{i} - obj.v2v1{i} * obj.u3u1{i};
-        obj.num1{i} = vv(1) * obj.u3u1{i} - uu(1) * obj.v3v1{i};
-        obj.num2{i} = uu(1) * obj.v2v1{i} - vv(1) * obj.u2u1{i};
-        [obj.v{i}, obj.u{i}] = find(obj.tri_base == i);
-        if ~isempty(obj.v{i}) && ~isempty(obj.u{i})
-          obj.ind_base{i} = obj.v{i} + (obj.u{i} - 1) * obj.rf.res(1);
-          obj.alphas{i} = ((obj.u{i} - uu(1)) .* obj.v3v1{i} - (obj.v{i} - vv(1)) .* obj.u3u1{i}) / obj.den{i};
-          obj.betas{i}  = ((obj.v{i} - vv(1)) .* obj.u2u1{i} - (obj.u{i} - uu(1)) .* obj.v2v1{i}) / obj.den{i};
+        u2u1{i} = uu(2) - uu(1);
+        u3u1{i} = uu(3) - uu(1);
+        v2v1{i} = vv(2) - vv(1);
+        v3v1{i} = vv(3) - vv(1);
+        den{i} = u2u1{i} * v3v1{i} - v2v1{i} * u3u1{i};
+        num1{i} = vv(1) * u3u1{i} - uu(1) * v3v1{i};
+        num2{i} = uu(1) * v2v1{i} - vv(1) * u2u1{i};
+        [v{i},u{i}] = find(obj.tri_base == i);
+        if ~isempty(v{i}) && ~isempty(u{i})
+          obj.uv_vec_triangle{i} = v{i} + (u{i} - 1) * obj.rf.res(1);
+          obj.alphas{i} = ((u{i} - uu(1)) .* v3v1{i} - (v{i} - vv(1)) .* u3u1{i}) / den{i};
+          obj.betas{i}  = ((v{i} - vv(1)) .* u2u1{i} - (u{i} - uu(1)) .* v2v1{i}) / den{i};
           obj.gammas{i} = 1 - (obj.alphas{i} + obj.betas{i});
         end
       end
-      obj = obj.InitializeC();
+      
+      %obj = obj.InitializeC();
     end
     
     tri_base = ComputeTriBase(obj)
     sorted_tri = SortTri(obj)
+    
+    [xy,uv] = Wxy(obj,ann,res);
   end
   
 end

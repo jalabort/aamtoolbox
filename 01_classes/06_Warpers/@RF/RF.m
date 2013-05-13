@@ -11,7 +11,8 @@ classdef RF
     res
     n_pixels
     
-    xy
+    uv
+    uv_vec
     mask1
     n_face_pixels1
     
@@ -41,7 +42,8 @@ classdef RF
       obj.mask2 = obj.ComputeMask(obj.parts{1},erode2); 
       obj.n_face_pixels2 = length(find(obj.mask2==1));
       
-      [obj.xy(:,2),obj.xy(:,1)] = find(obj.mask1 == true);
+      [obj.uv(:,2),obj.uv(:,1)] = find(obj.mask1 == true);
+      obj.uv_vec = obj.uv(:,2) + (obj.uv(:,1) - 1) * obj.res(1);
     end
     
     mask = ComputeMask(obj,contour,erode)

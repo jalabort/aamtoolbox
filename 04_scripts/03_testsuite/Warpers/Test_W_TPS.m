@@ -8,7 +8,9 @@ clc
 disp('- W_TPS test');
 
 % specify database
-bin_root = ['..' filesep 'binarydb' filesep];
+bin_root = ['..' ...
+  filesep 'binarydb' ...
+  filesep];
 name = 'lfpw';
 type = 'train';
 ann = 'our';
@@ -30,7 +32,7 @@ erode2 = 2;
 rf = RF(ref_ann,parts,erode1,erode2);
 
 % create W_TPS warper
-interp = 'cubic';
+interp = 'linear';
 w = W_TPS(rf,interp);
 
 % warp dataset
@@ -50,6 +52,6 @@ assert(rf.n_vert==ds.n_vert && ...
   rf.n_parts==ds.n_parts && ...
   rf.n_pixels>rf.n_face_pixels1 && ...
   rf.n_face_pixels1>rf.n_face_pixels2 && ... 
-  length(rf.xy) == rf.n_face_pixels1)
+  length(rf.uv) == rf.n_face_pixels1)
 disp('  passed');
 

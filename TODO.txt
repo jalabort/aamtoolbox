@@ -1,4 +1,5 @@
 - Implement method KillRotations for ShapeModel classes
+- Revise the notation and implementation of W_PWA/Compute_dWdxi
 
 - Implement WLCPA
 - Finish PCAs_Test for WLCPCA

@@ -8,7 +8,9 @@ clc
 disp('- FD_Mat test');
 
 % specify database
-bin_root = ['..' filesep 'binarydb' filesep];
+bin_root = ['..' ...
+  filesep 'binarydb' ...
+  filesep];
 name = 'lfpw';
 type = 'train';
 ann = 'our';
