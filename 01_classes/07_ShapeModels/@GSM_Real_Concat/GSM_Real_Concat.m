@@ -10,9 +10,10 @@ classdef GSM_Real_Concat < GSM_Real
   methods
     function obj = GSM_Real_Concat(ann)
       obj@GSM_Real(ann);
-      [obj.U,obj.PU] = ConstructConcatBasis();
+      [obj.U,obj.PU] = obj.ConstructConcatBasis();
     end
     
+    [U,PU] = ConstructConcatBasis(obj);
   end
   
 end

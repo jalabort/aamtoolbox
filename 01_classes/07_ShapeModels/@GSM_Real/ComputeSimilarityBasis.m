@@ -10,7 +10,7 @@ function [sim_mu,sim_basis] = ComputeSimilarityBasis(obj)
   zero = zeros(obj.n_vert,1);
 
   sim_basis(:,1) = sim_mu;
-  sim_basis(:,2) = [-obj.mu_ann(2);obj.mu_ann(1)];
+  sim_basis(:,2) = [-obj.mu_ann(:,2);obj.mu_ann(:,1)];
   sim_basis(:,3) = [one;zero];
   sim_basis(:,4) = [zero;one];
 

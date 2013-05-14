@@ -1,4 +1,4 @@
-function [new_mu,cann] = AlignAnn(obj,ann)
+function [mu,cann] = AlignAnn(obj,ann)
   %AlignAnn Summary of this function goes here
   %   Detailed explanation goes here
   
@@ -13,7 +13,7 @@ function [new_mu,cann] = AlignAnn(obj,ann)
       [~,cann(:,:,i)] = procrustes(mu,cann(:,:,i));
     end
     new_mu = mean(cann,3);
-    err = norm(new_mu-mu);
+    err = mean(sum((mu - new_mu).^2,2));
     [~,mu] = procrustes(mu,new_mu);
     it = it + 1;  
   end

@@ -15,6 +15,12 @@ classdef GSM_Real_NWarp < GSM_Real
     
     q = Shape2Q(obj,shape)
     shape = Q2Shape(obj,q)
+    
+    [A,t] = ComputeSimilarityMatrixForm(obj,ann)
+    [A,t] = Q2MatForm(obj,q)
+    
+    [ann] = ApplyQ(obj,q,shape)
+    [ann] = RemoveQ(obj,q,shape)
   end
   
 end

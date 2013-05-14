@@ -4,19 +4,19 @@ function [A,t] = ComputeSimilarityMatrixForm(obj,ann)
   
   mu = obj.Shape2Ann(obj.sim_mu);
   
-  v0x = mu(1,1);
-  v0y = mu(1,2);
-  v1x = mu(2,1);
-  v1y = mu(2,2);
-  v2x = mu(3,1);
-  v2y = mu(3,2);
+  v0x = mu(48,1);
+  v0y = mu(48,2);
+  v1x = mu(30,1);
+  v1y = mu(30,2);
+  v2x = mu(29,1);
+  v2y = mu(29,2);
         
-  vt0x = ann(1,1);
-  vt0y = ann(1,2);
-  vt1x = ann(2,1);
-  vt1y = ann(2,2);
-  vt2x = ann(3,1);
-  vt2y = ann(3,2);
+  vt0x = ann(48,1);
+  vt0y = ann(48,2);
+  vt1x = ann(30,1);
+  vt1y = ann(30,2);
+  vt2x = ann(29,1);
+  vt2y = ann(29,2);
         
   a = v2y - v0y;
   b = v2x - v0x;
