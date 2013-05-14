@@ -1,19 +1,30 @@
-function [ann,q,detected] = Run(obj,sm,img,~)
+function [ann,detected,p] = Run(obj,sm,img,~)
   %Run Summary of this function goes here
   %   Detailed explanation goes here
   
+  % initialize matlab's face detection
   obj.detector.release();
   bbox = step(obj.detector,img);
 
   if ~isempty(bbox)
+    % if detected
     detected = true;
     scale = 0.9 * bbox(end,3) / sm.mu_height;
     trans = repmat([(bbox(end,1)+bbox(end,3)/2),(bbox(end,2)+bbox(end,4)/1.65)],sm.n_vert,1);
     ann = scale * sm.mu_ann +  trans;
-    q = sm.Shape2Q(sm.Ann2Shape(ann));
+  
+    if obj.rotation
+      % if rotation flag is on
+      p = obj.Ann2SRT(ann);
+    else
+      % if not
+      p = obj.Ann2SRT(ann);
+    end
+    
   else
+    % if not detected
     detected = false; 
-    ann = []; q = [];
+    ann = []; p = [];
   end
 
 end

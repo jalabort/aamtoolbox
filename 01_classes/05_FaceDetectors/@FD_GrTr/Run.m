@@ -1,12 +1,18 @@
-function [ann,detected,q] = Run(~,sm,~,grtr_ann)
+function [ann,detected,p] = Run(~,sm,~,grtr_ann)
   %RUN Summary of this function goes here
   %   Detailed explanation goes here
   
   detected = true;
-  ref_shape = sm.Ann2Shape(grtr_ann);
-  q = sm.Shape2Q(ref_shape);
-  q = sm.KillRotations(q);
-  ann = sm.Shape2Ann(sm.Q2Shape(q));
+  
+  if obj.rotation
+    % if rotation flag is on
+    p = obj.Ann2SRT(grtr_ann);
+    ann = sm.SRT2Ann(p);
+  else
+    % if not
+    p = obj.Ann2ST(grtr_ann);
+    ann = sm.ST2Ann(p);
+  end
 
 end
 

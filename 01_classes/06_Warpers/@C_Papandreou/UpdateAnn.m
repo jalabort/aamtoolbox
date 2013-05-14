@@ -3,7 +3,7 @@ function [uann,p] = UpdateAnn(obj,sm,ann,delta,p)
   %   Detailed explanation goes here
   
   dWdp_u0 = sm.Compute_dudp();
-  [dWdp_up,A] = sm.Compute_dWdp_up();
+  [dWdp_up,A] = sm.Compute_dWdp_up(ann);
 
   dWdu_up = sm.Ann2Shape(obj.Compute_dWdu_up(A,ann)); 
   block_dWdu_p = repmat(dWdu_up(:,1),[1,sm.n_p]);
