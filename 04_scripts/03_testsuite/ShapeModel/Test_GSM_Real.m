@@ -1,4 +1,4 @@
-%clear all
+clear all
 close all
 clc
 
@@ -60,7 +60,11 @@ end
 
 % test
 tolerance = 2;
-assert( all(rec_err < tolerance*ones(size(rec_err))))
+assert( all(rec_err < tolerance*ones(size(rec_err))) && ...
+  sm.n_vert == ds.n_vert && ...
+  sm.n_pc == sm.n_b && ...
+  sm.n_sim_basis == sm.n_q && ...
+  sm.n_pc + sm.n_sim_basis == sm.n_p)
 disp('  passed');
 
 
@@ -89,17 +93,11 @@ ds = db.Load(reg_exp_query);
 ann = ds.GetAnn();
 sm = GSM_Real_NWarp(ann);
 
-U = [sm.sim_basis,sm.pc];
-
 % reconstruct original shapes
 rann = zeros(size(ann));
 rec_err = zeros(ds.n_data,1);
 for i = 1:ds.n_data
   rann(:,:,i) = sm.ProjectAnn(ann(:,:,i));
-
-  %rann(:,:,i) = sm.Shape2Ann(U*U'*sm.Ann2Shape(ann(:,:,i)));
-  
-  
   rec_err(i) = mean(sum((ann(:,:,i) - rann(:,:,i)).^2,2));
 end
 
@@ -127,10 +125,14 @@ end
 
 % test
 tolerance1 = 10^-10;
-tolerance2 = 2;
+tolerance2 = 10^-10;
 U = [sm.sim_basis,sm.pc];
 assert(max(max(abs(U'*U - eye(sm.n_p)))) < tolerance1 && ...
-  all(rec_err < tolerance2*ones(size(rec_err))))
+  all(rec_err < tolerance2*ones(size(rec_err))) && ...
+  sm.n_vert == ds.n_vert && ...
+  sm.n_pc == sm.n_b && ...
+  sm.n_sim_basis == sm.n_q && ...
+  sm.n_pc + sm.n_sim_basis == sm.n_p)
 disp('  passed');
 
 

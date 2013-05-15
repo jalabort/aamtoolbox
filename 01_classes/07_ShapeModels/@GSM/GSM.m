@@ -45,12 +45,15 @@ classdef (Abstract) GSM < SM
       obj.n_b = obj.n_pc;
       obj.n_p = obj.n_q + obj.n_b;
     end
-    
-    [deafult_ann,ann] = AlignAnn(obj,ann)
-    [mu,sim_basis] = ComputeSimilarityBasis(obj)
-    
+
+    [mu,cann] = AlignAnn(obj,ann)
+
     [duidq] = Compute_duidq(obj)
     [duidb] = Compute_duidb(obj)
+  end
+
+  methods (Abstract)
+    [mu,sim_basis] = ComputeSimilarityBasis(obj)
   end
   
 end
