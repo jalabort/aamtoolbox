@@ -22,12 +22,12 @@ classdef (Abstract) SM
   methods (Abstract)
     ann = Shape2Ann(obj,shape)
     shape = Ann2Shape(obj,ann)
+
+    p = Shape2P(obj,shape)
+    shape = P2Shape(obj,p)
     
     [u,v] = Shape2UV(obj,shape)
     [shape] = UV2Shape(obj,u,v)
-    
-    p = Shape2P(obj,shape)
-    shape = P2Shape(obj,p)
 
     st = Ann2ST(obj,ann)
     srt = Ann2SRT(obj,ann)
