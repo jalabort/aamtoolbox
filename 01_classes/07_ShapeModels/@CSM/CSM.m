@@ -1,5 +1,5 @@
-classdef (Abstract) PSM < SM
-  %PSM Summary of this class goes here
+classdef (Abstract) CSM < SM
+  %CSM Summary of this class goes here
   %   Detailed explanation goes here
   
   properties
@@ -10,10 +10,6 @@ classdef (Abstract) PSM < SM
     mass_mu
     mass_pc
     mass_ev
-    
-    pose_mu
-    pose_pc
-    pose_ev
     
     sim_mu
     sim_basis
@@ -27,18 +23,16 @@ classdef (Abstract) PSM < SM
     
     n_part_pc
     n_mass_pc
-    n_pose_pc
     n_sim_basis
     
     n_r
     n_f
-    n_l
     n_b
     n_q
   end
   
   methods
-    function obj = PSM(ann,part)
+    function obj = CSM(ann,part)
       obj@SM(ann);
       obj.n_part = length(part);
       
@@ -49,23 +43,11 @@ classdef (Abstract) PSM < SM
       obj.i_part_ann = part;
       obj.i_part_shape = obj.ComputeShapePartIndexes();
       
-      % align the annotations
-      [obj.mu_ann,ann] = obj.AlignAnn(ann);
+      % get mean annotation and align mass and part annotations
+      [mass_ann,part_ann,obj.mu_ann] = obj.AlignMassAndPartsAnn(ann);
       
       % compute similarity basis
       [obj.sim_mu,obj.sim_basis] = obj.ComputeSimilarityBasis();
-      
-      % infer pose eigenspace
-      obj.n_pose_pc = 2;
-      shape = obj.Ann2Shape(ann);
-      [obj.pose_mu,obj.pose_pc,obj.pose_ev] = ...
-        obj.ComputePoseEigenspace(shape);
-      
-      % remove pose eigenspace from the original annotations
-      ann = obj.ProjectOutPose(ann);
-      
-      % align mass and part annotations
-      [mass_ann,part_ann] = obj.AlignMassAndPartsAnn(ann);
       
       % transform mass annotations to mass shapes and compute mass pca
       mass_shape = obj.Ann2Shape(mass_ann);
@@ -86,22 +68,15 @@ classdef (Abstract) PSM < SM
       
       % initialize dinamic size properties
       obj.n_q = obj.n_sim_basis;
-      obj.n_l = obj.n_pose_pc;
       obj.n_f = obj.n_mass_pc;
       obj.n_r = [obj.n_part_pc{:}];
-      obj.n_b = obj.n_l + obj.n_f + sum(obj.n_r);
+      obj.n_b = obj.n_f + sum(obj.n_r);
       obj.n_p = obj.n_q + obj.n_b;
     end
 
-    [mass_ann,parts_ann] = obj.AlignMassAndPartsAnn(obj,ann)
-
-    [pose_mu,pose_pc,pose_ev] = ComputePoseEigenspace(obj,shape)
-    po_ann = obj.ProjectOutPose(ann)
-    shape = obj.L2Shape(l);
-    l = obj.Shape2L(shape);
+    [mass_ann,parts_ann,mu_ann] = obj.AlignMassAndPartsAnn(obj,ann)
     
     duidq = Compute_duidq(obj)
-    duidl = Compute_duidl(obj)
     duidb = Compute_duidb(obj)
     duidr = Compute_duidr(obj)
   end
