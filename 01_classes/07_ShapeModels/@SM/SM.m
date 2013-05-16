@@ -4,6 +4,7 @@ classdef (Abstract) SM
   
   properties
     pca 
+    
     n_p    
     n_vert
   end

@@ -1,5 +1,5 @@
-function [cimg] = ColorTransform(~,img)
-  %COLORTRANSFORM Summary of this function goes here
+function [cimg] = ColorTransform(img)
+  %ColorTransform Summary of this function goes here
   %   Detailed explanation goes here
 
   if size(img,3) == 3

@@ -3,57 +3,68 @@ classdef (Abstract) TM
   %   Detailed explanation goes here
   
   properties
-    pca
-    
-    mu
-    pc
-    ev
-    n_pc
-    
-    dt_dx
-    dt_dy
-    
-    n_c
-
-    mask
-    n_face_pixels 
+    smoother
     
     res
-    mask2
-    n_face_pixels2 
+    n_pixels
     
-    smoother
+    mask1
+    n_face_pixels1
+    n_face_features
+    
+    mask2 
+    n_face_pixels2
+    
+    n_c
+    n_ch
+    n_ch_img
   end
   
   methods
-    function obj = TM(mask,n_face_pixels,res,mask2,n_face_pixels2,smoother)
-      obj.mask = mask;
-      obj.n_face_pixels = n_face_pixels;
-      obj.res = res;
-      obj.mask2 = mask2;
-      obj.n_face_pixels2 = n_face_pixels2;
+    function obj = TM(rf,smoother)
+      obj.res = rf.res;
+      obj.n_pixels = rf.n_pixels;
+      obj.mask1 = rf.mask1;
+      obj.n_face_pixels1 = rf.n_face_pixels1;
+      obj.mask2 = rf.mask2;
+      obj.n_face_pixels2 = rf.n_face_pixels2;
       obj.smoother = smoother;
     end
-    
-    c = Tex2C(obj,tex,n_c)
-    [tex,aux] = C2Tex(obj,c)
     
     img = Tex2Img(obj,tex)
     tex = Img2Tex(obj,img)
     
-    ch = getTexCh(obj,tex,ch)
+    img = CroppedTex2Img(obj,ctex)
+    ctex = Img2CroppedTex(obj,img)
     
-    [cimg] = obj.ColorTransform(img);
-    [cimg,n_img_ch] = obj.ColorTransformAll(img,n_img);
+    tex_ch = getTexCh(obj,tex,i)
+    ctex_ch = getCroppedTexCh(obj,ctex,i)
     
-    trans_tex = obj.TransformAll(img,n_img);
+    [n_ch,n_ch_features] = SetNCh(obj)
     
-    [dt_dx,dt_dy] = C2VT(obj,c)
+    img = C2Img(obj,c)
+    c = Img2C(obj,img)
+    img = ProjectImg(obj,img)
     
-    [dt_dx,dt_dy] = ComputeDTDXY(obj,t)
-    [dt_dx,dt_dy] = ComputeDTDX(obj)
-    dt_dc = ComputeDTDC(obj,n_c,t,tt)
-    dt_dp = ComputeDTDQPR(obj,n_qpr,tx,ty,dW_dp,t,tt)
+    dtdp = Compute_dtdp(obj,dtdx,dtdy,dWdp)
+  end
+  
+  methods (Static)
+    img = ColorTransform(img);
+    img = ColorTransformAll(img);
+  end
+  
+  methods (Abstract)
+    c = Tex2C(obj,tex)
+    tex = C2Tex(obj,c)
+    
+    tex = TransformAll(obj,img);
+    tex = Transform(obj,img);
+    tex = TransformWithoutSmoothing(obj,img);
+    stex = TransformWithSmoothing(obj,img);
+    
+    [dtdx,dtdy] = Compute_dtdxy(obj,t)
+    dAdc = Compute_dAdc(obj)
   end
   
 end
