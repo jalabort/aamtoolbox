@@ -5,7 +5,10 @@ classdef GSM_Real_NWarp < GSM_Real & Interface_NWarp
   methods
     function obj = GSM_Real_NWarp(ann)
       obj@GSM_Real(ann);
-      obj@Interface_NWarp();
+      [obj.sim_basis,obj.pc,obj.ev] = obj.OrthonormalizeBasis();
+      obj.n_pc = size(obj.pc,2);
+      obj.n_b = obj.n_pc;
+      obj.n_p = obj.n_q + obj.n_b;
     end
   end
   

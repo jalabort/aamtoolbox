@@ -40,16 +40,14 @@ classdef (Abstract) GSM < SM
       obj.n_pc = size(obj.pc,2);
       obj.n_sim_basis = size(obj.sim_basis,2);
       
-      % set dinamic size properties
+      % initialize dinamic size properties
       obj.n_q = obj.n_sim_basis;
       obj.n_b = obj.n_pc;
       obj.n_p = obj.n_q + obj.n_b;
     end
 
-    [mu,cann] = AlignAnn(obj,ann)
-
-    [duidq] = Compute_duidq(obj)
-    [duidb] = Compute_duidb(obj)
+    duidq = Compute_duidq(obj)
+    duidb = Compute_duidb(obj)
   end
 
   methods (Abstract)

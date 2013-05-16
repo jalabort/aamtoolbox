@@ -13,6 +13,8 @@ classdef (Abstract) Interface_Concat
     end
     
     [U,PU] = ConstructConcatBasis(obj);
+    [sim_basis] = GetSimBasis(obj)
+    [pc] = GetPCs(obj)
   end
   
 end

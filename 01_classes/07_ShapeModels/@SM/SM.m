@@ -17,6 +17,10 @@ classdef (Abstract) SM
     p = Ann2P(obj,ann)
     
     pann = ProjectAnn(obj,ann)
+    
+    [mu,cann] = AlignAnn(obj,ann)
+    
+    dWdp = Compute_dWdp(obj,dWdxu)
   end
 
   methods (Abstract)
@@ -32,7 +36,6 @@ classdef (Abstract) SM
     st = Ann2ST(obj,ann)
     srt = Ann2SRT(obj,ann)
 
-    dWdp = Compute_dWdp(obj,dWdxu)
     dWdp_uip = Compute_dWdp_uip(obj,A,ann)
   end
 

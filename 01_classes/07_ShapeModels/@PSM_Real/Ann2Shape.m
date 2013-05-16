@@ -1,9 +1,8 @@
-function [shape] = Ann2Shape(~,ann)
+function [shape] = Ann2Shape(obj,ann)
   %ANN2SHAPE Summary of this function goes here
   %   Detailed explanation goes here
   
-  n_vert = size(ann,1);
-  shape = reshape(ann,2*n_vert,[]);
+  shape = reshape(ann,2*obj.n_vert,[]);
 
 end
 
