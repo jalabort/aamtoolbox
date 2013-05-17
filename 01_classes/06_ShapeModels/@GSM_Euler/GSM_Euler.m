@@ -1,5 +1,5 @@
-classdef (Abstract) GSM < SM
-  %GSM Summary of this class goes here
+classdef (Abstract) GSM_Euler < SM
+  %GSM_Euler Summary of this class goes here
   %   Detailed explanation goes here
   
   properties
@@ -20,7 +20,7 @@ classdef (Abstract) GSM < SM
   end
   
   methods
-    function obj = GSM(ann)
+    function obj = GSM_Euler(ann)
       obj@SM(ann);
       
       % align the annotations

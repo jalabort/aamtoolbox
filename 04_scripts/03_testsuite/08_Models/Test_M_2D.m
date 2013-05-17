@@ -3,9 +3,9 @@ close all
 clc
 
 
-%% Test GTM_Gi
+%% Test M_2D
 
-disp('- Test GTM_Gi test');
+disp('- Test M_2D test');
 
 % specify database
 bin_root = ['..' ...
@@ -17,7 +17,7 @@ ann = 'our';
 db = DB([name '-' type '-' ann],bin_root);
 
 % number of image
-n_data = 100;
+n_data = 811;
 
 % get dataset
 id = 1:n_data;
@@ -35,35 +35,35 @@ rf = RF(ref_ann,parts,erode1,erode2);
 interp = 'linear';
 w = W_TPS(rf,interp);
 
-% create Test GTM_Gi texture model
-img = GTM_Gi.ColorTransformAll(w.WarpDS(ds));
+% create Test GTM_Pi texture model
+img = GTM_Pi.ColorTransformAll(w.WarpDS(ds));
 smoother = [];
-tm = GTM_Gi(img,rf,smoother);
+tm = GTM_Pi(img,rf,smoother);
+
+% reconstruct original images
+rimg = zeros(size(img));
+rec_err = zeros(ds.n_data,1);
+for i = 1:ds.n_data
+  rimg(:,:,:,i) = tm.ProjectImg(img(:,:,:,i));
+  rec_err(i) = mean(sum((img(:,:,:,i) - rimg(:,:,:,i)).^2,2));
+end
 
 % visualize model (this just makes sure the model can be correctly 
 % visualized, for careful inpection each eigenvector should be plot
 % using imshow(tm.Tex2Img(tm.pc(:,i),[]))
-aux = tm.Tex2Img(tm.mu);
 figure(1);
-imshow(aux(:,:,1),[]);
-figure(2);
-imshow(aux(:,:,2),[]);
-aux = tm.Tex2Img(tm.pc(:,1));
-figure(1);
-h1 = imshow(aux(:,:,1),[]);
-set(h1,'EraseMode','none');
-figure(2);
-h2 = imshow(aux(:,:,2),[]);
-set(h2,'EraseMode','none');
+imshow(tm.Tex2Img(tm.mu),[]);
+h = imshow(tm.Tex2Img(tm.pc(:,1)),[]);
+set(h,'EraseMode','none') 
 for i = 2:tm.n_pc
-  aux = tm.Tex2Img(tm.pc(:,i));
-  set(h1,'CData',aux(:,:,1));
-  set(h2,'CData',aux(:,:,2));
+  set(h,'CData',tm.Tex2Img(tm.pc(:,i)));
   drawnow;
 end
 
 % test
-assert(tm.n_pixels == tm.res(1) * tm.res(2) && ...
+tolerance = 10^-10;
+assert( all(rec_err < tolerance*ones(size(rec_err))) && ...
+  tm.n_pixels == tm.res(1) * tm.res(2) && ...
   tm.n_pixels>tm.n_face_pixels1 && ...
   tm.n_face_pixels1>tm.n_face_pixels2 && ... 
   tm.n_ch == tm.n_ch_img * tm.n_ch_features && ...
@@ -71,4 +71,3 @@ assert(tm.n_pixels == tm.res(1) * tm.res(2) && ...
   tm.n_pc == size(tm.pc,2) && ...
   tm.n_pc == tm.n_c)
 disp('  passed');
-
