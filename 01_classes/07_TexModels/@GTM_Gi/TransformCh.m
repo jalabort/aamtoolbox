@@ -10,8 +10,8 @@ function [tex] = TransformCh(obj,img)
   ngy = gy(obj.mask1) ./ n;
   tex = [ngx;ngy];
   
-%   tex(isnan(tex)) = 0;
-%   tex(isinf(tex)) = 0;
+  tex(isnan(tex)) = 0;
+  tex(isinf(tex)) = 0;
 
 end
 

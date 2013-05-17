@@ -5,5 +5,8 @@ function [tex] = TransformCh(obj,img)
   tex = img(obj.mask1) - mean(img(obj.mask1));
   tex = tex ./ norm(tex);
   
+  tex(isnan(tex)) = 0;
+  tex(isinf(tex)) = 0;
+  
 end
 
