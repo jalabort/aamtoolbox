@@ -1,75 +1,36 @@
-function [fann] = Fit(obj,datum)
+function [fann] = Fit(obj,img,ann)
   %FIT Summary of this function goes here
   %   Detailed explanation goes here
   
-  n_it_level = obj.n_it / obj.n_level;
-  [cimg,n_img_ch] = obj.tm{1}.ColorTransformAll(datum.img,1);
-  cimg = cimg ./ 255;
-  img_res = size(cimg);
+  fann = zeros([size(obj.sm{1}.mu_ann),obj.n_it]);
+  img = obj.tm{1}.ColorTransformAll(img);
   
-  [ann,q,detected] = obj.face_det.Run(obj.sm{1},datum.img,datum.ann,obj.sm{1}.mu_ann,obj.sm{1}.n_vert,obj.w{1}.rf.res);
+  [ann,detected,p] = obj.detector.Run(obj.sm{1},img,ann);
   
   if detected
     
-    if obj.show_fitting
-      displayparts(1,datum.img,ann,obj.w{1}.rf.parts,obj.w{1}.rf.n_parts,'red');
-    end
-    
-    % ---------------------------------------------------------------------
-    
-%     p = zeros(obj.sm{obj.n_level}.n_p,1);
-%     n_p_prev = obj.sm{obj.n_level}.n_p;
-%     
-%     r = cell(obj.sm{obj.n_level}.n_comp,1);
-%     n_r_prev = zeros(obj.sm{obj.n_level}.n_comp,1);
-%     for k = 1:obj.sm{obj.n_level}.n_comp
-%       r{k} = zeros(obj.sm{obj.n_level}.n_r(k),1);
-%       n_r_prev(k) = obj.sm{obj.n_level}.n_r(k);
-%     end
-    
-p=[];
-r=[];
-    
-    % ---------------------------------------------------------------------
+    n_it_level = obj.n_it / obj.n_level;
+    it = 0;
     
     for i = obj.n_level:-1:1
            
       c = [];
-      %[ann]  = obj.sm{i}.ProjectAnn(ann);
-      
-      % ---------------------------------------------------------------------
-      
-%       p = [p;zeros(obj.sm{i}.n_p - n_p_prev,1)];
-%       n_p_prev = obj.sm{i}.n_p;
-%       
-%       for k = 1:obj.sm{i}.n_comp
-%         r{k} = [r{k};zeros(obj.sm{i}.n_r(k)-n_r_prev(k),1)];
-%         n_r_prev(k) = obj.sm{i}.n_r(k);
-%       end
-      
-      % ---------------------------------------------------------------------
+      ann  = obj.sm{i}.ProjectAnn(ann);
 
       for j = 1:n_it_level   
 
-        wimg = obj.w{i}.WarpOpt(ann,cimg,img_res);
-        tex = obj.tm{i}.Transform(wimg,n_img_ch);
+        wimg = obj.w{i}.Warp(ann,img);
+        tex = obj.tm{i}.Transform(wimg);
         
-        [delta,c,H] = obj.Optimize(i,tex,c);
-        [ann,q,p,r] = obj.w{i}.UpdateAnn(obj.sm{i},ann,delta,q,p,r,H);
+        [delta,c] = obj.Optimize(i,tex,c);
+        [ann,p] = obj.w{i}.UpdateAnn(obj.sm{i},ann,delta,p);
         
-        if obj.show_fitting
-          displayparts(1,datum.img,ann,obj.w{1}.rf.parts,obj.w{1}.rf.n_parts,'green');
-        end
-
+        fann(:,:,it) = ann; 
+        it = it + 1;
+        
       end
 
     end
-
-    fann = ann;
-    
-  else
-    
-    fann = nan(obj.sm{1}.n_vert,2);  
     
   end
 

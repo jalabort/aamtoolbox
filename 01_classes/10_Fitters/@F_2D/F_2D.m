@@ -3,11 +3,8 @@ classdef (Abstract) F_2D < M_2D
   %   Detailed explanation goes here
   
   properties
-    face_det
-    
+    detector
     n_it
-    
-    show_fitting
   end
   
   methods
@@ -16,9 +13,12 @@ classdef (Abstract) F_2D < M_2D
     end
     
     obj = Initialize(obj)
-    
-    fann = Fit(obj,datum)
-    [tann,ecc] = Track(obj,img,iann)
+    fann = Fit(obj,img,ann)
+  end
+  
+  methods (Abstract)
+    obj = PreCompute(obj,level)
+    [delta,c] = Optimize(obj,level,tex,c)
   end
   
 end

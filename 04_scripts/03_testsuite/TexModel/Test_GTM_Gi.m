@@ -48,7 +48,6 @@ figure(1);
 imshow(aux(:,:,1),[]);
 figure(2);
 imshow(aux(:,:,2),[]);
-
 aux = tm.Tex2Img(tm.pc(:,1));
 figure(1);
 h1 = imshow(aux(:,:,1),[]);
@@ -64,7 +63,6 @@ for i = 2:tm.n_pc
 end
 
 % test
-tolerance = 10^-10;
 assert(tm.n_pixels == tm.res(1) * tm.res(2) && ...
   tm.n_pixels>tm.n_face_pixels1 && ...
   tm.n_face_pixels1>tm.n_face_pixels2 && ... 

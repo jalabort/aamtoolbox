@@ -8,8 +8,8 @@ function [dtdx,dtdy] = Compute_dtdxy(obj,t)
   for i = 1:obj.n_ch
     [gx(:,:,i),gy(:,:,i)] = gradient(img(:,:,i));
   end
-  dtdx = obj.Img2Tex(gx);
-  dtdy = obj.Img2Tex(gy);
+  dtdx = obj.Img2CroppedTex(gx);
+  dtdy = obj.Img2CroppedTex(gy);
   
 end
 

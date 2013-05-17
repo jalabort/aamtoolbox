@@ -3,10 +3,10 @@ function [tex] = TransformCh(obj,img)
   %   Detailed explanation goes here
   
   [gx,gy] = gradient(img);
-  gdir = angle(gx + 1j*gy);
+  gdir = angle(gx(obj.mask1) + 1j*gy(obj.mask1));
   ngx = cos(gdir);
   ngy = sin(gdir);
-  tex = [ngx(obj.mask1);ngy(obj.mask1)] ./ sqrt(obj.n_face_pixels1);
+  tex = [ngx;ngy] ./ sqrt(obj.n_face_pixels1);
   
 end
 

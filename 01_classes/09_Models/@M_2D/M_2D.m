@@ -3,7 +3,7 @@ classdef M_2D
   %   Detailed explanation goes here
   
   properties
-    n_level
+    n_level = 0
     w
     sm
     tm
