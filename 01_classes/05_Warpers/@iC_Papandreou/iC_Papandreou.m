@@ -1,5 +1,5 @@
-classdef (Abstract) C_Papandreou < C
-  %C_Papandreou Summary of this class goes here
+classdef (Abstract) iC_Papandreou < iC
+  %iC_Papandreou Summary of this class goes here
   %   Detailed explanation goes here
   
   % Interface Class

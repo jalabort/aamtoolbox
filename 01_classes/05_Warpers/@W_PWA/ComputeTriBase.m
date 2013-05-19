@@ -10,6 +10,7 @@ function [tri_base] = ComputeTriBase(obj)
     base = poly2mask(x,y,obj.rf.res(1),obj.rf.res(2)) .* i;
     tri_base = max(tri_base,base);
   end
+  tri_base = tri_base .* obj.rf.mask1;
 
 end
 

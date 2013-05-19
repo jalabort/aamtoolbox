@@ -1,4 +1,4 @@
-function [xy,uv_vec] = Wuv(obj,ann,res)
+function [xy,uv_vec,e] = Wuv(obj,ann,res)
   %Wuv Summary of this function goes here
   %   Detailed explanation goes here
   
@@ -14,12 +14,12 @@ function [xy,uv_vec] = Wuv(obj,ann,res)
         ~isempty(obj.betas{i}) && ...
         ~isempty(obj.gammas{i})
       
-      wx = x(1) * obj.gammas{i} + x(2) * obj.alphas{i} + x(3) * ...
+      Wu = x(1) * obj.gammas{i} + x(2) * obj.alphas{i} + x(3) * ...
         obj.betas{i};
-      wy = y(1) * obj.gammas{i} + y(2) * obj.alphas{i} + y(3) * ...
+      Wv = y(1) * obj.gammas{i} + y(2) * obj.alphas{i} + y(3) * ...
         obj.betas{i};
       
-      target = [wx,wy];
+      target = [Wu,Wv];
 
       list = target(:,1) > 0 & ...
         target(:,1)<= res(2) & ...
@@ -42,9 +42,6 @@ function [xy,uv_vec] = Wuv(obj,ann,res)
     end
     
   end
-  
-  xy = xy(1:e,:);
-  uv_vec = uv_vec(1:e);
 
 end
 

@@ -1,5 +1,5 @@
-classdef (Abstract) C_Baker < C
-  %C_Baker Summary of this class goes here
+classdef (Abstract) iC_Baker < iC
+  %iC_Baker Summary of this class goes here
   %   Detailed explanation goes here
   
   % Interface Class

@@ -3,6 +3,8 @@ classdef W_PWA < W
   %   Detailed explanation goes here
   
   properties
+    u
+    v
     uv_vec_triangle
     alphas
     betas
@@ -10,23 +12,16 @@ classdef W_PWA < W
     
     tri_base
     tri
-    n_tri
     sorted_tri
     
-    c_pixel_tri
+    n_tri
+    
+    % c++ specific data
     c_alphas
     c_betas
     c_gammas
-    c_sorted_tri
-    c_tri
-    c_i_base
-    c_i_vert
-    c_i_tri
-    c_n_vert
-    c_n_tri
-    c_n_sorted_tri
-    c_n_warped_pixels
-    c_n_composed_vert
+    c_uv
+    c_n_uv_triangle
   end
   
   methods
@@ -44,8 +39,7 @@ classdef W_PWA < W
       den = cell(obj.n_tri,1);
       num1 = cell(obj.n_tri,1);
       num2 = cell(obj.n_tri,1);
-      v = cell(obj.n_tri,1);
-      u = cell(obj.n_tri,1);
+      
       for i = 1:obj.n_tri
         uu = obj.rf.tc(obj.tri(i,:),1);
         vv = obj.rf.tc(obj.tri(i,:),2);
@@ -56,22 +50,24 @@ classdef W_PWA < W
         den{i} = u2u1{i} * v3v1{i} - v2v1{i} * u3u1{i};
         num1{i} = vv(1) * u3u1{i} - uu(1) * v3v1{i};
         num2{i} = uu(1) * v2v1{i} - vv(1) * u2u1{i};
-        [v{i},u{i}] = find(obj.tri_base == i);
-        if ~isempty(v{i}) && ~isempty(u{i})
-          obj.uv_vec_triangle{i} = v{i} + (u{i} - 1) * obj.rf.res(1);
-          obj.alphas{i} = ((u{i} - uu(1)) .* v3v1{i} - (v{i} - vv(1)) .* u3u1{i}) / den{i};
-          obj.betas{i}  = ((v{i} - vv(1)) .* u2u1{i} - (u{i} - uu(1)) .* v2v1{i}) / den{i};
+        [obj.v{i},obj.u{i}] = find(obj.tri_base == i);
+        if ~isempty(obj.v{i})
+          obj.uv_vec_triangle{i} = obj.v{i} + (obj.u{i} - 1) * obj.rf.res(1);
+          obj.alphas{i} = ((obj.u{i} - uu(1)) .* v3v1{i} - (obj.v{i} - vv(1)) .* u3u1{i}) / den{i};
+          obj.betas{i}  = ((obj.v{i} - vv(1)) .* u2u1{i} - (obj.u{i} - uu(1)) .* v2v1{i}) / den{i};
           obj.gammas{i} = 1 - (obj.alphas{i} + obj.betas{i});
         end
       end
       
-      %obj = obj.InitializeC();
+      obj = obj.InitializeC();
     end
     
     tri_base = ComputeTriBase(obj)
     sorted_tri = SortTri(obj)
     
-    [xy,uv] = Wuv(obj,ann,res);
+    obj = obj.InitializeC(obj);
+    
+    [xy,uv,e] = Wuv(obj,ann,res);
   end
   
 end

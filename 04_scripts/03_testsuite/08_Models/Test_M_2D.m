@@ -1,4 +1,4 @@
-%clear all
+clear all
 close all
 clc
 
@@ -35,7 +35,7 @@ opt.m.interp = {'nearest'};
 opt.m.smoother = {};
 opt.m.sigma = {};
 opt.m.shape_model = {'gsm-real-nwarp'};
-opt.m.tex_model = {'gi'};
+opt.m.tex_model = {'pi'};
 opt.m.alpha = {};
 
 % build ...M... model

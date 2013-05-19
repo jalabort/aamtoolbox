@@ -1,5 +1,5 @@
-classdef (Abstract) C
-  %C Summary of this class goes here
+classdef (Abstract) iC
+  %Interface_Compose Summary of this class goes here
   %   Detailed explanation goes here
   
   % Interface Class

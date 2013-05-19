@@ -1,4 +1,4 @@
-classdef W_TPS_Baker < W_TPS & C_Baker
+classdef W_TPS_Baker < W_TPS & iC_Baker
   %W_TPS_Baker Summary of this class goes here
   %   Detailed explanation goes here
   
