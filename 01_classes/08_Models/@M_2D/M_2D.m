@@ -4,16 +4,16 @@ classdef M_2D
   
   properties
     n_level = 0
-    w
     sm
+    w
     tm
   end
   
   methods
-    function obj = M_2D(n_level,w,sm,tm)
-      obj.n_level = n_level;
-      obj.w = w;
+    function obj = M_2D(sm,w,tm)
+      obj.n_level = length(sm);
       obj.sm = sm;
+      obj.w = w;
       obj.tm = tm;
     end
     

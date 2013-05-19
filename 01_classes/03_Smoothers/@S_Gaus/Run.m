@@ -1,8 +1,8 @@
-function [simg] = Run(obj,img)
+function [img] = Run(obj,img)
   %Run Summary of this function goes here
   %   Detailed explanation goes here
   
-  simg = imfilter(img,obj.H,'replicate');
+  img = imfilter(img,obj.H,'replicate');
 
 end
 

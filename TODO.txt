@@ -1,5 +1,7 @@
+- How do I double the angle using Cootes features?
+- Create a test for Test_M_2D
+
 - Consider implementing a project out method in pca classes!!!
-- Consider using gradient instead of imgradientxy...
 - Consider making Real and Complex interfaces for Shape Models...
 - How can I kill the rotation when using complex shapes?
 - Revise the notation and implementation of W_PWA/Compute_dWdxi

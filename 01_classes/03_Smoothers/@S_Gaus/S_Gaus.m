@@ -3,13 +3,17 @@ classdef S_Gaus < S
   %   Detailed explanation goes here
   
   properties
+    sigma = 1;
     H
   end
   
   methods
     function obj = S_Gaus(sigma)
-      siz = 2*sigma+1;
-      obj.H = fspecial('gaussian',[siz siz],sigma);
+      if ~isempty(sigma)
+        obj.sigma = sigma;
+      end
+      siz = 2 * obj.sigma + 1;
+      obj.H = fspecial('gaussian',[siz siz],obj.sigma);
     end
   end
   

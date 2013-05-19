@@ -3,12 +3,16 @@ classdef S_Med < S
   %   Detailed explanation goes here
   
   properties
+    sigma = 3
     K
   end
   
   methods
     function obj = S_Med(sigma)
-      obj.K = [sigma, sigma];
+      if ~isempty(sigma)
+        obj.sigma = sigma;
+      end
+      obj.K = [obj.sigma,obj.sigma];
     end
   end
   

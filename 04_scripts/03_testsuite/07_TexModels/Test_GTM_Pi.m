@@ -5,7 +5,7 @@ clc
 
 %% Test GTM_Pi
 
-disp('- Test GTM_Pi test');
+disp('- GTM_Pi test');
 
 % specify database
 bin_root = ['..' ...
