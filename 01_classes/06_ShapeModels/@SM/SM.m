@@ -3,8 +3,6 @@ classdef (Abstract) SM
   %   Detailed explanation goes here
   
   properties
-    pca 
-    
     n_p    
     n_vert
   end

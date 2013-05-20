@@ -3,9 +3,9 @@ close all
 clc
 
 
-%% Test GSM_Complex_Concat
+%% Test GSM_Complex_NonCent_Concat
 
-disp('- GSM_Complex_Concat test');
+disp('- GSM_Complex_NonCent_Concat test');
 
 % specify database
 bin_root = ['..' ...
@@ -17,16 +17,16 @@ ann = 'our';
 db = DB([name '-' type '-' ann],bin_root);
 
 % number of image
-n_data = 100;
+n_data = 800;
 
 % get dataset
 id = 1:n_data;
 reg_exp_query = db.RegExpQuery(id);
 ds = db.Load(reg_exp_query);
 
-% create GSM_Complex_Concat shape model
+% create GSM_Complex_NonCent_Concat shape model
 ann = ds.GetAnn();
-sm = GSM_Complex_Concat(ann);
+sm = GSM_Complex_NonCent_Concat(ann);
 
 % reconstruct original shapes
 rann = zeros(size(ann));
@@ -71,13 +71,13 @@ assert( all(rec_err < tolerance*ones(size(rec_err))) && ...
 disp('  passed');
 
 
-%% Test GSM_Complex_NWarp
+%% Test GSM_Complex_NonCent_NWarp
 
-disp('- GSM_Complex_NWarp test');
+disp('- GSM_Complex_NonCent_NWarp test');
 
-% create GSM_Complex_NWarp shape model
+% create GSM_Complex_NonCent_NWarp shape model
 ann = ds.GetAnn();
-sm = GSM_Complex_NWarp(ann);
+sm = GSM_Complex_NonCent_NWarp(ann);
 
 % reconstruct original shapes
 rann = zeros(size(ann));
