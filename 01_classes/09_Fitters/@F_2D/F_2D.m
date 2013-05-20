@@ -9,7 +9,7 @@ classdef (Abstract) F_2D < M_2D
   
   methods
     function obj = F_2D(m)
-      obj = obj@M_2D(m.n_level,m.w,m.sm,m.tm);
+      obj = obj@M_2D(m.sm,m.w,m.tm);
     end
     
     obj = Initialize(obj)

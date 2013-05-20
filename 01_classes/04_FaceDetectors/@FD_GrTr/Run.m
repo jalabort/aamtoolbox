@@ -1,4 +1,4 @@
-function [ann,detected,p] = Run(~,sm,~,grtr_ann)
+function [ann,detected,p] = Run(obj,sm,~,grtr_ann)
   %RUN Summary of this function goes here
   %   Detailed explanation goes here
   

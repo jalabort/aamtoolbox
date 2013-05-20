@@ -76,6 +76,9 @@ classdef (Abstract) CSM < SM
 
     [mass_ann,parts_ann,mu_ann] = obj.AlignMassAndPartsAnn(obj,ann)
     
+    [n_b,n_p] = SetNB(obj,n_b)
+    [n_r,n_p] = SetNR(obj,n_r)
+    
     duidq = Compute_duidq(obj)
     duidb = Compute_duidb(obj)
     duidr = Compute_duidr(obj)

@@ -4,7 +4,7 @@ classdef (Abstract) iC_Papandreou < iC
   
   % Interface Class
   methods
-    dWdu_qpr = Compute_dWdu_uqpr(obj,A,ann)
+    dWduvi_uvip = Compute_dWduvi_uvip(obj,A,ann)
   end
   
 end

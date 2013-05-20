@@ -19,7 +19,7 @@ classdef (Abstract) SM
     
     [mu,cann] = AlignAnn(obj,ann)
     
-    dWdp = Compute_dWdp(obj,dWdxu)
+    dWdp = Compute_dWdp(obj,dWduvi)
   end
 
   methods (Abstract)

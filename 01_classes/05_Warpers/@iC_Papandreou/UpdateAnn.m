@@ -1,20 +1,20 @@
-function [uann,p] = UpdateAnn(obj,sm,ann,delta,p)
+function [ann,p] = UpdateAnn(obj,sm,ann,delta,p)
   %UpdateAnn Summary of this function goes here
   %   Detailed explanation goes here
   
-  dWdp_u0 = sm.Compute_dudp();
-  [dWdp_up,A] = sm.Compute_dWdp_up(ann);
+  dWdp_uv0 = sm.Compute_dudp();
+  [dWdp_uvp,A] = sm.Compute_dWdp_up(ann);
 
-  dWdu_up = sm.Ann2Shape(obj.Compute_dWdu_up(A,ann)); 
-  block_dWdu_p = repmat(dWdu_up(:,1),[1,sm.n_p]);
-  block_dWdv_p = repmat(dWdu_up(:,2),[1,sm.n_p]); 
+  dWduvi_uvip = sm.Ann2Shape(obj.Compute_dWduvi_uvip(A,ann)); 
+  block_dWdui_p = repmat(dWduvi_uvip(:,1),[1,sm.n_p]);
+  block_dWdvi_p = repmat(dWduvi_uvip(:,2),[1,sm.n_p]); 
   
-  dWdu_up_x_dWdp_u0 = block_dWdu_p .* dWdp_u0 + block_dWdv_p .* dWdp_u0;
+  dWduvi_uvip_x_dWdp_uv0 = block_dWdui_p .* dWdp_uv0 + block_dWdvi_p .* dWdp_uv0;
    
-  Jp = - (dWdp_up' * dWdp_up) \ dWdp_up' * dWdu_up_x_dWdp_u0;
+  Jp = - (dWdp_uvp' * dWdp_uvp) \ dWdp_uvp' * dWduvi_uvip_x_dWdp_uv0;
   
-  qpr = p + Jp * delta;
+  p = p + Jp * delta;
   
-  [uann,p] = sm.P2Ann(qpr);
+  [ann,p] = sm.P2Ann(p);
   
 end

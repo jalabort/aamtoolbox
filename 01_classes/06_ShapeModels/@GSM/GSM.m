@@ -42,6 +42,8 @@ classdef (Abstract) GSM < SM
       obj.n_b = obj.n_pc;
       obj.n_p = obj.n_q + obj.n_b;
     end
+    
+    [n_b,n_p] = SetNB(obj,n_b)
 
     duidq = Compute_duidq(obj)
     duidb = Compute_duidb(obj)

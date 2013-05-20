@@ -58,7 +58,7 @@ if ~loaded
           sm{i} = CSM_Complex_NWarp(ann);
         case 'csm-complex-concat'
           sm{i} = CSM_Complex_Concat(ann);
-        % parts shape models
+        % part shape models
         case 'psm-real-nwarp'
           sm{i} = PSM_Real_NWarp(ann);
         case 'psm-real-concat'
@@ -69,11 +69,11 @@ if ~loaded
           sm{i} = CSM_Complex_Concat(ann);
       end
       
-      assert(isa(sm{i},'SM') ,'undifiened shape model!')
+      assert(isa(sm{i},'SM') ,'undifiened shape model!');
           
       display('  - warper');
       
-      % create ...RF... reference frame
+      % build ...RF... reference frame
       ref_ann = factor * train_ds.ComputeRefAnn(); 
       parts = train_ds.parts; 
       if n_level == length(opt.m.erode1)
@@ -88,9 +88,9 @@ if ~loaded
       end
       rf = RF(ref_ann,parts,erode1,erode2);
       
-      assert(isa(rf,'RF') ,'undifiened reference frame!')
+      assert(isa(rf,'RF') ,'undifiened reference frame!');
 
-      % create ...W... warper
+      % build ...W... warper
       tri = train_ds.tri;
       if n_level == length(opt.m.interp)
         interp = opt.m.interp{i};
@@ -109,7 +109,7 @@ if ~loaded
           w{i} = W_PWA(rf,interp); 
       end
       
-      assert(isa(w{i},'W') ,'undifiened warper!')
+      assert(isa(w{i},'W') ,'undifiened warper!');
       
       display('  - warping images');
       
@@ -118,7 +118,7 @@ if ~loaded
       
       display('  - texture model');
 
-      % smoother
+      % build ...S... smoother
       if n_level == length(opt.m.shape_model)
         smoother_type = opt.m.smoother{i};
       else
@@ -141,7 +141,7 @@ if ~loaded
           smoother = [];
       end
       
-      % texture model
+      % build ...T... texture model
       if n_level == length(opt.m.tex_model)
         tex_model_type = opt.m.tex_model{i};
       else
@@ -183,7 +183,7 @@ if ~loaded
           tm{i} = GTM_Igo_Complex_Double(img,rf,smoother);
       end
       
-      assert(isa(tm{i},'TM') ,'undifiened texture model!')
+      assert(isa(tm{i},'TM') ,'undifiened texture model!');
      
     end
 

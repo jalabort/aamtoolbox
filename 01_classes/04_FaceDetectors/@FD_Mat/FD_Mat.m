@@ -7,7 +7,10 @@ classdef FD_Mat < FD
   end
   
   methods
-    function obj = FD_Mat()
+    function obj = FD_Mat(rotation)
+      if nargin > 0
+        obj.rotation = rotation;
+      end
       obj.detector = vision.CascadeObjectDetector();
     end
   end
