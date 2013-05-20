@@ -5,7 +5,7 @@ function [tex] = TransformCh(obj,img)
   dir = img(obj.mask1) * obj.alpha_pi;
   nx = cos(dir);
   ny = sin(dir);
-  tex = [nx;ny] ./ sqrt(obj.n_face_pixels1);
+  tex = [nx;ny] / sqrt(obj.n_face_pixels1);
   
 end
 

@@ -17,7 +17,7 @@ ann = 'our';
 db = DB([name '-' type '-' ann],bin_root);
 
 % number of image
-n_data = 100;
+n_data = 800;
 
 % get dataset
 id = 1:n_data;
