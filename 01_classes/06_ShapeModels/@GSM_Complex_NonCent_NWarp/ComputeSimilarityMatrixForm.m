@@ -2,7 +2,7 @@ function [A,t] = ComputeSimilarityMatrixForm(obj,ann)
   %ComputeSimilarityMatrixForm Summary of this function goes here
   %   Detailed explanation goes here
   
-  mu = obj.mu_ann;
+  mu = obj.Shape2Ann(obj.pc(:,1));
   
   v0x = mu(48,1);
   v0y = mu(48,2);

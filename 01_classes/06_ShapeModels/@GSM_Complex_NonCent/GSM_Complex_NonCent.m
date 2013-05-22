@@ -3,6 +3,7 @@ classdef (Abstract) GSM_Complex_NonCent < GSM
   %   Detailed explanation goes here
   
   properties
+    sim_pca = PCA_NonCent();
     pca = PCA_NonCent();
   end
   

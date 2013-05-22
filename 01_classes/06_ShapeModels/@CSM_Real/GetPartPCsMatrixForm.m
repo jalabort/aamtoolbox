@@ -3,7 +3,7 @@ function [part_pc_matrix] = GetPartPCsMatrixForm(obj)
   %   Detailed explanation goes here
   
   n_r_total = sum(obj.n_r);
-  parts_pc_matrix = zeros(2*obj.n_vert,n_r_total);
+  part_pc_matrix = zeros(2*obj.n_vert,n_r_total);
   s = 1;
   for i = 1:obj.n_part
     e = s + obj.n_r(i) - 1;

@@ -100,9 +100,9 @@ classdef (Abstract) PSM < SM
     shape = obj.L2Shape(l);
     l = obj.Shape2L(shape);
     
-    [n_l,n_p] = SetNL(obj,n_l)
-    [n_b,n_p] = SetNB(obj,n_b)
-    [n_r,n_p] = SetNR(obj,n_r)
+    [n_l,n_b,n_p] = SetNL(obj,n_l)
+    [n_f,n_b,n_p] = SetNF(obj,n_b)
+    [n_r,n_b,n_p] = SetNR(obj,n_r)
     
     duidq = Compute_duidq(obj)
     duidl = Compute_duidl(obj)

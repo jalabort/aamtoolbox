@@ -3,7 +3,8 @@ classdef (Abstract) GSM_Euler_Real < GSM_Euler
   %   Detailed explanation goes here
   
   properties
-    pca = PCA_NonCent();
+    sim_pca = PCA_Cent();
+    pca = PCA_Cent();
   end
   
   methods

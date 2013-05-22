@@ -16,7 +16,6 @@ switch opt.fitter
     f = F_Sic_Ecc(m);
 end
 assert(isa(f,'F_2D') ,'undifiened fitter!');
-clear m
 
 % build ...FD... face detector
 switch opt.detector 
@@ -34,16 +33,24 @@ f.n_it = opt.n_it;
 for i = 1:f.n_level
 
   % set baker or papandreou composition interfaces
-  if f.n_level == length(opt.composition)
-    composition = opt.composition{i};
+  if f.n_level == length(opt.composition_interface)
+    composition_interface = opt.composition_interface{i};
   else
-    composition = cell2mat(opt.composition);
+    composition_interface = cell2mat(opt.composition_interface);
   end
-  switch composition 
+  switch composition_interface 
     case 'baker'
-      f.w{i} = W_PWA_Baker(f.w{i});
+      if isa(f.w{i},'W_PWA')
+        f.w{i} = W_PWA_Baker(f.w{i});
+      else
+        f.w{i} = W_TPS_Baker(f.w{i});
+      end
     case 'papandreou'
-      f.w{i} = W_PWA_Papandreou(f.w{i});
+      if isa(f.w{i},'W_PWA')
+        f.w{i} = W_PWA_Papandreou(f.w{i});
+      else
+        f.w{i} = W_TPS_Papandreou(f.w{i});
+      end
   end
   assert(isa(f.w{i},'iC') ,'undifiened composition interface!');
 
@@ -70,55 +77,51 @@ for i = 1:f.n_level
       '# of shape eigenvectors is too large');
   elseif isa(f.sm{i},'CSM') 
     % component shape model
-    if f.n_level == length(opt.n_b)
-      n_b = opt.n_b{i};
+    if f.n_level == length(opt.n_f)
+      n_f = opt.n_f{i};
     else
-      n_b = cell2mat(opt.n_b);
+      n_f = cell2mat(opt.n_f);
     end
-    [f.sm{i}.n_b,f.sm{i}.n_p] = f.sm{i}.SetNB(opt.n_b);
-    assert(f.sm{i}.n_b <= f.sm{i}.n_mass_pc, ...
+    [f.sm{i}.n_f,f.sm{i}.n_b,f.sm{i}.n_p] = f.sm{i}.SetNF(n_f);
+    assert(f.sm{i}.n_f <= f.sm{i}.n_mass_pc, ...
       '# of mass shape eigenvectors is too large');
-    if f.n_level == length(opt.n_r)
-      n_r = opt.n_r{i};
+    if f.n_level == size(opt.n_r,2)
+      n_r = cell2mat(opt.n_r(:,i));
     else
       n_r = cell2mat(opt.n_r);
     end
-    [f.sm{i}.n_r,f.sm{i}.n_p] = f.sm{i}.SetNR(n_r);
-    assert(all(cell2mat(f.sm{i}.n_r) <= ...
-      cell2mat(f.sm{i}.n_comp_pc)), ...
+    [f.sm{i}.n_r,f.sm{i}.n_b,f.sm{i}.n_p] = f.sm{i}.SetNR(n_r);
+    assert(all(f.sm{i}.n_r <= ...
+      cell2mat(f.sm{i}.n_part_pc)'), ...
       '# of comp shape eigenvectors is too large'); 
   elseif isa(f.sm{i},'PSM') 
     % part shape model
-    if f.n_level == length(opt.n_l)
-      n_l = opt.n_l{i};
+    if f.n_level == length(opt.n_f)
+      n_f = opt.n_f{i};
     else
-      n_l = cell2mat(opt.n_l);
+      n_f = cell2mat(opt.n_f);
     end
-    [f.sm{i}.n_l,f.sm{i}.n_p] = f.sm{i}.SetNB(n_l);
-    assert(f.sm{i}.n_l <= f.sm{i}.n_pose_pc, ...
-      '# of pose shape eigenvectors is too large');
-    if f.n_level == length(opt.n_b)
-      n_b = opt.n_b{i};
-    else
-      n_b = cell2mat(opt.n_b);
-    end
-    [f.sm{i}.n_b,f.sm{i}.n_p] = f.sm{i}.SetNB(n_b);
-    assert(f.sm{i}.n_b <= f.sm{i}.n_mass_pc, ...
+    [f.sm{i}.n_f,f.sm{i}.n_b,f.sm{i}.n_p] = f.sm{i}.SetNF(n_f);
+    assert(f.sm{i}.n_f <= f.sm{i}.n_mass_pc, ...
       '# of mass shape eigenvectors is too large');
     if f.n_level == size(opt.n_r,2)
-      n_r = opt.n_r{:,i};
+      n_r = cell2mat(opt.n_r(:,i));
     else
       n_r = cell2mat(opt.n_r);
     end
-    [f.sm{i}.n_r,f.sm{i}.n_p] = f.sm{i}.SetNR(n_r);
-    assert(all(cell2mat(f.sm{i}.n_r) <= ...
-      cell2mat(f.sm{i}.n_part_pc)), ...
-      '# of part shape eigenvectors is too large'); 
+    [f.sm{i}.n_r,f.sm{i}.n_b,f.sm{i}.n_p] = f.sm{i}.SetNR(n_r);
+    assert(all(f.sm{i}.n_r <= ...
+      cell2mat(f.sm{i}.n_part_pc)'), ...
+      '# of comp shape eigenvectors is too large'); 
+  end
+  
+  if isa(f.sm{i},'iConcat') 
+    [f.sm{i}.U,f.sm{i}.PU] = f.sm{i}.ConstructConcatBasis();
   end
 
 end
 
-clear loaded i composition n_c n_b
+clear loaded m i composition_interface n_c n_b
 
 display('- initializing fitter');
 

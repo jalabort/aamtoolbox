@@ -1,4 +1,4 @@
-classdef PSM_Real_NWarp < PSM_Real & Interface_NWarp
+classdef PSM_Real_NWarp < PSM_Real & iNWarp
   %PSM_Real_NWarp Summary of this class goes here
   %   Detailed explanation goes here
   

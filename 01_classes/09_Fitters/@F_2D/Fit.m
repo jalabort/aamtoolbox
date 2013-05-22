@@ -1,21 +1,21 @@
 function [fann] = Fit(obj,img,ann)
-  %FIT Summary of this function goes here
+  %Fit Summary of this function goes here
   %   Detailed explanation goes here
   
   fann = zeros([size(obj.sm{1}.mu_ann),obj.n_it]);
   img = obj.tm{1}.ColorTransformAll(img);
   
-  [ann,detected,p] = obj.detector.Run(obj.sm{1},img,ann);
+  [ann,detected,p] = obj.detector.Run(obj.sm{obj.n_level},img,ann);
   
   if detected
     
-    n_it_level = obj.n_it / obj.n_level;
-    it = 0;
+    n_it_level = round(obj.n_it / obj.n_level);
+    it = 1;
     
     for i = obj.n_level:-1:1
            
       c = [];
-      ann  = obj.sm{i}.ProjectAnn(ann);
+      [ann,p]  = obj.sm{i}.ProjectAnn(ann);
 
       for j = 1:n_it_level   
 
@@ -29,10 +29,7 @@ function [fann] = Fit(obj,img,ann)
         it = it + 1;
         
       end
-
     end
-    
   end
-
 end
 

@@ -2,7 +2,7 @@ function [ann,detected,p] = Run(obj,sm,img,~)
   %Run Summary of this function goes here
   %   Detailed explanation goes here
   
-  % initialize matlab's face detection
+  % initialize matlab face detection
   obj.detector.release();
   bbox = step(obj.detector,img);
 
@@ -15,10 +15,10 @@ function [ann,detected,p] = Run(obj,sm,img,~)
   
     if obj.rotation
       % if rotation flag is on
-      p = obj.Ann2SRT(ann);
+      p = sm.Ann2SRT(ann);
     else
       % if not
-      p = obj.Ann2SRT(ann);
+      p = sm.Ann2SRT(ann);
     end
     
   else

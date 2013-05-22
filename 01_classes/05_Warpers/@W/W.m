@@ -20,5 +20,10 @@ classdef (Abstract) W
     wimg = WarpDS(obj,ds)
   end
   
+  methods (Static)
+    Save(img,opt,i)
+    [img,loaded] = Load(opt,i)
+  end
+  
 end
 

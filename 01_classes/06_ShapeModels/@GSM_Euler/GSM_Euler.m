@@ -7,7 +7,6 @@ classdef (Abstract) GSM_Euler < SM
     pc
     ev 
     
-    sim_pca = PCA_NonCent();
     sim_mu
     sim_basis
     

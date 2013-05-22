@@ -31,11 +31,11 @@ classdef (Abstract) TM
       obj.smoother = smoother;
     end
     
-    img = Tex2Img(obj,tex)
-    tex = Img2Tex(obj,img)
+    img = Tex2Img(obj,tex,n_ch)
+    tex = Img2Tex(obj,img,n_ch)
     
-    img = CroppedTex2Img(obj,ctex)
-    ctex = Img2CroppedTex(obj,img)
+    img = CroppedTex2Img(obj,ctex,n_ch)
+    ctex = Img2CroppedTex(obj,img,n_ch)
     
     tex_ch = getTexCh(obj,tex,i)
     ctex_ch = getCroppedTexCh(obj,ctex,i)
@@ -47,11 +47,15 @@ classdef (Abstract) TM
     img = ProjectImg(obj,img)
     
     dtdp = Compute_dtdp(obj,dtdx,dtdy,dWdp)
+    
+    Save(obj,opt,i)
   end
   
   methods (Static)
     img = ColorTransform(img);
     img = ColorTransformAll(img);
+    
+    [obj,loaded] = Load(opt,i)
   end
   
   methods (Abstract)

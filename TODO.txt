@@ -1,3 +1,6 @@
+- PSM with iNWarp does not work properly!!!! 
+- Consider coding shape_model intefaces nwarp and concat using the same 
+  structure as composition interfaces... 
 - Code WoW.cpp!!! (When possible...)
 - How do I double the angle using Cootes features?
 - Create a test for Test_M_2D

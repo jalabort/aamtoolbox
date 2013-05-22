@@ -1,4 +1,4 @@
-classdef GSM_Real_NWarp < GSM_Real & Interface_NWarp
+classdef GSM_Real_NWarp < GSM_Real & iNWarp
   %GSM_Real_NWarp Summary of this class goes here
   %   Detailed explanation goes here
   

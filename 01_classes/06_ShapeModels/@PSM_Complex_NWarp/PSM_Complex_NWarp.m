@@ -1,4 +1,4 @@
-classdef PSM_Complex_NWarp < PSM_Complex & Interface_NWarp
+classdef PSM_Complex_NWarp < PSM_Complex & iNWarp
   %PSM_Complex_NWarp Summary of this class goes here
   %   Detailed explanation goes here
   

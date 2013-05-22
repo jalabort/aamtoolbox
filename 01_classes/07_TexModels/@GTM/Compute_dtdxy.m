@@ -1,8 +1,8 @@
 function [dtdx,dtdy] = Compute_dtdxy(obj,t)
-%Compute_dtdxy Summary of this function goes here
-%   Detailed explanation goes here
+  %Compute_dtdxy Summary of this function goes here
+  %   Detailed explanation goes here
 
-  img = obj.Tex2Img2(t);
+  img = obj.Tex2Img(t);
   gx = zeros(size(img));
   gy = gx;
   for i = 1:obj.n_ch

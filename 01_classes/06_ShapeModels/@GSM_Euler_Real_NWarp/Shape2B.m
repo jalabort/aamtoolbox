@@ -3,7 +3,7 @@ function [b] = Shape2B(obj,shape)
   %   Detailed explanation goes here
   
   eshape = obj.Shape2EShape(shape);
-  b = Shape2B@Interface_NWarp(obj,eshape);
+  b = Shape2B@iNWarp(obj,eshape);
 
 end
 

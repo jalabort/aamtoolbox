@@ -23,7 +23,7 @@ opt.m.reg_exp_query = train_db.RegExpQuery(opt.m.id);
 % model options
 opt.m.root = ...
   ['..' filesep, ...
-   'models' filesep];
+   'model' filesep];
 opt.m.level = ...
   {1, ...
    0.5, ...
@@ -34,7 +34,7 @@ opt.m.warp = {'pwa'};
 opt.m.interp = {'nearest'};
 opt.m.smoother = {};
 opt.m.sigma = {};
-opt.m.shape_model = {'gsm-real-nwarp'};
+opt.m.shape_model = {'csm-real-nwarp'};
 opt.m.tex_model = {'pi'};
 opt.m.alpha = {};
 
@@ -67,10 +67,10 @@ opt.n_b = ... % # of shape eigenvectors
   {12, ...
     6, ...
     3};   
+opt.fitter = 'aic-ssd';
 opt.detector = 'gr-tr';
 opt.rotation = false;
-opt.fitter = 'aic-ssd';
-opt.composition = {'baker'};
+opt.composition_interface = {'baker'};
 
 % control options
 opt.show = true;

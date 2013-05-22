@@ -8,8 +8,8 @@ function [dWduvi] = Compute_dWduvi(obj)
   
   T = [obj.rf.tc;zeros(3,2)];
   
-  dw_dx = zeros(obj.rf.n_face_pixels,obj.rf.n_vert);
-  dw_dy = zeros(obj.rf.n_face_pixels,obj.rf.n_vert);
+  dw_dx = zeros(obj.rf.n_face_pixels1,obj.rf.n_vert);
+  dw_dy = zeros(obj.rf.n_face_pixels1,obj.rf.n_vert);
   
   for j = 1:obj.rf.n_vert
     
@@ -56,11 +56,11 @@ function [dWduvi] = Compute_dWduvi(obj)
     aux = zeros(obj.rf.res);
     aux2 = aux;
     
-    aux(obj.rf.mask2) = obj.k * dO_dx(:,1);
-    aux2(obj.rf.mask2) = obj.k * dO_dy(:,2);
+    aux(obj.rf.mask1) = obj.k * dO_dx(:,1);
+    aux2(obj.rf.mask1) = obj.k * dO_dy(:,2);
   
-    dw_dx(:,j) = aux(obj.rf.mask);
-    dw_dy(:,j) = aux2(obj.rf.mask);
+    dw_dx(:,j) = aux(obj.rf.mask1);
+    dw_dy(:,j) = aux2(obj.rf.mask1);
     
   end
 

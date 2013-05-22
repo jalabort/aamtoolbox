@@ -1,4 +1,4 @@
-classdef CSM_Real_NWarp < CSM_Real & Interface_NWarp
+classdef CSM_Real_NWarp < CSM_Real & iNWarp
   %CSM_Real_NWarp Summary of this class goes here
   %   Detailed explanation goes here
   

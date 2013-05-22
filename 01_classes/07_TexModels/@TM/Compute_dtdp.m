@@ -12,8 +12,8 @@ function [dtdp] = Compute_dtdp(obj,dtdx,dtdy,dWdp)
   for i = 1:obj.n_ch
     ax = obj.getCroppedTexCh(dtdx,i);
     ay = obj.getCroppedTexCh(dtdy,i);
-    ax = repmat(ax,1,p);
-    ay = repmat(ay,1,p);
+    ax = repmat(ax,1,n_p);
+    ay = repmat(ay,1,n_p);
     dtdp((i-1)*obj.n_face_pixels2+1:i*obj.n_face_pixels2,:) = ... 
       ax .* dWxdp + ay .* dWydp;
   end

@@ -3,6 +3,7 @@ classdef (Abstract) GSM_Real < GSM
   %   Detailed explanation goes here
   
   properties
+    sim_pca = PCA_Cent();
     pca = PCA_Cent();
   end
   

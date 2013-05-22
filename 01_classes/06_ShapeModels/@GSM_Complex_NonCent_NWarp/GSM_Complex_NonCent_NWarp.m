@@ -1,4 +1,4 @@
-classdef GSM_Complex_NonCent_NWarp < GSM_Complex_NonCent & Interface_NWarp
+classdef GSM_Complex_NonCent_NWarp < GSM_Complex_NonCent & iNWarp
   %GSM_Complex_NonCent_NWarp Summary of this class goes here
   %   Detailed explanation goes here
   
