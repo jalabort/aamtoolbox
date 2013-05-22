@@ -18,6 +18,7 @@ function [delta,c] = Optimize(obj,i,tex,~)
   error = t - tex;
   J_x_error = J' * error;
   delta = H \ J_x_error;
+  delta = delta;
   
 end
 

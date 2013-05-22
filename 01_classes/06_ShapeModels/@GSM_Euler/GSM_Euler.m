@@ -44,7 +44,7 @@ classdef (Abstract) GSM_Euler < SM
       
       
       
-      obj.mu_ann = obj.Shape2Ann(obj.EShape2Shape(obj.pc(:,1)));
+      obj.mu_ann = obj.Shape2Ann(obj.EShape2Shape(obj.mu));
       
 %       eshape = obj.pc(:,1);
 %       dir = angle(eshape(1:2*obj.n_vert) + 1j*eshape(2*obj.n_vert+1:end));

@@ -195,7 +195,7 @@ if ~loaded
         % igo
         case 'igo-real'
           tm{i} = GTM_Igo_Real(img,rf,smoother);
-        case 'igo-rea-double'
+        case 'igo-real-double'
           tm{i} = GTM_Igo_Real_Double(img,rf,smoother);
         case 'igo-complex'
           tm{i} = GTM_Igo_Complex(img,rf,smoother);

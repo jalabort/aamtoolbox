@@ -34,8 +34,8 @@ opt.m.warp = {'pwa'};
 opt.m.interp = {'nearest'};
 opt.m.smoother = {};
 opt.m.sigma = {};
-opt.m.shape_model = {'gsm-real-nwarp'};
-opt.m.tex_model = {'pi-norm'};
+opt.m.shape_model = {'gsm-euler-real-nwarp'};
+opt.m.tex_model = {'igo-real-double'};
 opt.m.alpha = {};
 
 % build ...M... model
@@ -70,7 +70,7 @@ opt.n_b = ... % # of mass shape eigenvectors
 opt.fitter = 'aic-ssd';
 opt.detector = 'gr-tr';
 opt.rotation = false;
-opt.composition_interface = {'baker'};
+opt.composition_interface = {'papandreou'};
 
 % control options
 opt.show = true;

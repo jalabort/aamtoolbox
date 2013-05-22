@@ -65,7 +65,7 @@ for i = 1:f.n_level
     '# of appearance eigenvectors is too large');
 
   % set shape model size
-  if isa(f.sm{i},'GSM') 
+  if isa(f.sm{i},'GSM') || isa(f.sm{i},'GSM_Euler') 
     % global shape model
     if f.n_level == length(opt.n_b)
       n_b = opt.n_b{i};
