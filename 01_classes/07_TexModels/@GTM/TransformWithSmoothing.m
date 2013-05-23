@@ -6,7 +6,7 @@ function [stex] = TransformWithSmoothing(obj,img)
     
   for i = 1:obj.n_ch_img
     simg_ch = obj.smoother.Run(img(:,:,i));
-    stex(1+obj.n_face_features*(i-1):obj.n_face_features*i) = ... 
+    stex(1+obj.n_face_features1*(i-1):obj.n_face_features1*i) = ... 
           obj.TransformCh(simg_ch(:,:,i));
   end
   

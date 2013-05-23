@@ -9,7 +9,7 @@ function [fann] = Fit(obj,img,ann)
   
   if detected
     
-    n_it_level = round(obj.n_it / obj.n_level);
+    n_it_level = ceil(obj.n_it / obj.n_level);
     it = 1;
     
     for i = obj.n_level:-1:1

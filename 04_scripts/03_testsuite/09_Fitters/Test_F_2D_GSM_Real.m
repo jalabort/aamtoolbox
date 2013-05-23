@@ -73,6 +73,7 @@ opt.rotation = false;
 opt.composition_interface = {'baker'};
 
 % control options
+opt.parallel = false;
 opt.show = true;
 opt.verbose = true;
 

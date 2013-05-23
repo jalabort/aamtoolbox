@@ -81,6 +81,7 @@ opt.rotation = false;
 opt.composition_interface = {'papandreou'};
 
 % control options
+opt.parallel = false;
 opt.show = true;
 opt.verbose = true;
 

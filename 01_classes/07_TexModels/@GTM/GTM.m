@@ -10,6 +10,8 @@ classdef (Abstract) GTM < TM
     cropped_pc
     
     n_pc
+    
+    variance
   end
   
   methods
@@ -20,7 +22,7 @@ classdef (Abstract) GTM < TM
       obj.n_ch_img = size(img,3);
       
       % convert images to textures (features)
-      [obj.n_ch,obj.n_face_features] = obj.SetNCh();
+      [obj.n_ch,obj.n_face_features1,obj.n_face_features2] = obj.SetNCh();
       tex = obj.TransformAll(img);
       
       % compute pca
@@ -35,7 +37,13 @@ classdef (Abstract) GTM < TM
       
       % initialize dinamic size properties
       obj.n_c = obj.n_pc;
+      
+      % compute the discarted variance
+      obj.variance = 0;
     end
+    
+    variance = ComputeLeftOutVariance(obj)
+    [n_c,variance] = SetNC(obj,n_c)
   end
   
   methods (Abstract) 

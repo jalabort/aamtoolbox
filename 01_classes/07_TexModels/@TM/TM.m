@@ -10,10 +10,11 @@ classdef (Abstract) TM
     
     mask1
     n_face_pixels1
-    n_face_features
+    n_face_features1
     
     mask2 
     n_face_pixels2
+    n_face_features2
     
     n_c
     n_ch
@@ -40,7 +41,7 @@ classdef (Abstract) TM
     tex_ch = getTexCh(obj,tex,i)
     ctex_ch = getCroppedTexCh(obj,ctex,i)
     
-    [n_ch,n_ch_features] = SetNCh(obj)
+    [n_ch,n_face_features1,n_face_features2] = SetNCh(obj)
     
     img = C2Img(obj,c)
     c = Img2C(obj,img)

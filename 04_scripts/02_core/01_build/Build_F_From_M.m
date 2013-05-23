@@ -14,6 +14,10 @@ switch opt.fitter
     f = F_Sic_Ssd(m);
   case 'sic-ecc'
     f = F_Sic_Ecc(m);
+  case 'p-fc-dts'
+    f = PF_Fc_DtS(m);
+  case 'p-fc-dts-dws'
+    f = PF_Fc_DtS_DwS(m);
 end
 assert(isa(f,'F_2D') ,'undifiened fitter!');
 
@@ -60,7 +64,7 @@ for i = 1:f.n_level
   else
     n_c = cell2mat(opt.n_c);
   end
-  f.tm{i}.n_c = n_c;
+  [f.tm{i}.n_c,f.tm{i}.variance] = f.tm{i}.SetNC(n_c);
   assert(f.tm{i}.n_c <= f.tm{i}.n_pc, ...
     '# of appearance eigenvectors is too large');
 

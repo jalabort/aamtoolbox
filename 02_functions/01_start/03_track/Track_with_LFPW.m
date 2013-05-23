@@ -5,8 +5,6 @@ clc
 
 %% Load or Create M_2D
 
-disp('- F_2D test');
-
 % database
 opt.m.bin_root = ...
   ['..' filesep, ... 
@@ -30,19 +28,40 @@ opt.m.level = ...
    0.25};
 opt.m.erode1 = {1};
 opt.m.erode2 = {2};
-opt.m.warp = {'tps'};
+opt.m.warp = {'pwa'};
 opt.m.interp = {'nearest'};
 opt.m.smoother = {};
 opt.m.sigma = {};
-opt.m.shape_model = {'gsm-euler-real-nwarp'};
+opt.m.shape_model = {'gsm-real-nwarp'};
 opt.m.tex_model = {'pi'};
-opt.m.alpha = {1.9};
+opt.m.alpha = {};
 
 % build ...M... model
 Build_M_From_DS
 
 
-%% Test F_2D
+%% Create F_2D
+
+% fitter options
+opt.n_it = 50; 
+opt.n_c = ... % # of appearance eigenvectors
+  {500, ...
+   500, ...
+   500}; 
+opt.n_b = ... % # of shape eigenvectors 
+  {12, ...
+   6, ...
+   3};   
+opt.fitter = 'pic-ecc';
+opt.detector = 'gr-tr';
+opt.rotation = false;
+opt.composition_interface = {'baker'};
+
+% build ...F... fitter
+Build_F_From_M
+
+
+%% Track
 
 % database
 opt.bin_root = ...
@@ -53,30 +72,12 @@ opt.type = 'test';
 opt.ann = 'our';
 test_db = DB([opt.name '-' opt.type '-' opt.ann],opt.bin_root);
 
-% training dataset
+% test dataset
 opt.id = 1:224;
 opt.reg_exp_query = test_db.RegExpQuery(opt.id);
 
-% fitter options
-opt.n_it = 50; 
-opt.n_c = ... % # of appearance eigenvectors
-  {50, ...
-   50, ...
-   50}; 
-opt.n_b = ... % # of mass shape eigenvectors 
-  {12, ...
-   6, ...
-   3}; 
-opt.fitter = 'aic-ssd';
-opt.detector = 'gr-tr';
-opt.rotation = false;
-opt.composition_interface = {'papandreou'};
-
 % control options
-opt.parallel = false;
 opt.show = true;
 opt.verbose = true;
 
-% build ...F... fitter
-Build_F_From_M
-
+Track_from Folder

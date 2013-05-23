@@ -60,7 +60,7 @@ for i = list
   count = count + 1;
 end
 
-plot(list,cerr,opt.simbol,'MarkerSize',2,'linewidth',1);
+plot(list,cerr,opt.symbol,'MarkerSize',2,'linewidth',1);
 method = [cell2mat(opt.m.shape_model) ' - ' ...
   cell2mat(opt.m.tex_model) ' - ' ...
   opt.fitter];

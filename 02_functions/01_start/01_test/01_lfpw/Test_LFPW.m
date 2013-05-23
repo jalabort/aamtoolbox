@@ -5,8 +5,6 @@ clc
 
 %% Load or Create M_2D
 
-disp('- F_2D test');
-
 % database
 opt.m.bin_root = ...
   ['..' filesep, ... 
@@ -17,7 +15,7 @@ opt.m.ann = 'our';
 train_db = DB([opt.m.name '-' opt.m.type '-' opt.m.ann],opt.m.bin_root);
 
 % training dataset
-opt.m.id = 1:811;
+opt.m.id = 1:11;
 opt.m.reg_exp_query = train_db.RegExpQuery(opt.m.id);
 
 % model options
@@ -30,19 +28,40 @@ opt.m.level = ...
    0.25};
 opt.m.erode1 = {1};
 opt.m.erode2 = {2};
-opt.m.warp = {'tps'};
+opt.m.warp = {'pwa'};
 opt.m.interp = {'nearest'};
 opt.m.smoother = {};
 opt.m.sigma = {};
-opt.m.shape_model = {'gsm-euler-real-nwarp'};
-opt.m.tex_model = {'pi'};
-opt.m.alpha = {1.9};
+opt.m.shape_model = {'gsm-real-nwarp'};
+opt.m.tex_model = {'igo-real'};
+opt.m.alpha = {};
 
 % build ...M... model
 Build_M_From_DS
 
 
-%% Test F_2D
+%% Create F_2D
+
+% fitter options
+opt.n_it = 50; 
+opt.n_c = ... % # of appearance eigenvectors
+  {5, ...
+   5, ...
+   5}; 
+opt.n_b = ... % # of shape eigenvectors 
+  {6, ...
+   6, ...
+   3};   
+opt.fitter = 'aic-ecc';
+opt.detector = 'gr-tr';
+opt.rotation = false;
+opt.composition_interface = {'baker'};
+
+% build ...F... fitter
+Build_F_From_M
+
+
+%% Fit DS
 
 % database
 opt.bin_root = ...
@@ -53,30 +72,23 @@ opt.type = 'test';
 opt.ann = 'our';
 test_db = DB([opt.name '-' opt.type '-' opt.ann],opt.bin_root);
 
-% training dataset
+% test dataset
 opt.id = 1:224;
 opt.reg_exp_query = test_db.RegExpQuery(opt.id);
-
-% fitter options
-opt.n_it = 50; 
-opt.n_c = ... % # of appearance eigenvectors
-  {50, ...
-   50, ...
-   50}; 
-opt.n_b = ... % # of mass shape eigenvectors 
-  {12, ...
-   6, ...
-   3}; 
-opt.fitter = 'aic-ssd';
-opt.detector = 'gr-tr';
-opt.rotation = false;
-opt.composition_interface = {'papandreou'};
 
 % control options
 opt.parallel = false;
 opt.show = true;
 opt.verbose = true;
 
-% build ...F... fitter
-Build_F_From_M
+Fit_DS
+
+
+%% Test DS
+
+% plot options
+opt.err_type = 'ram';
+opt.symbol = 'r*-';
+
+Test_DS
 
