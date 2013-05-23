@@ -3,40 +3,43 @@ function [delta,c] = Optimize(obj,i,tex,~)
   %   Detailed explanation goes her
   
   c = obj.tm{i}.Tex2C(tex);
-  [t,tt] = obj.tm{i}.C2Tex(c);
-
-  [dt_dx,dt_dy] = obj.tm{i}.ComputeDTDXY(t);
-
-  g = obj.tm{i}.ComputeDTDQPR(obj.sm{i}.n_qpr,dt_dx,dt_dy,obj.dw_dp{i},t,tt);
-  q = g' * g;
-  inv_q = inv(q);
+  t = obj.tm{i}.C2Tex(c);
   
-  t = obj.tm{i}.Img2Tex(obj.tm{i}.Tex2Img2(t));
-  tex = obj.tm{i}.Img2Tex(obj.tm{i}.Tex2Img2(tex));
+  [dtdx,dtdy] = obj.tm{i}.Compute_dtdxy(t);
+
+  J = obj.tm{i}.Compute_dtdp(dtdx,dtdy,obj.dWdp{i});
+  J = obj.tm{i}.ProjectOut(J);
+  
+  invH = inv(J' * J);
+   
+  t = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(t));
+  tex = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(tex));
 
   v = t' * t;
-  v_bold = g' * t;
-  num = v - v_bold' * inv_q * v_bold;
+  vbold = J' * t;
+  aux1 = vbold' * invH * vbold;
+  num = v - aux1;
 
   u = t' * tex;
-  u_bold = g' * tex;
-  aux = u_bold' * inv_q * v_bold;
-  den = u - aux;
+  ubold = J' * tex;
+  aux2 = ubold' * invH * vbold;
+  den = u - aux2;
 
-  if u >  aux
+  if u >  aux2
     lambda = num / den;
   else
-    if u <=  aux
-      lambda1 = sqrt((v_bold' / q * v_bold) / (u_bold' / q * u_bold));
-      lambda2 = (u_bold' / q * v_bold - u) / (u_bold' / q * u_bold);
+    if u <=  aux2
+      aux3 = (ubold'  * invH * ubold);
+      lambda1 = sqrt(aux1 / aux3);
+      lambda2 = (aux2 - u) / aux3;
       lambda = max(lambda1,lambda2);
     else
       disp('Error in computation of lambda');
     end
   end
 
-  sd_delta = lambda * u_bold - v_bold;
-  delta = inv_q * sd_delta;
+  J_x_error = lambda * vbold - ubold;
+  delta = invH * J_x_error;
 
 end
 

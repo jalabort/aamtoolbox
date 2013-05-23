@@ -35,7 +35,7 @@ opt.m.interp = {'nearest'};
 opt.m.smoother = {};
 opt.m.sigma = {};
 opt.m.shape_model = {'gsm-real-nwarp'};
-opt.m.tex_model = {'igo-real-double'};
+opt.m.tex_model = {'pi'};
 opt.m.alpha = {};
 
 % build ...M... model
@@ -60,17 +60,17 @@ opt.reg_exp_query = test_db.RegExpQuery(opt.id);
 % fitter options
 opt.n_it = 50; 
 opt.n_c = ... % # of appearance eigenvectors
-  {50, ...
-   50, ...
-   50}; 
+  {500, ...
+   500, ...
+   500}; 
 opt.n_b = ... % # of shape eigenvectors 
   {12, ...
-    6, ...
-    3};   
-opt.fitter = 'aic-ssd';
+   6, ...
+   3};   
+opt.fitter = 'pic-ecc';
 opt.detector = 'gr-tr';
 opt.rotation = false;
-opt.composition_interface = {'papandreou'};
+opt.composition_interface = {'baker'};
 
 % control options
 opt.show = true;

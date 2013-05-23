@@ -30,13 +30,13 @@ opt.m.level = ...
    0.25};
 opt.m.erode1 = {1};
 opt.m.erode2 = {2};
-opt.m.warp = {'pwa'};
+opt.m.warp = {'tps'};
 opt.m.interp = {'nearest'};
 opt.m.smoother = {};
 opt.m.sigma = {};
 opt.m.shape_model = {'gsm-euler-real-nwarp'};
-opt.m.tex_model = {'igo-real-double'};
-opt.m.alpha = {};
+opt.m.tex_model = {'pi'};
+opt.m.alpha = {1.9};
 
 % build ...M... model
 Build_M_From_DS

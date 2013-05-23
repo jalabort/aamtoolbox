@@ -39,6 +39,11 @@ if ~loaded
       else
         shape_model_type = cell2mat(opt.m.shape_model);
       end
+      if n_level == length(opt.m.alpha)
+        alpha = opt.m.alpha{i};
+      else
+        alpha = cell2mat(opt.m.alpha);
+      end
       switch shape_model_type  
         % global shape models
         case 'gsm-real-nwarp'
@@ -46,7 +51,7 @@ if ~loaded
         case 'gsm-real-concat'
           sm{i} = GSM_Real_Concat(ann);
         case 'gsm-euler-real-nwarp'
-          sm{i} = GSM_Euler_Real_NWarp(ann,1.9);
+          sm{i} = GSM_Euler_Real_NWarp(ann,alpha);
         case 'gsm-complex-cent-nwarp'
           sm{i} = GSM_Complex_Cent_NWarp(ann);
         case 'gsm-complex-cent-concat'

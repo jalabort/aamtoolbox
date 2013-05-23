@@ -1,5 +1,5 @@
 function [obj] = PreCompute(obj,i)
-  %PreComputeE Summary of this function goes here
+  %PreCompute Summary of this function goes here
   %   Detailed explanation goes here
 
   dWduvi = obj.w{i}.Compute_dWduvi();
