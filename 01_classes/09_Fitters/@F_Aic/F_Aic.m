@@ -1,4 +1,4 @@
-classdef F_Aic < F_2D
+classdef F_Aic < F_2D & iU_Compositional
   %F_Aic Summary of this class goes here
   %   Detailed explanation goes here
   

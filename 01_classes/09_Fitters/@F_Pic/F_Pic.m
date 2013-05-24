@@ -1,4 +1,4 @@
-classdef (Abstract) F_Pic < F_2D
+classdef (Abstract) F_Pic < F_2D & iU_Compositional
   %F_Aic Summary of this class goes here
   %   Detailed explanation goes here
   

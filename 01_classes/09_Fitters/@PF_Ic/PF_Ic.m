@@ -1,4 +1,4 @@
-classdef (Abstract) PF_Ic < F_2D
+classdef (Abstract) PF_Ic < F_2D & iU_Compositional
   %PF_FI Summary of this class goes here
   %   Detailed explanation goes here
   
