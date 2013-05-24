@@ -1,14 +1,15 @@
-classdef (Abstract) PF_Fc < F_2D
-  %PF_Fc Summary of this class goes here
+classdef (Abstract) PF_Ic < F_2D
+  %PF_FI Summary of this class goes here
   %   Detailed explanation goes here
   
   properties
     t
-    dWdp
+    J
+    H
   end
   
   methods
-    function obj = PF_Fc(f)
+    function obj = PF_Ic(f)
       obj = obj@F_2D(f);
     end
   end

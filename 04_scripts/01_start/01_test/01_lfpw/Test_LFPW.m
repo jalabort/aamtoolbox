@@ -43,7 +43,7 @@ Build_M_From_DS
 %% Create F_2D
 
 % fitter options
-opt.n_it = 50; 
+opt.n_it = 500; 
 opt.n_c = ... % # of appearance eigenvectors
   {50, ...
    50, ...
@@ -55,7 +55,7 @@ opt.n_b = ... % # of shape eigenvectors
 opt.fitter = 'p-fc-dts-dws';
 opt.detector = 'gr-tr';
 opt.rotation = false;
-opt.composition_interface = {'baker'};
+opt.composition_interface = {'papandreou'};
 
 % build ...F... fitter
 Build_F_From_M

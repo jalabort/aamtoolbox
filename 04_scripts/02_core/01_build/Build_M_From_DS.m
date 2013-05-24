@@ -181,13 +181,13 @@ if ~loaded
           tm{i} = GTM_Pi_Norm(img,rf,smoother);
         % euler
         case 'euler-real'
-          tm{i} = GTM_Euler_Real(img,rf,smoother);
+          tm{i} = GTM_Euler_Real(img,rf,smoother,opt.m.alpha);
         case 'euler-real-double'
-          tm{i} = GTM_Euler_Real_Double(img,rf,smoother);
+          tm{i} = GTM_Euler_Real_Double(img,rf,smoother,opt.m.alpha);
         case 'euler-complex'
-          tm{i} = GTM_Euler_Complex(img,rf,smoother);
+          tm{i} = GTM_Euler_Complex(img,rf,smoother,opt.m.alpha);
         case 'euler-complex-double'
-          tm{i} = GTM_Euler_Complex_Double(img,rf,smoother);
+          tm{i} = GTM_Euler_Complex_Double(img,rf,smoother,opt.m.alpha);
         % cootes
         case 'gi-real'
           tm{i} = GTM_Gi_Real(img,rf,smoother);

@@ -16,8 +16,16 @@ switch opt.fitter
     f = F_Sic_Ecc(m);
   case 'p-fc-dts'
     f = PF_Fc_DtS(m);
+  case 'p-fc-dws'
+    f = PF_Fc_DwS(m);
   case 'p-fc-dts-dws'
     f = PF_Fc_DtS_DwS(m);
+  case 'p-ic-dts'
+    f = PF_Ic_DtS(m);
+  case 'p-ic-dws'
+    f = PF_Ic_DwS(m);
+  case 'p-ic-dts-dws'
+    f = PF_Ic_DtS_DwS(m);
 end
 assert(isa(f,'F_2D') ,'undifiened fitter!');
 

@@ -11,7 +11,7 @@ classdef GTM_Euler_Real_Double < GTM
   methods
     function obj = GTM_Euler_Real_Double(img,rf,smoother,alpha)
       obj@GTM(img,rf,smoother);
-      if ~isempty(alpha)
+      if nargin > 3  &&  ~isempty(alpha) 
         obj.alpha_pi = alpha * pi;
       end
     end

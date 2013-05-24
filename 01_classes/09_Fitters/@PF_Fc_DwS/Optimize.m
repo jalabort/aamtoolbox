@@ -5,7 +5,9 @@ function [delta,c] = Optimize(obj,i,tex,c)
   [dtdx,dtdy] = obj.tm{i}.Compute_dtdxy(tex);
   
   J = obj.tm{i}.Compute_dtdp(dtdx,dtdy,obj.dWdp{i});
-  J = obj.A{i} * J;
+  obj.J = obj.tm{i}.cropped_pc(:,1:obj.tm{i}.n_c) * ...
+    diag(1./obj.tm{i}.ev(1:obj.tm{i}.n_c)) * ...
+    (obj.tm{i}.cropped_pc(:,1:obj.tm{i}.n_c)' * obj.J);
   
   H = J' * J;
   
