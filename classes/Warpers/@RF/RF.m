@@ -33,7 +33,7 @@ classdef RF
       obj.n_pixels = obj.res(1) * obj.res(2);
       obj.mask = obj.ComputeMask(obj.parts{1},erode); 
       obj.n_face_pixels = length(find(obj.mask==1));
-      obj.mask2 = obj.ComputeMask2(obj.parts{1}); 
+      obj.mask2 = obj.ComputeMask(obj.parts{1},1); 
       obj.n_face_pixels2 = length(find(obj.mask2==1));
     end
     

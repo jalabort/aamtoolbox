@@ -18,14 +18,14 @@ opt.m.train_reg_exp_query = train_db.RegExpQuery(opt.m.id);
 opt.m.model_root = '../Models/';
 opt.m.n_level = 3;
 opt.m.factor = {1,1,1};
-opt.m.erode = 3;
+opt.m.erode = 1;
 opt.m.warp = 'pwa';
 opt.m.interp = 'bilinear';
 opt.m.smoothing = 'none';
 opt.m.g_type = 'CentralDifference';
 opt.m.sigma = {1,2,3};
 opt.m.shape_model = {'cb-pc6','cb-pc6','cb-pc6'};
-opt.m.tex_model = 'gi';
+opt.m.tex_model = 'pi';
 opt.m.alpha = 1.99;
 
 % Train
@@ -41,7 +41,7 @@ opt.name = ['HelenRescaled-' opt.type];
 test_db = DB(opt.name,opt.bin_root);
 
 % Specify Fitting DataSet
-opt.id =  [5,7,15,21,49,52,64,79,88,146,174,188,208,236,287,289,303,320,322];%1:50;
+opt.id =  1:330;%[5,7,15,21,49,52,64,79,88,146,174,188,208,236,287,289,303,320,322];%1:50;
 opt.test_reg_exp_query = test_db.RegExpQuery(opt.id);
 
 % Specify Fitting Options
@@ -63,7 +63,7 @@ opt.algorithm = 'aic-ssd';
 opt.composition = 'baker';
 
 % Specify Control Options
-opt.show_fitting = true;
+opt.show_fitting = false;
 opt.show_error = true;
 
 % Fit
