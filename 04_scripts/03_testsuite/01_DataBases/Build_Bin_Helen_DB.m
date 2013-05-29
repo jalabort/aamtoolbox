@@ -1,4 +1,4 @@
-clear all
+%clear all
 close all
 clc
 
@@ -9,7 +9,7 @@ bin_root = ['..' ...
   filesep 'binarydb' ...
   filesep];
 name = 'helen';
-type = 'train';
+type = 'test';
 ann = 'original';
 db = DB([name '-' type  '-' ann],bin_root);
 

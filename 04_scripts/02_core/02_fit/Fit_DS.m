@@ -15,3 +15,8 @@ else
   Fit_Sequential
 end
 
+% save fitted ann
+if opt.save_ann
+  saveann(opt,fann);
+end
+

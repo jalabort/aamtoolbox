@@ -1,22 +1,22 @@
-%clear all
-%close all
+clear all
+close all
 clc
 
 
 %% Load or Create M_2D
 
 % specific options
-opt.m.shape_model = {'psm-real-concat'};
+opt.m.shape_model = {'csm-real-concat'};
 
 % shared options
-Shared_Model
+Shared_Model_Helen
 
 
 %% Create F_2D
 
 % specific options
 opt.n_f = ... % # of mass shape eigenvectors 
-  {6, ...
+  {5, ...
    4, ...
    3}; 
 opt.n_r = ... % # of local shape eigenvectors
@@ -29,7 +29,7 @@ opt.n_r = ... % # of local shape eigenvectors
    1, 0, 0};   % right eyebrow  
 
 % shared options
-Shared_Fitter
+Shared_Fitter_Helen
  
 
 %% Fit DS
@@ -41,5 +41,5 @@ Shared_Fit_Helen
 %% Test DS
 
 % shared options
-Shared_Test
+Shared_Test_Helen
 

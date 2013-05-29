@@ -1,16 +1,12 @@
 % fitter options
-opt.n_it = 50; 
+opt.n_it = 100; 
 opt.n_c = ... % # of appearance eigenvectors
-  {50, ...
-   50, ...
-   50}; 
-opt.n_b = ... % # of shape eigenvectors 
-  {12, ...
-   6, ...
-   3};   
+  {200, ...
+   100, ...
+   50};    
 opt.fitter = 'aic-ssd';
 opt.detector = 'gr-tr';
-opt.rotation = false;
+opt.rotation = true;
 opt.composition_interface = {'papandreou'};
 
 % build ...F... fitter

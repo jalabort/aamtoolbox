@@ -9,19 +9,19 @@ clc
 opt.m.shape_model = {'gsm-real-concat'};
 
 % shared options
-Shared_Model
+Shared_Model_Helen
 
 
 %% Create F_2D
 
 % specific options
 opt.n_b = ... % # of shape eigenvectors 
-  {12, ...
-   6, ...
-   3};   
+  {25, ...
+   15, ...
+   10};   
 
 % shared options
-Shared_Fitter
+Shared_Fitter_Helen
  
 
 %% Fit DS
@@ -33,5 +33,5 @@ Shared_Fit_Helen
 %% Test DS
 
 % shared options
-Shared_Test
+Shared_Test_Helen
 
