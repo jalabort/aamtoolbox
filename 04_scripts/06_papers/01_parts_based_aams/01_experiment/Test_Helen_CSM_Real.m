@@ -1,5 +1,5 @@
-clear all
-close all
+%clear all
+%close all
 clc
 
 
@@ -16,7 +16,7 @@ Shared_Model_Helen
 
 % specific options
 opt.n_f = ... % # of mass shape eigenvectors 
-  {5, ...
+  {6, ...
    4, ...
    3}; 
 opt.n_r = ... % # of local shape eigenvectors
@@ -33,6 +33,16 @@ Shared_Fitter_Helen
  
 
 %% Fit DS
+
+% save directories
+opt.ann_root =  ...
+  ['..' filesep, ... 
+   'result' filesep, ...
+   'nips2013' filesep, ...
+   'componentbased' filesep];
+opt.img_root =  ...
+  [opt.ann_root, ... 
+   'img' filesep];
 
 % shared options
 Shared_Fit_Helen

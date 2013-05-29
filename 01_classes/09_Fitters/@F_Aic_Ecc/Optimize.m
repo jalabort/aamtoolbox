@@ -8,7 +8,7 @@ function [delta,c] = Optimize(obj,i,tex,~)
   [dtdx,dtdy] = obj.tm{i}.Compute_dtdxy(t);
 
   J = obj.tm{i}.Compute_dtdp(dtdx,dtdy,obj.dWdp{i});
-  J = obj.tm{i}.ProjectOut(J);
+  %J = obj.tm{i}.ProjectOut(J);
   
   invH = inv(J' * J);
    

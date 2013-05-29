@@ -1,4 +1,4 @@
-for i =1:1%:test_ds.n_data
+for i =1:test_ds.n_data
 
   % fit image
   ann = f.Fit(test_ds.data{i}.img,test_ds.data{i}.ann);
@@ -13,7 +13,7 @@ for i =1:1%:test_ds.n_data
     % save images
     if opt.save_img
       frame = getframe(h);
-      imwrite(frame.cdata,[opt.img_root 'i'],'png'); 
+      imwrite(frame.cdata,[opt.img_root int2str(i)],'png'); 
     end
   end
 

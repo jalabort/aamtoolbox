@@ -6,7 +6,7 @@ clc
 %% Load or Create M_2D
 
 % specific options
-opt.m.shape_model = {'psm-real-concat'};
+opt.m.shape_model = {'gsm-real-concat'};
 
 % shared options
 Shared_Model_Helen
@@ -15,18 +15,10 @@ Shared_Model_Helen
 %% Create F_2D
 
 % specific options
-opt.n_f = ... % # of mass shape eigenvectors 
-  {8, ...
-   6, ...
-   4}; 
-opt.n_r = ... % # of local shape eigenvectors
-  {4, 2, 1;    % mouth
-   3, 1, 0;    % nose
-   1, 0, 0;    % left eye
-   1, 0, 0;    % right eye
-   4, 2, 0;    % jaw
-   1, 0, 0;    % left eyebrow
-   1, 0, 0};   % right eyebrow  
+opt.n_b = ... % # of shape eigenvectors 
+  {30, ...
+   , ...
+   8};   
 
 % shared options
 Shared_Fitter_Helen
@@ -39,7 +31,7 @@ opt.ann_root =  ...
   ['..' filesep, ... 
    'result' filesep, ...
    'nips2013' filesep, ...
-   'partbased' filesep];
+   'global' filesep];
 opt.img_root =  ...
   [opt.ann_root, ... 
    'img' filesep];
