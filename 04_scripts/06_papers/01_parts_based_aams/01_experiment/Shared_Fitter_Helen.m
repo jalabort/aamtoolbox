@@ -7,7 +7,7 @@ opt.n_c = ... % # of appearance eigenvectors
 opt.fitter = 'aic-ssd';
 opt.detector = 'gr-tr';
 opt.rotation = false;
-opt.composition_interface = {'baker'};
+opt.composition_interface = {'papandreou'};
 
 % build ...F... fitter
 Build_F_From_M

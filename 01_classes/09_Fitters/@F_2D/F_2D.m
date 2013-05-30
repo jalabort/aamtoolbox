@@ -14,6 +14,7 @@ classdef (Abstract) F_2D < M_2D
     
     obj = Initialize(obj)
     fann = Fit(obj,img,ann)
+    rann = Reconstruct(obj,ann)
   end
   
   methods (Abstract)

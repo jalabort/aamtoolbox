@@ -16,9 +16,9 @@ Shared_Model_Helen
 
 % specific options
 opt.n_b = ... % # of shape eigenvectors 
-  {24, ...
-   14, ...
-   8};   
+  {12, ...
+   6, ...
+   4};   
 
 % shared options
 Shared_Fitter_Helen
@@ -37,11 +37,11 @@ opt.img_root =  ...
    'img' filesep];
 
 % shared options
-Shared_Fit_Helen
+Shared_Reconstruct_Helen
 
 
 %% Test DS
 
 % shared options
-Shared_Test_Helen
+Shared_Test_Reconstruct_Helen
 

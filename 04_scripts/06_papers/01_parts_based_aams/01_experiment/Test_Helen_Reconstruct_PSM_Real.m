@@ -6,7 +6,7 @@ clc
 %% Load or Create M_2D
 
 % specific options
-opt.m.shape_model = {'csm-real-concat'};
+opt.m.shape_model = {'psm-real-concat'};
 
 % shared options
 Shared_Model_Helen
@@ -39,17 +39,17 @@ opt.ann_root =  ...
   ['..' filesep, ... 
    'result' filesep, ...
    'nips2013' filesep, ...
-   'componentbased' filesep];
+   'partbased' filesep];
 opt.img_root =  ...
   [opt.ann_root, ... 
    'img' filesep];
 
 % shared options
-Shared_Fit_Helen
+Shared_Reconstruct_Helen
 
 
 %% Test DS
 
 % shared options
-Shared_Test_Helen
+Shared_Test_Reconstruct_Helen
 

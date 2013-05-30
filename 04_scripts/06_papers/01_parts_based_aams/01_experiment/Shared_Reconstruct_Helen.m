@@ -13,10 +13,7 @@ opt.reg_exp_query = test_db.RegExpQuery(opt.id);
 
 % control options
 opt.parallel = false;
-opt.save_ann = true;
-opt.verbose = true;
-opt.show = true;
-opt.save_img = true;
+opt.show = false;
 
 % fit dataset
-Fit_DS
+Reconstruct_DS
