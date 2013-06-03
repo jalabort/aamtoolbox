@@ -1,5 +1,22 @@
-- Df_Igo & Igo classes are the same when training..
-- SIMILARITY inside of SM must be handled with PCA functions whenever possible!!!!
-- Color and align methods inside of tex and shape models? (Think about it...)
-- Check the derivative of igo-complex when xy are complex (Not sure is correct!!!!)
-- Think how to get a consistent ann from the different shape representation in euler shape model.
+- Sic_Ecc still needs to be reimplemented!!!!!
+- Simultaneous algorithm versions need to be coded!!!
+- PSM with iNWarp does not work properly!!!! 
+- Consider coding shape_model intefaces nwarp and concat using the same 
+  structure as composition interfaces... 
+- Code WoW.cpp!!! (When possible...)
+- How do I double the angle using Cootes features?
+- Create a test for Test_M_2D
+
+- Consider implementing a project out method in pca classes!!!
+- Consider making Real and Complex interfaces for Shape Models...
+- How can I kill the rotation when using complex shapes?
+- Revise the notation and implementation of W_PWA/Compute_dWdxi
+
+- Implement WLCPA
+- Finish PCAs_Test for WLCPCA
+- Try to reimplement Stefanos PCA functions 
+
+- Copy & structure multipie files to db
+- Write Build_Bin_MultiPie_DB
+
+- Finish Test_FaceDetectors
