@@ -1,8 +1,3 @@
-clear all
-%close all
-clc
-
-
 %% Load or Create M_2D
 
 % shared options
@@ -12,13 +7,23 @@ Shared_Model_Helen
 %% Create F_2D
 
 % specific options
-opt.fitter = 'pic-ssd';
+opt.fitter = 'p-fc-dts';
 
 % shared options
 Shared_Fitter_Helen
  
 
 %% Fit DS
+
+opt.ann_root =  ...
+  ['..' filesep, ... 
+   'result' filesep, ...
+   'nips2013' filesep, ...
+   'probaams' filesep, ...
+   'dts' filesep];
+opt.img_root =  ...
+  [opt.ann_root, ... 
+   'img' filesep];
 
 % shared options
 Shared_Fit_Helen

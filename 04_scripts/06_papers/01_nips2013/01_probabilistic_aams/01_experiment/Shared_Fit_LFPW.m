@@ -12,8 +12,10 @@ opt.id = 1:224;
 opt.reg_exp_query = test_db.RegExpQuery(opt.id);
 
 % control options
-opt.parallel = false;
-opt.show = true;
+opt.parallel = true;
+opt.save_ann = false;
 opt.verbose = true;
+opt.show = true;
+opt.save_img = false;
 
 Fit_DS
