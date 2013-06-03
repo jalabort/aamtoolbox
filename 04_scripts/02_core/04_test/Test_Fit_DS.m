@@ -37,18 +37,29 @@ switch opt.err_type
   case 'hel'
     xlabel('mean interocular-distance normalized poit-to-point error', ...
       'Interpreter','tex','fontsize',font_size);
-    limit = 0.05;
-    step = 0.0005;
-    xtick = 0:0.01:limit;
+    limit = 0.2;
+    step = 0.001;
+    xtick = 0:0.02:limit;
 end
 set(gca, 'xtick', xtick);
 
 % compute error
 err = zeros(test_ds.n_data,1);
 for i = 1:test_ds.n_data
-  [rms_err,p2p_err,ram_err,hel_err] = computeerr(fann(:,:,i),...
-        test_ds.data{i}.ann,test_db.comp);
-  err(i) = ram_err;
+  [rms_err,p2p_err,ram_err,hel_err] = computeerr(fann(:,:,i), ...
+        test_ds.data{i}.ann(opt.point_list,:), ...
+        test_ds.data{i}.ann(opt.point_list,:), ...
+        test_db.comp);
+  switch opt.err_type
+    case 'rms'
+      err(i) = rms_err;
+    case 'p2p'
+      err(i) = p2p_err;
+    case 'ram'
+      err(i) = ram_err;
+    case 'hel'
+      err(i) = hel_err;
+  end
 end
 
 % compute cumulative error

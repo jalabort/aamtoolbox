@@ -76,10 +76,20 @@ test_db = DB([opt.name '-' opt.type '-' opt.ann],opt.bin_root);
 opt.id = 1:224;
 opt.reg_exp_query = test_db.RegExpQuery(opt.id);
 
+% save directories
+opt.ann_root =  ...
+  ['..' filesep, ... 
+   'results' filesep];
+opt.img_root =  ...
+  ['..' filesep, ... 
+   'fittedimg' filesep];
+
 % control options
 opt.parallel = true;
 opt.show = true;
 opt.verbose = true;
+opt.save_ann = true;
+opt.save_img = true;
 
 Fit_DS
 

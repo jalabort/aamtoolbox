@@ -54,6 +54,7 @@ classdef (Abstract) PSM < SM
       
       % compute similarity basis
       [obj.sim_mu,obj.sim_basis] = obj.ComputeSimilarityBasis();
+      obj.n_sim_basis = size(obj.sim_basis,2);
       
       % infer pose eigenspace
       obj.n_pose_pc = 2;
@@ -63,7 +64,7 @@ classdef (Abstract) PSM < SM
       
       % remove pose eigenspace from the original annotations
       ann = obj.ProjectOutPose(ann);
-      
+          
       % align mass and part annotations
       [mass_ann,part_ann] = obj.AlignMassAndPartsAnn(ann);
       
@@ -81,7 +82,6 @@ classdef (Abstract) PSM < SM
       end
       
       % set remaining static size properties
-      obj.n_sim_basis = size(obj.sim_basis,2);
       obj.n_mass_pc = size(obj.mass_pc,2);
       
       % initialize dinamic size properties

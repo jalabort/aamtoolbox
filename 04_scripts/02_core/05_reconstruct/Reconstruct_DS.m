@@ -6,17 +6,12 @@ assert(loaded,'test dataset could not be loaded!');
 
 display('- fitting');
 
-fann = zeros(train_db.n_vert,2,test_ds.n_data);
+rann = zeros(train_db.n_vert,2,f.n_level,test_ds.n_data);
 
 % fitting loop
 if opt.parallel
-  Fit_Parallel
+  Reconstruct_Parallel
 else
-  Fit_Sequential
-end
-
-% save fitted ann
-if opt.save_ann
-  saveann(opt,fann);
+  Reconstruct_Sequential
 end
 

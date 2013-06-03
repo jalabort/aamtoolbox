@@ -29,6 +29,11 @@ ann = ds.GetAnn();
 part = ds.comp;
 sm = PSM_Real_Concat(ann,part);
 
+sm.n_mass_pc = 0;
+
+sm.n_part_pc = {2,1,1,2,1,1};
+   
+
 % reconstruct original shapes
 rann = zeros(size(ann));
 rec_err = zeros(ds.n_data,1);

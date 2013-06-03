@@ -1,4 +1,4 @@
-for i = 1:test_ds.n_data
+for i =1:test_ds.n_data
 
   % fit image
   ann = f.Fit(test_ds.data{i}.img,test_ds.data{i}.ann);
@@ -7,7 +7,13 @@ for i = 1:test_ds.n_data
   % show the fitting
   if opt.show
     if all(all(ann(:,:,end)))
-      aamshow(1,test_ds.data{i}.img,ann,test_db.parts);
+      h = 1;
+      aamshow(h,test_ds.data{i}.img,ann,test_db.parts);
+    end
+    % save images
+    if opt.save_img
+      frame = getframe(h);
+      imwrite(frame.cdata,[opt.img_root int2str(i)],'png'); 
     end
     frame = getframe(1);
     imwrite(frame.cdata,['./' int2str(i) '.png'],'png');
@@ -16,8 +22,10 @@ for i = 1:test_ds.n_data
   % print the error
   if opt.verbose 
     if all(all(ann(:,:,end)))
-      [rms_err,p2p_err,ram_err,hel_err] = computeerr(fann(:,:,i),...
-        test_ds.data{i}.ann,test_db.comp);
+      [rms_err,p2p_err,ram_err,hel_err] = computeerr(fann(:,:,i), ...
+        test_ds.data{i}.ann, ...
+        test_ds.data{i}.ann, ...
+        test_db.comp);
       fprintf(['  - img: ' int2str(i) '/' int2str(test_ds.n_data) ...
         '\t\t  rms_err: ' num2str(rms_err) ...
         '\t  p2p_err: ' num2str(p2p_err) ...

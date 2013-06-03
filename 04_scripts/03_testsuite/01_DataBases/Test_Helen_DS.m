@@ -1,4 +1,4 @@
-clear all
+%clear all
 close all
 clc
 
@@ -11,7 +11,7 @@ disp('- DS test');
 bin_root = ['..' ...
   filesep 'binarydb' ...
   filesep];
-name = 'helen-rescaled';
+name = 'helen';
 type = 'test';
 ann = 'original';
 db = DB([name '-' type '-' ann],bin_root);
