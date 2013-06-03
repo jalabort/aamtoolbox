@@ -33,8 +33,8 @@ opt.m.interp = {'nearest'};
 opt.m.smoother = {};
 opt.m.sigma = {};
 opt.m.shape_model = {'gsm-real-nwarp'};
-opt.m.tex_model = {'pi-norm'};
-opt.m.alpha = {};
+opt.m.tex_model = {'pi'};
+opt.m.alpha = {1.9};
 
 % build ...M... model
 Build_M_From_DS
@@ -45,17 +45,17 @@ Build_M_From_DS
 % fitter options
 opt.n_it = 50; 
 opt.n_c = ... % # of appearance eigenvectors
-  {50, ...
-   50, ...
-   50}; 
+  {100, ...
+   100, ...
+   100}; 
 opt.n_b = ... % # of shape eigenvectors 
   {12, ...
    6, ...
    3};   
-opt.fitter = 'p-fc-dts-dws';
+opt.fitter = 'aic-ssd';
 opt.detector = 'gr-tr';
 opt.rotation = false;
-opt.composition_interface = {'papandreou'};
+opt.composition_interface = {'baker'};
 
 % build ...F... fitter
 Build_F_From_M
@@ -77,7 +77,7 @@ opt.id = 1:224;
 opt.reg_exp_query = test_db.RegExpQuery(opt.id);
 
 % control options
-opt.parallel = false;
+opt.parallel = true;
 opt.show = true;
 opt.verbose = true;
 

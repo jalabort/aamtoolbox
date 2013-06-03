@@ -30,6 +30,20 @@ function h = aamshow(i_fig,img,ann,parts,color)
     end
     drawnow;
   end
+  
+%   for i = 3:n_parts
+%     h{i} = plot(mean(ann(parts{i},1)),mean(ann(parts{i},2)),'o', ...
+%     'MarkerFaceColor','w', ...
+%     'MarkerEdgeColor','b', ...
+%     'MarkerSize',5);
+%   end
+  
+%   h{i} = plot(mean(ann(:,1)),mean(ann(:,2)),'+', ...
+%     'MarkerFaceColor','black', ...
+%     'MarkerEdgeColor','black', ...
+%     'MarkerSize',2);
+
+  
   hold off;
 
 end

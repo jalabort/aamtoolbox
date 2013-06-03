@@ -24,12 +24,12 @@ function Save(obj,opt,i)
   else
     warp_type = cell2mat(opt.warp);
   end
-  if n_level == length(opt.shape_model)
+ if n_level > 1 && n_level == length(opt.shape_model)
     smoother_type = opt.smoother{i};
   else
     smoother_type = cell2mat(opt.smoother);
   end
-  if n_level == length(opt.sigma)
+  if n_level > 1 && n_level == length(opt.sigma)
     sigma = opt.sigma{i};
   else
     sigma = cell2mat(opt.sigma);

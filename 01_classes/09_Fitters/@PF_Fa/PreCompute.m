@@ -5,8 +5,7 @@ function [obj] = PreCompute(obj,i)
   t = obj.tm{i}.GetMean();
   obj.t{i} = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(t));
 
-  dWduvi = obj.w{i}.Compute_dWduvi();
-  obj.dWduvi{i} = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(dWduvi,1),1);
+  obj.dWduvi{i} = obj.w{i}.Compute_dWduvi();
   
 end
 

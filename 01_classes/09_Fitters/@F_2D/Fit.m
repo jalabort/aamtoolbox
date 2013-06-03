@@ -22,7 +22,7 @@ function [fann] = Fit(obj,img,ann)
         wimg = obj.w{i}.Warp(ann,img);
         tex = obj.tm{i}.Transform(wimg);
         
-        [delta,c] = obj.Optimize(i,tex,c);
+        [delta,c] = obj.Optimize(i,tex,c,p);
         [ann,p] = obj.UpdateAnn(i,ann,delta,p);
         
         fann(:,:,it) = ann; 

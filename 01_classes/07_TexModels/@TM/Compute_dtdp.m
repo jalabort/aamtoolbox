@@ -4,17 +4,17 @@ function [dtdp] = Compute_dtdp(obj,dtdx,dtdy,dWdp)
   
   n_p = size(dWdp,2);
 
-  dWxdp = obj.GetCroppedTexCh(dWdp,1);
-  dWydp = obj.GetCroppedTexCh(dWdp,2);
+  dWxdp = obj.GetTexCh(dWdp,1);
+  dWydp = obj.GetTexCh(dWdp,2);
   
-  dtdp = zeros(obj.n_ch*obj.n_face_pixels2,n_p);
+  dtdp = zeros(obj.n_ch*obj.n_face_pixels1,n_p);
   
   for i = 1:obj.n_ch
-    ax = obj.getCroppedTexCh(dtdx,i);
-    ay = obj.getCroppedTexCh(dtdy,i);
+    ax = obj.getTexCh(dtdx,i);
+    ay = obj.getTexCh(dtdy,i);
     ax = repmat(ax,1,n_p);
     ay = repmat(ay,1,n_p);
-    dtdp((i-1)*obj.n_face_pixels2+1:i*obj.n_face_pixels2,:) = ... 
+    dtdp((i-1)*obj.n_face_pixels1+1:i*obj.n_face_pixels1,:) = ... 
       ax .* dWxdp + ay .* dWydp;
   end
 

@@ -1,3 +1,4 @@
+- Sic_Ecc still needs to be reimplemented!!!!!
 - Simultaneous algorithm versions need to be coded!!!
 - PSM with iNWarp does not work properly!!!! 
 - Consider coding shape_model intefaces nwarp and concat using the same 

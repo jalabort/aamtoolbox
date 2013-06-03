@@ -18,7 +18,7 @@ classdef (Abstract) F_2D < M_2D
   
   methods (Abstract)
     obj = PreCompute(obj,level)
-    [delta,c] = Optimize(obj,level,tex,c)
+    [delta,c] = Optimize(obj,level,tex,c,p)
     [ann,p] = UpdateAnn(obj,i,ann,delta,p)
   end
   

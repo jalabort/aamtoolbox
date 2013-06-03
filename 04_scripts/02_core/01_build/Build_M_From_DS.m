@@ -144,7 +144,7 @@ if ~loaded
     if ~loaded
 
       % build ...S... smoother
-      if n_level == length(opt.m.shape_model)
+      if n_level > 1 && n_level == length(opt.m.shape_model)
         smoother_type = opt.m.smoother{i};
       else
         smoother_type = cell2mat(opt.m.smoother);
@@ -152,7 +152,7 @@ if ~loaded
           smoother_type = '';
         end
       end
-      if n_level == length(opt.m.sigma)
+      if n_level > 1 && n_level == length(opt.m.sigma)
         sigma = opt.m.sigma{i};
       else
         sigma = cell2mat(opt.m.sigma);

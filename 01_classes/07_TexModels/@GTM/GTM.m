@@ -32,8 +32,8 @@ classdef (Abstract) GTM < TM
       % obtain and orthonormalize the cropped pc (necessary to correctly
       % handle possible innacuracies when computing gradients on the 
       % reference frame)
-      obj.cropped_pc = obj.Img2CroppedTex(obj.Tex2Img(obj.pc));
-      [obj.cropped_pc, ~] = qr(obj.cropped_pc,0);
+%       obj.cropped_pc = obj.Img2CroppedTex(obj.Tex2Img(obj.pc));
+%       [obj.cropped_pc, ~] = qr(obj.cropped_pc,0);
       
       % initialize dinamic size properties
       obj.n_c = obj.n_pc;

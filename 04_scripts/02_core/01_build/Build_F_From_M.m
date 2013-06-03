@@ -2,24 +2,36 @@ display('- building fitter');
 
 % build ...F... fitter
 switch opt.fitter
+  % project-out-inverse-compositional
   case 'pic-ssd'
     f = F_Pic_Ssd(m);
   case 'pic-ecc'
     f = F_Pic_Ecc(m);
+  % alternating-inverse-compositional
   case 'aic-ssd'
     f = F_Aic_Ssd(m);
   case 'aic-ecc'
     f = F_Aic_Ecc(m);
+  % simultaneous-inverse-compositional
   case 'sic-ssd'
     f = F_Sic_Ssd(m);
   case 'sic-ecc'
     f = F_Sic_Ecc(m);
+  % probabilistic-foward-additive
+  case 'p-fa-dts'
+    f = PF_Fa_DtS(m);
+  case 'p-fa-dws'
+    f = PF_Fa_DwS(m);
+  case 'p-fa-dts-dws'
+    f = PF_Fa_DtS_DwS(m);
+  % probabilistic-forward-compositional
   case 'p-fc-dts'
     f = PF_Fc_DtS(m);
   case 'p-fc-dws'
     f = PF_Fc_DwS(m);
   case 'p-fc-dts-dws'
     f = PF_Fc_DtS_DwS(m);
+  % probabilistic-inverse-compositional
   case 'p-ic-dts'
     f = PF_Ic_DtS(m);
   case 'p-ic-dws'

@@ -1,27 +1,21 @@
 clear all
-close all
+%close all
 clc
 
 
 %% Load or Create M_2D
 
-% specific options
-opt.m.shape_model = {'gsm-real-concat'};
-
 % shared options
-Shared_Model
+Shared_Model_LFPW
 
 
 %% Create F_2D
 
 % specific options
-opt.n_b = ... % # of shape eigenvectors 
-  {12, ...
-   6, ...
-   3};   
+opt.fitter = 'sic-ssd';
 
 % shared options
-Shared_Fitter
+Shared_Fitter_LFPW
  
 
 %% Fit DS
@@ -33,5 +27,5 @@ Shared_Fit_LFPW
 %% Test DS
 
 % shared options
-Shared_Test
+Shared_Test_LFPW
 

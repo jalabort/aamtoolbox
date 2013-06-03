@@ -2,20 +2,18 @@ function [obj] = PreCompute(obj,i)
   %PRECOMPUTE Summary of this function goes here
   %   Detailed explanation goes here
   
-  t = obj.tm{i}.GetMean();
-  [dtdx,dtdy] = obj.tm{i}.Compute_dtdxy(t);
-  
-  obj.t{i} = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(t));
+  obj.t{i} = obj.tm{i}.GetMean();
+  [dtdx,dtdy] = obj.tm{i}.Compute_dtdxy(obj.t{i});
 
   dWduvi = obj.w{i}.Compute_dWduvi();
-  dWduvi = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(dWduvi,1),1);
-  
   dWdp = obj.sm{i}.Compute_dWdp(dWduvi);
   
   J = obj.tm{i}.Compute_dtdp(dtdx,dtdy,dWdp);
-  obj.J{i} = obj.tm{i}.ProjectOut(J);
+  J2 = obj.tm{i}.ProjectOut(J);
+  obj.J{i} = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(J),1);
+  J2 = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(J2),1);
   
-  obj.invH{i} = inv(obj.J{i}' * obj.J{i});
+  obj.invH{i} = inv(J2' * obj.J{i});
   
 end
 

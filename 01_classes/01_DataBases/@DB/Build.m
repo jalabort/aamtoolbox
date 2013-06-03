@@ -47,7 +47,7 @@ function Build(obj,scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch)
   
   save(obj.bin_path,'obj');
   
-  try
+  %try
   
     h = waitbar(0,sprintf('building binary db %s',obj.name));
     struct_name = cell(n_ann,1);
@@ -62,7 +62,7 @@ function Build(obj,scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch)
       ann = annread([ann_path ann_list(i).name], n_vert);
       ann = ann .* scale;
 
-      struct_name{i} = ['x' img_name];
+      struct_name{i} = ['x' int2str(i)];
       eval(sprintf([struct_name{i} '.img = img;']));
       eval(sprintf([struct_name{i} '.ann = ann;'])); 
 
@@ -78,12 +78,12 @@ function Build(obj,scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch)
     
     save(obj.bin_path)
     
-  catch err;
-    
-    delete(obj.bin_path);
-    close(h);
-    rethrow(exception);
-    
-  end
+%   %catch err;
+%     
+%     delete(obj.bin_path);
+%     close(h);
+%     rethrow(exception);
+%     
+%   end
   
 end
