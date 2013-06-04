@@ -59,8 +59,8 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     
     for (int j=(int)a_uv[i];j<a_uv[i+1];j++) {
       
-      double Wu = x1 * gammas[j] + x2 * alphas[j] + x3 * betas[j] - 1;
-      double Wv = y1 * gammas[j] + y2 * alphas[j] + y3 * betas[j] - 1;
+      double Wu = x1 * gammas[j] + x2 * alphas[j] + x3 * betas[j] + 1;
+      double Wv = y1 * gammas[j] + y2 * alphas[j] + y3 * betas[j] + 1;
       
       if ((Wu >= 0) && (Wu < res_img[1]) && (Wv >= 0) && (Wv < res_img[0])) {
               

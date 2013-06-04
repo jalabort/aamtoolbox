@@ -10,8 +10,10 @@ function [xy,uv_vec] = Compute_Wuv(obj,ann,res)
     [xy,uv_vec,e] = obj.Wuv(ann,res);
   end
   
-  xy = xy(1:e,:);
-  uv_vec = uv_vec(1:e);
+  if nargout > 1
+    xy = xy(1:e,:);
+    uv_vec = uv_vec(1:e);
+  end
 
 end
 

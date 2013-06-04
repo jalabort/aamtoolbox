@@ -9,6 +9,11 @@ function [obj,loaded] = Load(opt,i)
   else
     shape_model_type = cell2mat(opt.shape_model);
   end
+  if n_level == length(opt.dense)
+    dense = opt.dense{i};
+  else
+    dense = cell2mat(opt.dense);
+  end
   if n_level == length(opt.alpha)
     alpha = opt.alpha{i};
   else
@@ -19,6 +24,7 @@ function [obj,loaded] = Load(opt,i)
              opt.ann '_' ...
              mat2str(opt.level{i}) '_' ...
              shape_model_type '_' ...
+             int2str(dense) '_' ...
              mat2str(alpha)];
            
   hash_code = DataHash(opt.reg_exp_query);

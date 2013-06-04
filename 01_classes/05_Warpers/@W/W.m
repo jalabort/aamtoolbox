@@ -18,6 +18,7 @@ classdef (Abstract) W
     [xy,uv] = Compute_Wuv(obj,ann,res);
     wimg = Warp(obj,ann,img)
     wimg = WarpDS(obj,ds)
+    ann = DensifyDSAnn(obj,ds)
   end
   
   methods (Static)
