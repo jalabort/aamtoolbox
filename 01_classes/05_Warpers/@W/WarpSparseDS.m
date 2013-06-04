@@ -1,5 +1,5 @@
-function [wimg] = WarpDS(obj,ds)
-  %WarpDS Summary of this function goes here
+function [wimg] = WarpSparseDS(obj,ds)
+  %WarpSparseDS Summary of this function goes here
   %   Detailed explanation goes here
   
   wimg = zeros([obj.rf.res,ds.n_ch,ds.n_data]);
@@ -9,7 +9,7 @@ function [wimg] = WarpDS(obj,ds)
       ds.data{i}.img(:,:,2) = ds.data{i}.img(:,:,1);
       ds.data{i}.img(:,:,3) = ds.data{i}.img(:,:,1);
     end
-    wimg(:,:,:,i) = obj.Warp(ds.data{i}.ann,double(ds.data{i}.img)/255);
+    wimg(:,:,:,i) = obj.WarpSparse(ds.data{i}.ann,double(ds.data{i}.img)/255);
   end
 
 end

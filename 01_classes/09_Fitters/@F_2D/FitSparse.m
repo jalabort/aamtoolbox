@@ -1,5 +1,5 @@
-function [fann] = Fit(obj,img,ann)
-  %Fit Summary of this function goes here
+function [fann] = FitSparse(obj,img,ann)
+  %FitSparse Summary of this function goes here
   %   Detailed explanation goes here
   
   fann = zeros([size(obj.sm{1}.mu_ann),obj.n_it]);
@@ -19,11 +19,11 @@ function [fann] = Fit(obj,img,ann)
 
       for j = 1:n_it_level   
 
-        wimg = obj.w{i}.Warp(ann,img);
+        wimg = obj.w{i}.WarpSparse(ann,img);
         tex = obj.tm{i}.Transform(wimg);
         
         [delta,c] = obj.Optimize(i,tex,c,p);
-        [ann,p] = obj.UpdateAnn(i,ann,delta,p);
+        [ann,p] = obj.UpdateSparseAnn(i,ann,delta,p);
         
         fann(:,:,it) = ann; 
         it = it + 1;

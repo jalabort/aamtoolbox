@@ -12,15 +12,20 @@ classdef (Abstract) F_2D < M_2D
       obj = obj@M_2D(m.sm,m.w,m.tm);
     end
     
-    obj = Initialize(obj)
-    fann = Fit(obj,img,ann)
+    obj = InitializeDense(obj)
+    obj = InitializeSparse(obj)
+    fann = FitDense(obj,img,ann)
+    fann = FitSparse(obj,img,ann)
     rann = Reconstruct(obj,ann)
   end
   
   methods (Abstract)
-    obj = PreCompute(obj,level)
+    obj = PreComputeSparse(obj,level)
+    obj = PreComputeDense(obj,level)
     [delta,c] = Optimize(obj,level,tex,c,p)
-    [ann,p] = UpdateAnn(obj,i,ann,delta,p)
+    [ann,p] = UpdateDenseAnn(obj,i,ann,delta,p)
+    [ann,p] = UpdateSparseAnn(obj,i,ann,delta,p)
+
   end
   
 end

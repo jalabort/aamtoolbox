@@ -26,7 +26,7 @@ opt.m.interp = {'nearest'};
 opt.m.smoother = {};
 opt.m.sigma = {};
 opt.m.shape_model = {'gsm-real-nwarp'};
-opt.m.dense = {false};
+opt.m.dense = false;
 opt.m.tex_model = {'pi-norm'};
 opt.m.alpha = {};
 

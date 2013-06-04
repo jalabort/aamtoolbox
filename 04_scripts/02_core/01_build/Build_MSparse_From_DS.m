@@ -108,7 +108,7 @@ display('  - warping images');
 
 if ~loaded
   % warp images
-  img = w{i}.WarpDS(train_ds);
+  img = w{i}.WarpSparseDS(train_ds);
   % save warped images
   W.Save(img,opt.m,i);  
 end

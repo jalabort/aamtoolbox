@@ -1,5 +1,5 @@
-function [wimg] = Warp(obj,ann,img)
-  %Warp Summary of this function goes here
+function [wimg] = WarpSparse(obj,ann,img)
+  %WarpDense Summary of this function goes here
   %   Detailed explanation goes here
 
   [res(1),res(2),n_ch] = size(img);

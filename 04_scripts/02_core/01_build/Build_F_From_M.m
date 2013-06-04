@@ -150,5 +150,9 @@ clear loaded m i composition_interface n_c n_b
 display('- initializing fitter');
 
 % initialize fitter
-f = f.Initialize();
+if opt.m.dense
+  f = f.InitializeDense();
+else
+  f = f.InitializeSparse();
+end
 

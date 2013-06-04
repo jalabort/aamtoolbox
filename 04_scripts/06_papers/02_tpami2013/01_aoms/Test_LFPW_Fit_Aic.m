@@ -33,5 +33,5 @@ Shared_Fit_LFPW
 %% Test DS
 
 % shared options
-Shared_Test_LFPW
+Shared_Test_Fit_LFPW
 

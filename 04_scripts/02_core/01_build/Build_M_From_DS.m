@@ -19,13 +19,8 @@ if ~loaded
   sm = cell(n_level,1);
   tm =  cell(n_level,1);
 
-  for i = 1:n_level
-    if n_level == length(opt.m.dense)
-      dense = opt.m.dense{i};
-    else
-      dense = cell2mat(opt.m.dense);
-    end
-    if dense
+  for i = 1:n_level  
+    if opt.m.dense
       Build_MDense_From_DS;
     else
       Build_MSparse_From_DS;

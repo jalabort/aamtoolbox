@@ -1,5 +1,5 @@
-function [ann,p] = UpdateAnn(obj,sm,ann,delta,p)
-  %UpdateAnn Summary of this function goes here
+function [ann,p] = UpdateSparseAnn(obj,sm,ann,delta,p)
+  %UpdateSparseAnn Summary of this function goes here
   %   Detailed explanation goes here
   
   dWdp_uvi0 = sm.Compute_duvidp();
