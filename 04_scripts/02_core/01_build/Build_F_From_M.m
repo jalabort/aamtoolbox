@@ -12,6 +12,11 @@ switch opt.fitter
     f = F_Aic_Ssd(m);
   case 'aic-ecc'
     f = F_Aic_Ecc(m);
+  % adaptative-inverse-compositional
+  case 'cic-ssd'
+    f = F_Cic_Ssd(m);
+  case 'cic-ecc'
+    f = F_Cic_Ecc(m);
   % simultaneous-inverse-compositional
   case 'sic-ssd'
     f = F_Sic_Ssd(m);

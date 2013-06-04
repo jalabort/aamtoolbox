@@ -14,7 +14,7 @@ function [fann] = FitSparse(obj,img,ann)
     
     for i = obj.n_level:-1:1
            
-      c = [];
+      c = zeros(obj.tm{i}.n_c,1);
       [ann,p]  = obj.sm{i}.ProjectAnn(ann);
 
       for j = 1:n_it_level   

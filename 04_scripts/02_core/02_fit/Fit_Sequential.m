@@ -6,7 +6,6 @@ for i =1:test_ds.n_data
   else
     ann = f.FitSparse(test_ds.data{i}.img,test_ds.data{i}.ann);
   end
-  ann = f.Fit(test_ds.data{i}.img,test_ds.data{i}.ann);
   fann(:,:,i) = ann(:,:,end); 
 
   % show the fitting
