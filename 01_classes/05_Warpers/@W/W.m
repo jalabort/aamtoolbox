@@ -13,12 +13,17 @@ classdef (Abstract) W
       obj.interp = interp;
     end
     
+    ann = DensifyDSAnn(obj,ds)
+    
     dWduvi = Compute_dWduvi(obj)
     
-    [xy,uv] = Compute_Wuv(obj,ann,res);
-    wimg = Warp(obj,ann,img)
-    wimg = WarpDS(obj,ds)
-    ann = DensifyDSAnn(obj,ds)
+    [xy,uv] = Compute_Wuv(obj,ann,res)
+    
+    wimg = WarpDense(obj,ann,img)
+    wimg = WarpSparse(obj,ann,img)
+    
+    wimg = WarpDenseDS(obj,ds,ann)
+    wimg = WarpSparseDS(obj,ds)
   end
   
   methods (Static)

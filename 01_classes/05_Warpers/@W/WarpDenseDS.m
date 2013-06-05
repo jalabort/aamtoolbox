@@ -1,4 +1,4 @@
-function [wimg] = WarpDenseDS(obj,ds)
+function [wimg] = WarpDenseDS(obj,ds,ann)
   %WarpDenseDS Summary of this function goes here
   %   Detailed explanation goes here
   
@@ -9,7 +9,7 @@ function [wimg] = WarpDenseDS(obj,ds)
       ds.data{i}.img(:,:,2) = ds.data{i}.img(:,:,1);
       ds.data{i}.img(:,:,3) = ds.data{i}.img(:,:,1);
     end
-    wimg(:,:,:,i) = obj.WarpDense(ds.data{i}.ann,double(ds.data{i}.img)/255);
+    wimg(:,:,:,i) = obj.WarpDense(ann(:,:,i),double(ds.data{i}.img)/255);
   end
 
 end

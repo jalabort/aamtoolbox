@@ -11,7 +11,7 @@ function [delta,c] = Optimize(obj,i,~,tex,c,~)
   
   H = J2' * J;
   
-  error = -tex;%obj.tm{i}.mu - tex;
+  error = zeros(size(texobj.tm{i}.mu - tex;
   error = obj.tm{i}.Compute_DtS(error) + obj.tm{i}.Compute_DwS(error);
   error = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(error));
   J_x_error = J' * error;

@@ -42,13 +42,16 @@ assert(isa(w{i},'W') ,'undifiened warper!');
 
 display ('  - shape model');
 
+% densify original annotations
+ann = w{i}.DensifyDSAnn(train_ds);
+ann2 = factor * ann;
+
 % load shape model
 [sm{i},loaded] = SM.Load(opt.m,i);
 
 if ~loaded
 
   % build ...SM... shape model
-  ann = factor * w{i}.DensifyDSAnn(train_ds);
   if n_level == length(opt.m.shape_model)
     shape_model_type = opt.m.shape_model{i};
   else
@@ -62,37 +65,37 @@ if ~loaded
   switch shape_model_type  
     % global shape models
     case 'gsm-real-nwarp'
-      sm{i} = GSM_Real_NWarp(ann);
+      sm{i} = GSM_Real_NWarp(ann2);
     case 'gsm-real-concat'
-      sm{i} = GSM_Real_Concat(ann);
+      sm{i} = GSM_Real_Concat(ann2);
     case 'gsm-euler-real-nwarp'
-      sm{i} = GSM_Euler_Real_NWarp(ann,alpha);
+      sm{i} = GSM_Euler_Real_NWarp(ann2,alpha);
     case 'gsm-complex-cent-nwarp'
-      sm{i} = GSM_Complex_Cent_NWarp(ann);
+      sm{i} = GSM_Complex_Cent_NWarp(ann2);
     case 'gsm-complex-cent-concat'
-      sm{i} = GSM_Complex_Cent_Concat(ann);
+      sm{i} = GSM_Complex_Cent_Concat(ann2);
     case 'gsm-complex-noncent-nwarp'
-      sm{i} = GSM_Complex_NonCent_NWarp(ann);
+      sm{i} = GSM_Complex_NonCent_NWarp(ann2);
     case 'gsm-complex-noncent-concat'
-      sm{i} = GSM_Complex_NonCent_Concat(ann);
+      sm{i} = GSM_Complex_NonCent_Concat(ann2);
     % component shape models
     case 'csm-real-nwarp'
-      sm{i} = CSM_Real_NWarp(ann,train_db.comp);
+      sm{i} = CSM_Real_NWarp(ann2,train_db.comp);
     case 'csm-real-concat'
-      sm{i} = CSM_Real_Concat(ann,train_db.comp);
+      sm{i} = CSM_Real_Concat(ann2,train_db.comp);
     case 'csm-complex-nwarp'
-      sm{i} = CSM_Complex_NWarp(ann,train_db.comp);
+      sm{i} = CSM_Complex_NWarp(ann2,train_db.comp);
     case 'csm-complex-concat'
-      sm{i} = CSM_Complex_Concat(ann,train_db.comp);
+      sm{i} = CSM_Complex_Concat(ann2,train_db.comp);
     % part shape models
     case 'psm-real-nwarp'
-      sm{i} = PSM_Real_NWarp(ann,train_db.comp);
+      sm{i} = PSM_Real_NWarp(ann2,train_db.comp);
     case 'psm-real-concat'
-      sm{i} = PSM_Real_Concat(ann,train_db.comp);
+      sm{i} = PSM_Real_Concat(ann2,train_db.comp);
     case 'psm-complex-nwarp'
-      sm{i} = CSM_Complex_NWarp(ann,train_db.comp);
+      sm{i} = CSM_Complex_NWarp(ann2,train_db.comp);
     case 'psm-complex-concat'
-      sm{i} = CSM_Complex_Concat(ann,train_db.comp);
+      sm{i} = CSM_Complex_Concat(ann2,train_db.comp);
   end
   assert(isa(sm{i},'SM') ,'undifiened shape model!');
 
@@ -108,7 +111,7 @@ display('  - warping images');
 
 if ~loaded
   % warp images
-  img = w{i}.WarpDenseDS(train_ds);
+  img = w{i}.WarpDenseDS(train_ds,ann);
   % save warped images
   W.Save(img,opt.m,i);  
 end

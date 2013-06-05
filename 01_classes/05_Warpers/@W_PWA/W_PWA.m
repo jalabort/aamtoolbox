@@ -58,6 +58,7 @@ classdef W_PWA < W
           obj.gammas{i} = 1 - (obj.alphas{i} + obj.betas{i});
         end
       end
+      obj.rf.uv_vec = cell2mat(obj.uv_vec_triangle');
       
       obj = obj.InitializeC();
     end

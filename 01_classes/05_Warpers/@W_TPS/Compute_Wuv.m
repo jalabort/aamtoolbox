@@ -10,8 +10,10 @@ function [xy,uv_vec] = Compute_Wuv(obj,ann,res)
         xy(:,2) > 0 & ...
         xy(:,2)<= res(1);
       
-  xy = xy(list,:);
-  uv_vec = obj.rf.uv_vec(list);
+  if nargout > 1
+    xy = xy(list,:);
+    uv_vec = obj.rf.uv_vec(list);
+  end 
   
 end
 

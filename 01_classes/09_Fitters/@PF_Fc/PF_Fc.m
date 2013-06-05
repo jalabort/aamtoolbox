@@ -3,7 +3,6 @@ classdef (Abstract) PF_Fc < F_2D & iU_Compositional
   %   Detailed explanation goes here
   
   properties
-    t
     dWdp
   end
   
