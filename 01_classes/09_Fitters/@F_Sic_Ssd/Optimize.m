@@ -1,8 +1,8 @@
-function [delta,c] = Optimize(obj,i,tex,c,~)
+function [delta,c] = Optimize(obj,i,j,tex,c,~)
   %Optimize Summary of this function goes here
   %   Detailed explanation goes here
 
-  if isempty(c)
+  if j == 1
     c = obj.tm{i}.Tex2C(tex);
   end
         

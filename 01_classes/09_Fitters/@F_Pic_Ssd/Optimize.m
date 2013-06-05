@@ -1,4 +1,4 @@
-function [delta,c] = Optimize(obj,i,tex,c,~)
+function [delta,c] = Optimize(obj,i,~,tex,c,~)
   %OPTIMIZE Summary of this function goes here
   %   Detailed explanation goes here
 
@@ -7,7 +7,6 @@ function [delta,c] = Optimize(obj,i,tex,c,~)
   error = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(error));
   J_x_error = obj.J{i}' * error;
   delta = obj.invH{i} * J_x_error;
-  %delta = 0.1 * delta;
 
 end
 

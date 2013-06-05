@@ -1,10 +1,9 @@
-function [delta,c] = Optimize(obj,level,tex,c)
+function [delta,c] = Optimize(obj,i,j,tex,c,p)
   %OPTIMIZE Summary of this function goes here
   %   Detailed explanation goes here
 
-  if isempty(c)
-    c = obj.texModel{level}.Tex2Coeff(tex);
-    c = c(1:obj.nTexs(level));
+  if j == 1
+    c = obj.tm{i}.Tex2C(tex);
   end
         
   [t,tt] = obj.texModel{level}.Coeff2Tex(c);

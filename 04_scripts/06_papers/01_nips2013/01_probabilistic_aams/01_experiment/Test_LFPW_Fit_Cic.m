@@ -7,7 +7,7 @@ Shared_Model_LFPW
 %% Create F_2D
 
 % specific options
-opt.fitter = 'sic-ssd';
+opt.fitter = 'cic-ssd';
 
 % shared options
 Shared_Fitter_LFPW
@@ -15,12 +15,13 @@ Shared_Fitter_LFPW
 
 %% Fit DS
 
+% save directories
 opt.ann_root =  ...
   ['..' filesep, ... 
    'result' filesep, ...
    'nips2013' filesep, ...
    'probaams' filesep, ...
-   'sic' filesep];
+   'aic' filesep];
 opt.img_root =  ...
   [opt.ann_root, ... 
    'img' filesep];

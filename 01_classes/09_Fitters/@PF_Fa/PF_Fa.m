@@ -4,7 +4,8 @@ classdef (Abstract) PF_Fa < F_2D & iU_Additive
   
   properties
     t
-    dWduvi
+%     dWduvi
+    dWdp
   end
   
   methods

@@ -1,4 +1,4 @@
-function [delta,c] = Optimize(obj,i,tex,~,~)
+function [delta,c] = Optimize(obj,i,~,tex,~,~)
   %OPTIMIZE Summary of this function goes here
   %   Detailed explanation goes her
   
@@ -8,7 +8,7 @@ function [delta,c] = Optimize(obj,i,tex,~,~)
   [dtdx,dtdy] = obj.tm{i}.Compute_dtdxy(t);
 
   J = obj.tm{i}.Compute_dtdp(dtdx,dtdy,obj.dWdp{i});
-  J = obj.tm{i}.ProjectOut(J);
+%   J = obj.tm{i}.ProjectOut(J);
   J = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(J));
   
   invH = inv(J' * J);

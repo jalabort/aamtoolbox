@@ -1,5 +1,5 @@
-function [obj] = PreCompute(obj,i)
-  %PreCompute Summary of this function goes here
+function [obj] = PreComputeSparse(obj,i)
+  %PreComputeSparse Summary of this function goes here
   %   Detailed explanation goes here
   
   obj.t{i} = obj.tm{i}.GetMean();

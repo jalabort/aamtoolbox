@@ -1,8 +1,11 @@
-function [delta,c] = Optimize(obj,i,tex,~,~)
+function [delta,c] = Optimize(obj,i,j,tex,~,~)
   %OPTIMIZE Summary of this function goes here
   %   Detailed explanation goes her
   
-  c = obj.tm{i}.Tex2C(tex);
+  if j == 1
+    c = obj.tm{i}.Tex2C(tex);
+  end
+  
   t = obj.tm{i}.C2Tex(c);
   
   [dtdx,dtdy] = obj.tm{i}.Compute_dtdxy(t);

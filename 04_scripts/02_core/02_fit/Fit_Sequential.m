@@ -19,8 +19,6 @@ for i =1:test_ds.n_data
       frame = getframe(h);
       imwrite(frame.cdata,[opt.img_root int2str(i)],'png'); 
     end
-    frame = getframe(1);
-    imwrite(frame.cdata,['./' int2str(i) '.png'],'png');
   end
 
   % print the error

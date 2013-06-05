@@ -14,7 +14,7 @@ function [fann] = FitDense(obj,img,ann)
     
     for i = obj.n_level:-1:1
            
-      c = [];
+      c = zeros(obj.tm{i}.n_c,1);
       [ann,p]  = obj.sm{i}.ProjectAnn(ann);
 
       for j = 1:n_it_level   
@@ -22,7 +22,7 @@ function [fann] = FitDense(obj,img,ann)
         wimg = obj.w{i}.WarpDens(ann,img);
         tex = obj.tm{i}.Transform(wimg);
         
-        [delta,c] = obj.Optimize(i,tex,c,p);
+        [delta,c] = obj.Optimize(i,j,tex,c,p);
         [ann,p] = obj.UpdateAnn(i,ann,delta,p);
         
         fann(:,:,it) = ann; 

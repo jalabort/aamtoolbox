@@ -22,7 +22,7 @@ classdef (Abstract) F_2D < M_2D
   methods (Abstract)
     obj = PreComputeSparse(obj,level)
     obj = PreComputeDense(obj,level)
-    [delta,c] = Optimize(obj,level,tex,c,p)
+    [delta,c] = Optimize(obj,i,j,tex,c,p)
     [ann,p] = UpdateDenseAnn(obj,i,ann,delta,p)
     [ann,p] = UpdateSparseAnn(obj,i,ann,delta,p)
 
