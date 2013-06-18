@@ -1,16 +1,11 @@
-function [ann,p] = UpdateDenseAnn(obj,sm,ann,delta,p)
+function [ann,p] = UpdateDenseAnn(~,sm,~,delta,p)
   %UpdateDenseAnn Summary of this function goes here
   %   Detailed explanation goes here
   
-  pann = sm.P2Ann(delta);
-  
-  q = p(1:4);
-  
-  
-  
-  cann = sm.Shape2Ann(sm.ApplyQ(q,sm.Ann2Shape(pann) + sm.pc(:,1:sm.n_b) * p(5:end)));
-   
-  [ann,p] = sm.ProjectAnn(cann);
+  shape = sm.P2Shape(delta);
+  shape = sm.ApplyP(p,shape);  
+  [shape,p] = sm.ProjectShape(shape);
+  ann = sm.Shape2Ann(shape);
   
 end
 

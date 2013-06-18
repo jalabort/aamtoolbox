@@ -23,12 +23,14 @@ opt.m.erode1 = {0};
 opt.m.erode2 = {1};
 opt.m.warp = {'pwa'};
 opt.m.interp = {'nearest'};
-opt.m.smoother = {'gaussian'};
-opt.m.sigma = {1,1,1};
+opt.m.smoother = {};
+opt.m.sigma = {};
 opt.m.shape_model = {'gsm-real-nwarp'};
 opt.m.dense = false;
-opt.m.tex_model = {'pi-norm'};
-opt.m.alpha = {1.9};
+opt.m.tex_model = {'hog'};
+opt.m.cell_size = {1};
+opt.m.n_orientation = {9};
+opt.m.alpha = {1.9}
 
 % build ...M... model
 Build_M_From_DS

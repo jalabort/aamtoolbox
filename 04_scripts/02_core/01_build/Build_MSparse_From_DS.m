@@ -183,6 +183,10 @@ if ~loaded
       tm{i} = GTM_Igo_Complex(img,rf,smoother);
     case 'igo-complex-double'
       tm{i} = GTM_Igo_Complex_Double(img,rf,smoother);
+    % hog
+    case 'hog'
+      tm{i} = GTM_Hog(img,rf,smoother,opt.m.cell_size, ...
+        opt.m.n_orientation);
   end
   assert(isa(tm{i},'TM') ,'undifiened texture model!');
 

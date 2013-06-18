@@ -16,6 +16,7 @@ classdef (Abstract) SM
     p = Ann2P(obj,ann)
     
     [ann,p] = ProjectAnn(obj,ann)
+    [shape,p] = ProjectShape(obj,shape)
     
     [mu,ann] = AlignAnn(obj,ann)
     
@@ -34,6 +35,8 @@ classdef (Abstract) SM
 
     p = Shape2P(obj,shape)
     shape = P2Shape(obj,p)
+    
+    ann = ApplyP(obj,p,ann)
     
     [u,v] = Shape2UV(obj,shape)
     [shape] = UV2Shape(obj,u,v)

@@ -15,7 +15,8 @@ classdef (Abstract) iNWarp
     [A,t] = Q2MatForm(obj,q)
     
     [ann] = ApplyQ(obj,q,shape)
-    [ann] = RemoveQ(obj,q,shape)
+    [shape] = ApplyB(obj,b,shape)
+    [shape,ann] = RemoveQ(obj,q,shape)
   end
   
 end
