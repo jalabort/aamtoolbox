@@ -1,27 +1,51 @@
 display('- building fitter');
 
 % build ...F... fitter
+clear f
 switch opt.fitter
+  % project-out -----------------------------------------------------------
+  % project-out-forward-compositional
+  case 'pfc-ssd'
+    f = F_Pfc_Ssd(m);
   % project-out-inverse-compositional
   case 'pic-ssd'
     f = F_Pic_Ssd(m);
   case 'pic-ecc'
     f = F_Pic_Ecc(m);
+  % project-out-symmetric-compositional
+  case 'psc-ssd'
+    f = F_Psc_Ssd(m);
+  % project-out-bidirectional-compositional
+  case 'pbc-ssd'
+    f = F_Pbc_Ssd(m);
+  % alternating -----------------------------------------------------------
+  % alternating-forward-compositional
+  case 'afc-ssd'
+    f = F_Afc_Ssd(m);
   % alternating-inverse-compositional
   case 'aic-ssd'
     f = F_Aic_Ssd(m);
   case 'aic-ecc'
     f = F_Aic_Ecc(m);
+  % alternating-symmetric-compositional 
+  case 'asc-ssd'
+    f = F_Asc_Ssd(m);
+  % alternating-bidirectional-compositional
+  case 'abc-ssd'
+    f = F_Abc_Ssd(m);
+  % adaptive --------------------------------------------------------------
   % adaptative-inverse-compositional
   case 'cic-ssd'
     f = F_Cic_Ssd(m);
   case 'cic-ecc'
     f = F_Cic_Ecc(m);
+  % simultaneous ----------------------------------------------------------
   % simultaneous-inverse-compositional
   case 'sic-ssd'
     f = F_Sic_Ssd(m);
   case 'sic-ecc'
     f = F_Sic_Ecc(m);
+  % probabilistic ---------------------------------------------------------
   % probabilistic-foward-additive
   case 'p-fa-dts'
     f = PF_Fa_DtS(m);

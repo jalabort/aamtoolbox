@@ -3,7 +3,7 @@ function [ann,p] = UpdateSparseAnn(obj,sm,ann,delta,p)
   %   Detailed explanation goes here
   
   dWdp_uvi0 = sm.Compute_duvidp();
-  [dWdp_uvip,A] = sm.Compute_duvidp_uvip(ann);
+  [dWdp_uvip,A] = sm.Compute_duvidp_uvip(p);
 
   dWduvi_uvip = sm.Ann2Shape(obj.Compute_dWduvi_uvip(A,ann)); 
   block_dWdui_p = repmat(dWduvi_uvip(:,1),[1,sm.n_p]);

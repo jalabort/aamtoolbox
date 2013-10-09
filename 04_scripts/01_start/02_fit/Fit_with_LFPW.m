@@ -1,8 +1,3 @@
-clear all
-close all
-clc
-
-
 %% Load or Create M_2D
 
 % database
@@ -28,8 +23,9 @@ opt.m.level = ...
    0.25};
 opt.m.erode1 = {1};
 opt.m.erode2 = {2};
-opt.m.warp = {'pwa'};
+opt.m.warp = {'tps'};
 opt.m.interp = {'nearest'};
+opt.m.dense = false;
 opt.m.smoother = {};
 opt.m.sigma = {};
 opt.m.shape_model = {'gsm-real-nwarp'};
@@ -52,10 +48,10 @@ opt.n_b = ... % # of shape eigenvectors
   {12, ...
    6, ...
    3};   
-opt.fitter = 'pic-ecc';
+opt.fitter = 'aic-ssd';
 opt.detector = 'gr-tr';
 opt.rotation = false;
-opt.composition_interface = {'baker'};
+opt.composition_interface = {'papandreou'};
 
 % build ...F... fitter
 Build_F_From_M
@@ -77,8 +73,11 @@ opt.id = 1:224;
 opt.reg_exp_query = test_db.RegExpQuery(opt.id);
 
 % control options
-opt.show = true;
+opt.parallel = false;
+opt.save_ann = false;
 opt.verbose = true;
+opt.show = true;
+opt.save_img = false;
 
-Fit_from_Folder
+Fit_DS
 

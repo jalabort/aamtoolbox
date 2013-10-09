@@ -1,4 +1,4 @@
-function [point_err] = computepointerr(test_ds,err_type,fann)
+function [point_err] = computepointerr(test_ds,fann,err_type)
   %computepointerr Summary of this function goes here
   %   Detailed explanation goes here
 

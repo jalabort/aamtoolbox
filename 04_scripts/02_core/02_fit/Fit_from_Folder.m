@@ -1,6 +1,6 @@
 display('- Creating fitter');
   
-switch opt.algorithm
+switch opt.fitter
   case 'pic-ssd'
     f = F_PicSsd(m);
   case 'pic-ecc'
@@ -76,7 +76,7 @@ ann = [];
 
 for i = 1:n_data
 
-  img = imread([opt.folder opt.sequence data(i).name]);
+  img = imread('/data/matlab/iccv2011_modified/02_data/obama1.jpg');
   
   fann(:,:,i) = f.Track(img,[]);
   

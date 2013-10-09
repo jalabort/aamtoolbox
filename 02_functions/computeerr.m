@@ -7,10 +7,9 @@ function [rms_err,p2p_err,ram_err,hel_err]= computeerr(fann,ann,aux,comp)
 
   % p2p_err
   p2p_err = mean(sqrt(sum((ann- fann).^2,2)));
-  
  
   % ram_err
-  face_size = mean(max(ann) - min(ann));
+  face_size = mean(max(aux) - min(aux));
   ram_err = p2p_err / face_size;
   
   % hel_err

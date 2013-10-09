@@ -20,14 +20,14 @@ opt.m.level = ...
    0.5, ...
    0.25};
 opt.m.erode1 = {0};
-opt.m.erode2 = {1};
+opt.m.erode2 = {2};
 opt.m.warp = {'pwa'};
-opt.m.interp = {'nearest'};
-opt.m.smoother = {'gaussian'};
+opt.m.interp = {'linear'};
+opt.m.smoother = {'none'};
 opt.m.sigma = {1,1,1};
 opt.m.shape_model = {'gsm-real-nwarp'};
 opt.m.dense = false;
-opt.m.tex_model = {'pi-norm'};
+opt.m.tex_model = {'igo-real-double'};
 opt.m.alpha = {1.9};
 
 % build ...M... model

@@ -3,7 +3,7 @@ function [tex] = TransformCh(obj,img)
   %   Detailed explanation goes here
   
   tex = img(obj.mask1) - mean(img(obj.mask1));
-  tex = tex ./ norm(tex);
+  tex = tex ./ std(tex);
   
   tex(isnan(tex)) = 0;
   tex(isinf(tex)) = 0;

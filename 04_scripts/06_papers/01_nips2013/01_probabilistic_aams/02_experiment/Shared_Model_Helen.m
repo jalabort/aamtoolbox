@@ -4,7 +4,7 @@ opt.m.bin_root = ...
    'binarydb' filesep];
 opt.m.name = 'helen-rescaled';
 opt.m.type = 'train';
-opt.m.ann = 'our';
+opt.m.ann = 'original';
 train_db = DB([opt.m.name '-' opt.m.type '-' opt.m.ann],opt.m.bin_root);
 
 % training dataset
@@ -24,6 +24,7 @@ opt.m.erode2 = {1};
 opt.m.warp = {'pwa'};
 opt.m.interp = {'nearest'};
 opt.m.smoother = {};
+opt.m.dense = false;
 opt.m.sigma = {};
 opt.m.shape_model = {'gsm-real-nwarp'};
 opt.m.tex_model = {'pi-norm'};
