@@ -23,5 +23,6 @@ function [delta,c] = Optimize(obj,i,~,tex,~,~)
   error = t - tex;
   J_x_error = J' * error;
   delta = 0.5 * H \ J_x_error;
+  delta = [delta; delta];
   
 end

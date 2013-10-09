@@ -16,5 +16,6 @@ function [delta,c] = Optimize(obj,i,~,tex,c,~)
   error = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(error));
   J_x_error = J' * error;
   delta = 0.5 * H \ J_x_error;
+  delta = [delta; delta];
 
 end

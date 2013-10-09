@@ -7,7 +7,7 @@ Shared_Model_Helen
 %% Create F_2D
 
 % specific options
-opt.fitter = 'pbc-ssd';
+opt.fitter = 'asc-ssd';
 
 % shared options
 Shared_Fitter_Helen

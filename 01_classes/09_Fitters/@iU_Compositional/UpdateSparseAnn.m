@@ -6,9 +6,10 @@ function [ann,p] = UpdateSparseAnn(obj,i,ann,delta,p)
     [ann,p] = obj.w{i}.UpdateSparseAnn(obj.sm{i},ann,delta,p);
   else
     delta_t = delta(1:obj.sm{i}.n_p);
-    [ann,p] = obj.w{i}.UpdateSparseAnn(obj.sm{i},ann,delta_t,p);
     delta_i = delta(obj.sm{i}.n_p+1:end);
-    [ann,p] = obj.w{i}.UpdateSparseAnn(obj.sm{i},ann,delta_i,p);
+    ann_i = obj.sm{i}.P2Ann(delta_i);
+    [~,delta_it] = obj.w{i}.UpdateSparseAnn(obj.sm{i},ann_i,delta_t,delta_i);
+    [ann,p] = obj.w{i}.UpdateSparseAnn(obj.sm{i},ann,delta_it,p);
   end
 end
 
