@@ -1,4 +1,4 @@
-function [mu,pc,ev] = Compute(data)
+function [mu,pc,ev] = Compute(obj,data)
   %Compute Summary of this function goes here
   %   Detailed explanation goes here
 
@@ -7,6 +7,10 @@ function [mu,pc,ev] = Compute(data)
   mu = mean(data,2);
   cent_data = data - repmat(mu,[1,n_data]);
 
-  [pc,ev] = myGPCA(cent_data,n_data,0,0);   
+  if obj.Lp
+    [pc,ev] = myLpPCA(cent_data,obj.Lp,0,0,0);   
+  else
+    [pc,ev] = myPCA(cent_data,0,0,0);  
+  end
   
 end

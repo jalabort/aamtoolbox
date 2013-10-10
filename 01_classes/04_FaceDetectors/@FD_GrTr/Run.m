@@ -12,7 +12,15 @@ function [ann,detected,p] = Run(obj,sm,~,grtr_ann)
     p = sm.Ann2ST(grtr_ann);
   end
   
-  ann = sm.P2Ann(p);
-
+  [A,t] = sm.Q2MatForm(p(1:sm.n_q));
+  ann = sm.mu_ann * A + repmat(t,[sm.n_vert,1]);
+  range = max(ann) - min(ann);
+  
+  noisy_A = A + obj.noise_scale * randn(size(A)) .* A;
+  noisy_t = t + obj.noise_scale * randn(size(t)) .* range;
+  
+  ann = sm.mu_ann * noisy_A + repmat(noisy_t,[sm.n_vert,1]);
+  p = sm.Ann2SRT(ann);
+  
 end
 

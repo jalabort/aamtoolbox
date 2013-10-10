@@ -73,7 +73,7 @@ assert(isa(f,'F_2D') ,'undifiened fitter!');
 % build ...FD... face detector
 switch opt.detector 
   case 'gr-tr'
-    f.detector = FD_GrTr(opt.rotation);
+    f.detector = FD_GrTr(opt.rotation, opt.noise_scale);
   case 'matlab'
     f.detector = FD_Mat(opt.rotation);
 end

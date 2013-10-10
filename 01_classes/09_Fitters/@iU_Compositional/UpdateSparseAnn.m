@@ -11,5 +11,5 @@ function [ann,p] = UpdateSparseAnn(obj,i,ann,delta,p)
     [~,delta_it] = obj.w{i}.UpdateSparseAnn(obj.sm{i},ann_i,delta_t,delta_i);
     [ann,p] = obj.w{i}.UpdateSparseAnn(obj.sm{i},ann,delta_it,p);
   end
+  
 end
-
