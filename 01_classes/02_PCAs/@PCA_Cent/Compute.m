@@ -8,7 +8,7 @@ function [mu,pc,ev] = Compute(obj,data)
   cent_data = data - repmat(mu,[1,n_data]);
 
   if obj.Lp
-    [pc,ev] = myLpPCA(cent_data,obj.Lp,0,0,0);   
+    [pc,ev] = myLpPCA(cent_data,obj.Lp,0,0,0,0);   
   else
     [pc,ev] = myPCA(cent_data,0,0,0);  
   end

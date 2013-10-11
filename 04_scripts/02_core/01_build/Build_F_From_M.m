@@ -1,5 +1,11 @@
 display('- building fitter');
 
+if m.n_level == length(opt.m.tex_model)
+  Lp = opt.m.Lp{i};
+else
+  Lp = cell2mat(opt.m.Lp);
+end
+
 % build ...F... fitter
 clear f
 switch opt.fitter
@@ -27,6 +33,8 @@ switch opt.fitter
     f = F_Aic_Ssd(m);
   case 'aic-ecc'
     f = F_Aic_Ecc(m);
+  case 'aic-lp'
+    f = F_Aic_Lp(m,Lp);
   % alternating-symmetric-compositional 
   case 'asc-ssd'
     f = F_Asc_Ssd(m);

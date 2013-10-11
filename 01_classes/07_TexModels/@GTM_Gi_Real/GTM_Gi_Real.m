@@ -8,8 +8,8 @@ classdef GTM_Gi_Real < GTM
   end
   
   methods
-    function obj = GTM_Gi_Real(img,rf,smoother)
-      obj@GTM(img,rf,smoother);
+    function obj = GTM_Gi_Real(img,rf,smoother,Lp)
+      obj@GTM(img,rf,smoother,Lp);
     end
   end
 

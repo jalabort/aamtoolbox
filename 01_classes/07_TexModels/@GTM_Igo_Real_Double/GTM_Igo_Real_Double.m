@@ -8,8 +8,8 @@ classdef GTM_Igo_Real_Double < GTM
   end
   
   methods
-    function obj = GTM_Igo_Real_Double(img,rf,smoother)
-      obj@GTM(img,rf,smoother);
+    function obj = GTM_Igo_Real_Double(img,rf,smoother,Lp)
+      obj@GTM(img,rf,smoother,Lp);
     end
   end
 

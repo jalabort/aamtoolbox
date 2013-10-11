@@ -15,7 +15,7 @@ classdef (Abstract) GTM < TM
   end
   
   methods
-    function obj = GTM(img,rf,smoother)
+    function obj = GTM(img,rf,smoother,Lp)
       obj@TM(rf,smoother);
       
       % number of channels of the original images
@@ -26,6 +26,7 @@ classdef (Abstract) GTM < TM
       tex = obj.TransformAll(img);
       
       % compute pca
+      obj.pca.Lp = Lp;
       [obj.mu,obj.pc,obj.ev] = obj.pca.Compute(tex);
       obj.n_pc = size(obj.pc,2);
       

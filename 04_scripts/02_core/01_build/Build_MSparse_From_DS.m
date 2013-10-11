@@ -149,13 +149,18 @@ if ~loaded
   else
     tex_model_type = cell2mat(opt.m.tex_model);
   end
+  if n_level == length(opt.m.tex_model)
+    Lp = opt.m.Lp{i};
+  else
+    Lp = cell2mat(opt.m.Lp);
+  end
   img = TM.ColorTransformAll(img);
   switch tex_model_type
     % pixel intensity
     case 'pi'
-      tm{i} = GTM_Pi(img,rf,smoother);
+      tm{i} = GTM_Pi(img,rf,smoother,Lp);
     case 'pi-norm'
-      tm{i} = GTM_Pi_Norm(img,rf,smoother);
+      tm{i} = GTM_Pi_Norm(img,rf,smoother,Lp);
     % euler
     case 'euler-real'
       tm{i} = GTM_Euler_Real(img,rf,smoother,opt.m.alpha);
@@ -167,7 +172,7 @@ if ~loaded
       tm{i} = GTM_Euler_Complex_Double(img,rf,smoother,opt.m.alpha);
     % cootes
     case 'gi-real'
-      tm{i} = GTM_Gi_Real(img,rf,smoother);
+      tm{i} = GTM_Gi_Real(img,rf,smoother,Lp);
     case 'gi-real-double'
       tm{i} = GTM_Gi_Real_Double(img,rf,smoother);
     case 'gi-complex'
@@ -176,9 +181,9 @@ if ~loaded
       tm{i} = GTM_Gi_Complex_Double(img,rf,smoother);
     % igo
     case 'igo-real'
-      tm{i} = GTM_Igo_Real(img,rf,smoother);
+      tm{i} = GTM_Igo_Real(img,rf,smoother,Lp);
     case 'igo-real-double'
-      tm{i} = GTM_Igo_Real_Double(img,rf,smoother);
+      tm{i} = GTM_Igo_Real_Double(img,rf,smoother,Lp);
     case 'igo-complex'
       tm{i} = GTM_Igo_Complex(img,rf,smoother);
     case 'igo-complex-double'

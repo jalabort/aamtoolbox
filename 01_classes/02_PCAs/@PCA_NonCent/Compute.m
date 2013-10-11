@@ -3,7 +3,7 @@ function [mu,pc,ev] = Compute(obj,data)
   %   Detailed explanation goes here
 
   if obj.Lp
-    [pc,ev] = myLpPCA(data,Lp,0,0,0);   
+    [pc,ev] = myLpPCA(data,obj.Lp,0,0,0,0);   
   else
     [pc,ev] = myPCA(data,0,0,0);  
   end
