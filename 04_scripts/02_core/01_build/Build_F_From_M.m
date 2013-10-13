@@ -1,7 +1,7 @@
 display('- building fitter');
 
 if m.n_level == length(opt.m.tex_model)
-  Lp = opt.m.Lp{i};
+  Lp = opt.m.Lp{1};
 else
   Lp = cell2mat(opt.m.Lp);
 end
@@ -43,10 +43,16 @@ switch opt.fitter
     f = F_Abc_Ssd(m);
   % adaptive --------------------------------------------------------------
   % adaptative-inverse-compositional
+   case 'cfc-ssd'
+    f = F_Cfc_Ssd(m);
   case 'cic-ssd'
     f = F_Cic_Ssd(m);
   case 'cic-ecc'
     f = F_Cic_Ecc(m);
+  case 'csc-ssd'
+    f = F_Csc_Ssd(m);
+   case 'cbc-ssd'
+    f = F_Cbc_Ssd(m);
   % simultaneous ----------------------------------------------------------
   % simultaneous-inverse-compositional
   case 'sic-ssd'

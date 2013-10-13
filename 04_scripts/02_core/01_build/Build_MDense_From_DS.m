@@ -152,13 +152,18 @@ if ~loaded
   else
     tex_model_type = cell2mat(opt.m.tex_model);
   end
+  if n_level == length(opt.m.tex_model)
+    Lp = opt.m.Lp{i};
+  else
+    Lp = cell2mat(opt.m.Lp);
+  end
   img = TM.ColorTransformAll(img);
   switch tex_model_type
     % pixel intensity
     case 'pi'
-      tm{i} = GTM_Pi(img,rf,smoother);
+      tm{i} = GTM_Pi(img,rf,smoother,Lp);
     case 'pi-norm'
-      tm{i} = GTM_Pi_Norm(img,rf,smoother);
+      tm{i} = GTM_Pi_Norm(img,rf,smoother,Lp);
     % euler
     case 'euler-real'
       tm{i} = GTM_Euler_Real(img,rf,smoother,opt.m.alpha);

@@ -7,7 +7,7 @@ Shared_Model_LFPW
 %% Create F_2D
 
 % specific options
-opt.fitter = 'pic-ssd';
+opt.fitter = 'pfc-ssd';
 
 % shared options
 Shared_Fitter_LFPW

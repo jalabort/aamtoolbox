@@ -8,8 +8,7 @@ function [obj] = PreComputeSparse(obj,i)
   dWduvi = obj.w{i}.Compute_dWduvi();
   obj.dWdp{i} = obj.sm{i}.Compute_dWdp(dWduvi);
   
-  Jt = obj.tm{i}.Compute_dtdp(dtdx,dtdy,obj.dWdp{i});
-  obj.Jt{i} = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(Jt));
+  obj.Jt{i} = obj.tm{i}.Compute_dtdp(dtdx,dtdy,obj.dWdp{i});
   
 end
 

@@ -5,11 +5,13 @@ function [delta,c] = Optimize(obj,i,~,tex,c,~)
   [dtexdx,dtexdy] = obj.tm{i}.Compute_dtdxy(tex);
   
   Jtex = obj.tm{i}.Compute_dtdp(dtexdx,dtexdy,obj.dWdp{i});
-  Jtex = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(Jtex));
   
-  J = 0.5 * (obj.Jt{i} + Jtex);
+  J = 0.5 * (Jtex + obj.Jt{i});
+  J2 = obj.tm{i}.ProjectOut(J);
+  J = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(J));
+  J2 = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(J2));
   
-  H = J' * J;
+  H = J2' * J;
 
   error = obj.t{i} - tex;
   error = obj.tm{i}.ProjectOut(error);

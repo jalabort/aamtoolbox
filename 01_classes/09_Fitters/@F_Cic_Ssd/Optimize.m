@@ -11,8 +11,8 @@ function [delta_p,c] = Optimize(obj,i,j,tex,c,~)
   [dtdx,dtdy] = obj.tm{i}.Compute_dtdxy(t);
   
   J = obj.tm{i}.Compute_dtdp(dtdx,dtdy,obj.dWdp{i});
-  J = obj.tm{i}.ProjectOut(J);
-  J2 = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(J));
+  J2 = obj.tm{i}.ProjectOut(J);
+  J2 = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(J2));
   
   H = J2' * J2;
 

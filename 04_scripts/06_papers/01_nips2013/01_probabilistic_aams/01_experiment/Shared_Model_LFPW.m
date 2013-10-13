@@ -16,19 +16,17 @@ opt.m.root = ...
   ['..' filesep, ...
    'model' filesep];
 opt.m.level = ...
-  {1, ...
-   0.5, ...
-   0.25};
+  {1};
 opt.m.erode1 = {0};
-opt.m.erode2 = {2};
+opt.m.erode2 = {0};
 opt.m.warp = {'pwa'};
 opt.m.interp = {'nearest'};
 opt.m.Lp = {false};
 opt.m.smoother = {};
 opt.m.sigma = {};
 opt.m.shape_model = {'gsm-real-nwarp'};
-opt.m.dense = false;
-opt.m.tex_model = {'igo-real-double'};
+opt.m.dense = true;
+opt.m.tex_model = {'pi-norm'};
 opt.m.alpha = {};
 
 % build ...M... model

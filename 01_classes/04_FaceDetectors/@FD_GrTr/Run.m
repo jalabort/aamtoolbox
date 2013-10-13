@@ -21,6 +21,8 @@ function [ann,detected,p] = Run(obj,sm,~,grtr_ann)
   
   ann = sm.mu_ann * noisy_A + repmat(noisy_t,[sm.n_vert,1]);
   p = sm.Ann2SRT(ann);
+
+%   ann = sm.P2Ann(p);
   
 end
 
