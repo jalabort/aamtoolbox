@@ -18,14 +18,14 @@ opt.m.root = ...
 opt.m.level = ...
   {1};
 opt.m.erode1 = {0};
-opt.m.erode2 = {0};
+opt.m.erode2 = {1};
 opt.m.warp = {'pwa'};
 opt.m.interp = {'nearest'};
 opt.m.Lp = {false};
 opt.m.smoother = {};
 opt.m.sigma = {};
 opt.m.shape_model = {'gsm-real-nwarp'};
-opt.m.dense = true;
+opt.m.dense = false;
 opt.m.tex_model = {'pi-norm'};
 opt.m.alpha = {};
 

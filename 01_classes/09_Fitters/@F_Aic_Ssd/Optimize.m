@@ -1,4 +1,4 @@
-function [delta,c] = Optimize(obj,i,~,tex,~,~)
+function [delta,H] = Optimize(obj,i,~,tex,~,~)
   %Optimize Summary of this function goes here
   %   Detailed explanation goes here
   

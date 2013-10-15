@@ -7,7 +7,7 @@ Shared_Model_LFPW
 %% Create F_2D
 
 % specific options
-opt.fitter = 'pbc-ssd';
+opt.fitter = 'aic-ssd';
 
 % shared options
 Shared_Fitter_LFPW

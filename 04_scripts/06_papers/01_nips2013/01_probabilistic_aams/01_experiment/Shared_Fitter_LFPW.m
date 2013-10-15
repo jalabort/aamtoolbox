@@ -1,9 +1,9 @@
 % fitter options
-opt.n_it = 50; 
+opt.n_it = 150; 
 opt.n_c = ... % # of appearance eigenvectors
-  {100}; 
+  {150}; 
 opt.n_b = ... % # of shape eigenvectors 
-  {3};   
+  {10};   
 opt.detector = 'gr-tr';
 opt.rotation = false;
 opt.noise_scale = 0.05;
