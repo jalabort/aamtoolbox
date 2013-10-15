@@ -1,4 +1,4 @@
-classdef W_PWA_Baker < W_PWA & iC_Baker
+classdef W_PWA_Baker < W_PWA & iC_Baker & handle
   %W_PWA_Baker Summary of this class goes here
   %   Detailed explanation goes here
 

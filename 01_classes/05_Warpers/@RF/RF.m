@@ -1,4 +1,4 @@
-classdef RF
+classdef RF < handle
   %RF Summary of this class goes here
   %   Detailed explanation goes here
   

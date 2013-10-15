@@ -1,4 +1,4 @@
-classdef (Abstract) F_Csc < F_2D & iU_Compositional
+classdef (Abstract) F_Csc < F_2D & iU_Compositional & handle
   %F_Cic Summary of this class goes here
   %   Detailed explanation goes here
   

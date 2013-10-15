@@ -1,4 +1,4 @@
-classdef W_TPS_Papandreou < W_TPS & iC_Papandreou
+classdef W_TPS_Papandreou < W_TPS & iC_Papandreou & handle
   %W_TPS_Papandreou Summary of this class goes here
   %   Detailed explanation goes here
   

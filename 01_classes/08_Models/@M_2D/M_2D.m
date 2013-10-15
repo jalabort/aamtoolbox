@@ -1,4 +1,4 @@
-classdef M_2D
+classdef (HandleCompatible) M_2D
   %M_2D Summary of this class goes here
   %   Detailed explanation goes here
   

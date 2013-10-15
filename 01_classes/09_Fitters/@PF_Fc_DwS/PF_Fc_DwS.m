@@ -1,4 +1,4 @@
-classdef PF_Fc_DwS < PF_Fc
+classdef PF_Fc_DwS < PF_Fc & handle
   %PF_Fc_DwS Summary of this class goes here
   %   Detailed explanation goes here
   

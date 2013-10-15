@@ -1,4 +1,4 @@
-classdef F_Csc_Ssd < F_Csc
+classdef F_Csc_Ssd < F_Csc & handle
   %F_Cic_Ssd Summary of this class goes here
   %   Detailed explanation goes here
   

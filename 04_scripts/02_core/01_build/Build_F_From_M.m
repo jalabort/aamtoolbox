@@ -96,6 +96,10 @@ assert(isa(f.detector,'FD') ,'undifiened face detector!');
 % set # of iterations
 f.n_it = opt.n_it;
 
+% set regularization flags
+f.shape_reg = opt.shape_reg;
+f.tex_reg = opt.tex_reg;
+
 % set per level options
 for i = 1:f.n_level
 

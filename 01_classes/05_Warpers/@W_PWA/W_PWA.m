@@ -1,4 +1,4 @@
-classdef W_PWA < W
+classdef W_PWA < W  & handle
   %W_PWA Summary of this class goes here
   %   Detailed explanation goes here
   

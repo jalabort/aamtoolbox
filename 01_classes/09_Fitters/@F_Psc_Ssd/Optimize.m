@@ -19,5 +19,11 @@ function [delta,c] = Optimize(obj,i,~,tex,c,~)
   J_x_error = J' * error;
   delta = 0.5 * H \ J_x_error;
   delta = [delta; delta];
+  
+  %-----
+  if obj.shape_reg ~= 0
+    obj.sm{i}.sigma_inv_p = obj.tm{i}.variance^2 * inv(H);
+  end
+  %-----
 
 end

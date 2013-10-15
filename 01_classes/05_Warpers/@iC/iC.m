@@ -1,10 +1,10 @@
-classdef (Abstract) iC
+classdef (Abstract) iC < handle
   %Interface_Compose Summary of this class goes here
   %   Detailed explanation goes here
   
   % Interface Class
   methods
-    [qpr_ann,q,p,r] = UpdateAnn(obj,sm,ann,delta,q,p,r)
+    [qpr_ann,q,p,r] = UpdateAnn(obj,sm,ann,delta,q,p,r,reg)
   end
   
 end

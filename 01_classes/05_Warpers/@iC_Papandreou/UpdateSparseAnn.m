@@ -1,11 +1,9 @@
-function [ann,p] = UpdateSparseAnn(obj,sm,ann,delta,p)
+function [ann,pk] = UpdateSparseAnn(obj,sm,ann,delta,p0,reg)
   %UpdateSparseAnn Summary of this function goes here
   %   Detailed explanation goes here
   
-  p_0 = p;
-  
   dWdp_uvi0 = sm.Compute_duvidp();
-  [dWdp_uvip,A] = sm.Compute_duvidp_uvip(p);
+  [dWdp_uvip,A] = sm.Compute_duvidp_uvip(p0);
 
   I = eye(2);
   dWduvi_uvip = sm.Ann2Shape(obj.Compute_dWduvi_uvip(I,ann)); 
@@ -16,15 +14,20 @@ function [ann,p] = UpdateSparseAnn(obj,sm,ann,delta,p)
    
   Jp = (dWdp_uvip' * dWdp_uvip) \ dWdp_uvip' * dWduvi_uvip_x_dWdp_uv0;
   
-  p_1 = p + Jp * delta;
-  
-  sigma_b = inv(Jp * obj.H * Jp);
-  sigma = obj.sigma_b0 + sigma_b;
-  p = sigma \ ((sigma_b) * p_1 + obj.sigma_b0 * p_0);
-  obj.sigma_b0 = sigma;
-
-  %(1:4) = p_1(1:4); 
-  
-  ann = sm.P2Ann(p);
+  pk = p0 + Jp * delta;
+  %-----
+  if reg == 1
+    inv_sigma_pk = inv(Jp * obj.sigma_inv_p * Jp);
+    inv_sigma = obj.inv_sigma_p0 + inv_sigma_pk;
+    pk = inv_sigma \ (inv_sigma_pk * pk + obj.inv_sigma_p0 * p0);
+    %obj.inv_sigma_p0 = inv(inv_sigma);
+  elseif reg == 2
+    P = obj.sigma_p0 + obj.sigma_pk;
+    K = P  / (P + Jp * obj.sigma_inv_p * Jp);
+    pk = p0 + K * (pk - p0);
+    obj.sigma_pk = (eye(size(K)) - K) * P;
+  end
+  %-----
+  ann = sm.P2Ann(pk);
   
 end

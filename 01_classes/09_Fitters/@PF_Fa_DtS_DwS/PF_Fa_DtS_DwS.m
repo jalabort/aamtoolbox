@@ -1,4 +1,4 @@
-classdef PF_Fa_DtS_DwS < PF_Fa_DtS
+classdef PF_Fa_DtS_DwS < PF_Fa_DtS & handle
   %PF_Fa_DtS_DwS Summary of this class goes here
   %   Detailed explanation goes here
   

@@ -5,7 +5,17 @@ function [obj] = PreComputeSparse(obj,i)
   dWduvi = obj.w{i}.Compute_dWduvi();
   obj.dWdp{i} = obj.sm{i}.Compute_dWdp(dWduvi);
   
-  obj.w{i}.sigma_b0 = diag(1./[obj.sm{i}.ev(1),obj.sm{i}.ev(1),obj.sm{i}.ev(1),obj.sm{i}.ev(1),obj.sm{i}.ev(1:obj.sm{i}.n_b)]);
+  %-----
+  if obj.shape_reg ~= 0
+    obj.sm{i}.inv_sigma_p0 = diag(1./[obj.sm{i}.ev(1),obj.sm{i}.ev(1),obj.sm{i}.ev(1),obj.sm{i}.ev(1),obj.sm{i}.ev(1:obj.sm{i}.n_b)]); 
+    obj.sm{i}.sigma_p0 = diag([obj.sm{i}.ev(1),obj.sm{i}.ev(1),obj.sm{i}.ev(1),obj.sm{i}.ev(1),obj.sm{i}.ev(1:obj.sm{i}.n_b)]);
+    obj.sm{i}.sigma_pk = zeros(size(obj.sm{i}.sigma_p0));
+  end
+  if obj.tex_reg ~= 0
+    obj.tm{i}.inv_sigma_ck = obj.tm{i}.variance^2 * obj.tm{i}.pc(:,1:obj.tm{i}.n_c)' * obj.tm{i}.pc(:,1:obj.tm{i}.n_c);
+    obj.tm{i}.inv_sigma_c0 = diag(1./obj.tm{i}.ev(1:obj.tm{i}.n_c));
+  end
+  %-----
   
 end
 

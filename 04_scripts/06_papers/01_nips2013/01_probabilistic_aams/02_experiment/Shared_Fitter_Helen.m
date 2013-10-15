@@ -10,6 +10,7 @@ opt.n_b = ... % # of shape eigenvectors
    3};   
 opt.detector = 'gr-tr';
 opt.rotation = false;
+opt.noise_scale = 0.00;
 opt.composition_interface = {'papandreou'};
 
 % build ...F... fitter

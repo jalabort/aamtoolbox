@@ -14,5 +14,14 @@ function [obj] = PreComputeDense(obj,i)
   
   obj.invH{i} = inv(J2' * obj.J{i});
   
+  %-----
+  if obj.shape_reg ~= 0
+    obj.sm{i}.sigma_inv_p = obj.tm{i}.variance^2 * obj.invH{i};
+    obj.sm{i}.inv_sigma_p0 = diag(1./[obj.sm{i}.ev(1),obj.sm{i}.ev(1),obj.sm{i}.ev(1),obj.sm{i}.ev(1),obj.sm{i}.ev(1:obj.sm{i}.n_b)]); 
+    obj.sm{i}.sigma_p0 = diag([obj.sm{i}.ev(1),obj.sm{i}.ev(1),obj.sm{i}.ev(1),obj.sm{i}.ev(1),obj.sm{i}.ev(1:obj.sm{i}.n_b)]);
+    obj.sm{i}.sigma_pk = zeros(size(obj.sm{i}.sigma_p0));
+  end
+  %-----
+  
 end
 

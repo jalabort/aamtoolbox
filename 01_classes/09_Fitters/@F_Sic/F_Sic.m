@@ -1,4 +1,4 @@
-classdef F_Sic < F_2D & iU_Compositional
+classdef F_Sic < F_2D & iU_Compositional & handle
   %F_Sic Summary of this class goes here
   %   Detailed explanation goes here
   

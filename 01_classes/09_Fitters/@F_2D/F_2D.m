@@ -1,10 +1,12 @@
-classdef (Abstract) F_2D < M_2D
+classdef (Abstract) F_2D < M_2D & handle
   %F_2D Summary of this class goes here
   %   Detailed explanation goes here
   
   properties
     detector
     n_it
+    shape_reg
+    tex_reg
   end
   
   methods

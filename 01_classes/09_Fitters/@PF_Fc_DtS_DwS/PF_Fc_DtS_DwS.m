@@ -1,4 +1,4 @@
-classdef PF_Fc_DtS_DwS < PF_Fc & iU_Compositional
+classdef PF_Fc_DtS_DwS < PF_Fc & iU_Compositional & handle
   %PF_Fc_DtS_DwS Summary of this class goes here
   %   Detailed explanation goes here
   

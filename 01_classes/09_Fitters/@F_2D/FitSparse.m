@@ -22,8 +22,7 @@ function [fann] = FitSparse(obj,img,ann)
         wimg = obj.w{i}.WarpSparse(ann,img);
         tex = obj.tm{i}.Transform(wimg);
         
-        [delta,H] = obj.Optimize(i,j,tex,c,p);
-        obj.w{i}.H = mean(obj.tm{i}.ev(obj.tm{i}.n_c:end))^2 * inv(H);
+        [delta,c] = obj.Optimize(i,j,tex,c,p);
         [ann,p] = obj.UpdateSparseAnn(i,ann,delta,p);
         
         fann(:,:,it) = ann; 

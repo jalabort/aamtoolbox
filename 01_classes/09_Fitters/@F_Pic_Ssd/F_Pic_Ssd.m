@@ -1,4 +1,4 @@
-classdef F_Pic_Ssd < F_Pic
+classdef F_Pic_Ssd < F_Pic & handle
   %F_Pic_Ssd Summary of this class goes here
   %   Detailed explanation goes here
   

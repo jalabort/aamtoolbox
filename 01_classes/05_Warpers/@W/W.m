@@ -1,4 +1,4 @@
-classdef (Abstract) W
+classdef (Abstract) W  < handle
   %W Summary of this class goes here
   %   Detailed explanation goes here
   

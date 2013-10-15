@@ -1,4 +1,4 @@
-classdef (Abstract) PF_Fa < F_2D & iU_Additive
+classdef (Abstract) PF_Fa < F_2D & iU_Additive & handle
   %PF_Fa Summary of this class goes here
   %   Detailed explanation goes here
   

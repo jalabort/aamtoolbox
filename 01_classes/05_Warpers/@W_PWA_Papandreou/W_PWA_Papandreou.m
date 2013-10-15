@@ -1,4 +1,4 @@
-classdef W_PWA_Papandreou < W_PWA & iC_Papandreou
+classdef W_PWA_Papandreou < W_PWA & iC_Papandreou & handle
   %W_PWA_Papandreou Summary of this class goes here
   %   Detailed explanation goes here
 

@@ -1,4 +1,4 @@
-classdef (Abstract) iC_Baker < iC
+classdef (Abstract) iC_Baker < iC & handle
   %iC_Baker Summary of this class goes here
   %   Detailed explanation goes here
   

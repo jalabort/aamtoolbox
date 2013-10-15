@@ -1,4 +1,4 @@
-classdef W_TPS < W
+classdef W_TPS < W & handle
   %W_TPS Summary of this class goes here
   %   Detailed explanation goes here
   
