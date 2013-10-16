@@ -20,8 +20,8 @@ classdef (Abstract) TM
     n_ch
     n_ch_img
     
-   inv_sigma_ck
-   inv_sigma_c0
+   sigma_ck
+   sigma_c0
   end
   
   methods

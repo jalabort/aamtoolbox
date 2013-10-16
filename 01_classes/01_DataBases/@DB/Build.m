@@ -25,6 +25,7 @@ function Build(obj,scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch)
   obj.ann_type = ann_type;
   obj.n_vert = n_vert;
   obj.n_ch = n_ch;
+  obj.n_data = n_ann;
   
   [~,aux_path] = strtok(fliplr(ann_path),filesep);
   aux_path = fliplr(aux_path);
@@ -62,7 +63,7 @@ function Build(obj,scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch)
       ann = annread([ann_path ann_list(i).name], n_vert);
       ann = ann .* scale;
 
-      struct_name{i} = ['x' int2str(i)];
+      struct_name{i} = ['x' obj.list.id{i}];
       eval(sprintf([struct_name{i} '.img = img;']));
       eval(sprintf([struct_name{i} '.ann = ann;'])); 
 

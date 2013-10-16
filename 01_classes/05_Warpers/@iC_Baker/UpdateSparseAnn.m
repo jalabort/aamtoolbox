@@ -1,4 +1,4 @@
-function [ann,p] = UpdateSparseAnn(obj,sm,ann,delta,~)
+function [ann,p] = UpdateSparseAnn(obj,sm,ann,delta,~,~)
   %UpdateSparseAnn Summary of this function goes here
   %   Detailed explanation goes here
   

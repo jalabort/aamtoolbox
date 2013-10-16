@@ -7,7 +7,7 @@ Shared_Model_LFPW
 %% Create F_2D
 
 % specific options
-opt.fitter = 'aic-ssd';
+opt.fitter = 'p-fc-dws';
 
 % shared options
 Shared_Fitter_LFPW
@@ -21,11 +21,11 @@ opt.ann_root =  ...
    'result' filesep, ...
    'nips2013' filesep, ...
    'probaams' filesep, ...
-   'aic' filesep];
+   'dws' filesep];
 opt.img_root =  ...
   [opt.ann_root, ... 
    'img' filesep];
-
+ 
 % shared options
 Shared_Fit_LFPW
 
@@ -33,5 +33,5 @@ Shared_Fit_LFPW
 %% Test DS
 
 % shared options
-Shared_Test_Fit_LFPW
+Shared_Test_LFPW
 

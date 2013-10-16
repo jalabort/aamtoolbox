@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-pathA = '..\AnnotatedFaceImageDataBases\Helen\TrainImages\';
+pathA = '/data/databases/afw/images/test/';
 
 list = dir([pathA '*.jpg']);
 n = length(list);

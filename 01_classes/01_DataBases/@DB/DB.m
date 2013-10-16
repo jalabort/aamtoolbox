@@ -24,6 +24,8 @@ classdef DB
     parts
     n_parts
     
+    n_data
+    
     list
   end
   

@@ -22,7 +22,7 @@ function [delta,c] = Optimize(obj,i,~,tex,c,~)
   
   %-----
   if obj.shape_reg ~= 0
-    obj.sm{i}.sigma_inv_p = obj.tm{i}.variance^2 * inv(H);
+    obj.w{i}.sigma_inv_p = obj.tm{i}.variance^2 * inv(H);
   end
   %-----
 

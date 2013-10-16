@@ -33,7 +33,7 @@ function [delta_p,ck] = Optimize(obj,i,j,tex,c0,~)
     obj.tm{i}.inv_sigma_c0 = inv_sigma;
   end
   if obj.shape_reg ~= 0
-    obj.sm{i}.sigma_inv_p = obj.tm{i}.variance^2 * inv(H);
+    obj.w{i}.sigma_inv_p = obj.tm{i}.variance^2 * inv(H);
   end
   %-----
   

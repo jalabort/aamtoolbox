@@ -1,4 +1,4 @@
-function [ann,p] = UpdateDenseAnn(~,sm,~,delta,p)
+function [ann,p] = UpdateDenseAnn(~,sm,~,delta,p,~)
   %UpdateDenseAnn Summary of this function goes here
   %   Detailed explanation goes here
   

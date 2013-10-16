@@ -81,6 +81,12 @@ switch opt.fitter
     f = PF_Ic_DwS(m);
   case 'p-ic-dts-dws'
     f = PF_Ic_DtS_DwS(m);
+  % probabilistic-symmetric-compositional
+  case 'p-sc-dts-dws'
+    f = PF_Sc_DtS_DwS(m);
+  % probabilistic-bidirectional-compositional
+  case 'p-bc-dts-dws'
+    f = PF_Bc_DtS_DwS(m);
 end
 assert(isa(f,'F_2D') ,'undifiened fitter!');
 
