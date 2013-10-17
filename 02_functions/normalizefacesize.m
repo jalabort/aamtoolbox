@@ -6,6 +6,8 @@ function [img,ann,scale] = normalizefacesize(img,ann,sm)
   [A,~] = sm.Q2MatForm(p(1:sm.n_q));
   scale = 1 / A(1);
     
+  img = (double(img)/255);
+  
   img = imresize(img,scale);
   ann = ann .* scale;
 

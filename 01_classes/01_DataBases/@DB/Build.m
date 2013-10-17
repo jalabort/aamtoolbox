@@ -57,7 +57,7 @@ function Build(obj,scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch)
 
       [~,img_name] = fileparts([img_path img_list(i).name]);
 
-      img = double(imread([img_path img_list(i).name])) / 255;
+      img = imread([img_path img_list(i).name]);
       if scale ~= 1
         img = imresize(img,scale);
       end

@@ -8,7 +8,7 @@ opt.ann = 'our';
 test_db = DB([opt.name '-' opt.type '-' opt.ann],opt.bin_root);
 
 % test dataset
-opt.id = 1:test_db.n_data;
+opt.id = 1:100%test_db.n_data;
 opt.reg_exp_query = test_db.RegExpQuery(opt.id);
 
 % control options
