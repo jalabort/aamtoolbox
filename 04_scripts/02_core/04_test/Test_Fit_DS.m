@@ -44,21 +44,25 @@ end
 set(gca, 'xtick', xtick);
 
 % compute error
-err = zeros(test_ds.n_data,1);
+err = zeros(n_fittings,1);
+k = 1;
 for i = 1:test_ds.n_data
-  [rms_err,p2p_err,ram_err,hel_err] = computeerr(fann(opt.point_list,:,i), ...
-        test_ds.data{i}.ann(opt.point_list,:), ...
-        test_ds.data{i}.ann, ...
-        test_db.comp);
-  switch opt.err_type
-    case 'rms'
-      err(i) = rms_err;
-    case 'p2p'
-      err(i) = p2p_err;
-    case 'ram'
-      err(i) = ram_err;
-    case 'hel'
-      err(i) = hel_err;
+  for j = 1:n_fittings/test_ds.n_data
+    [rms_err,p2p_err,ram_err,hel_err] = computeerr(fann(opt.point_list,:,j), ...
+          test_ds.data{i}.ann(opt.point_list,:), ...
+          test_ds.data{i}.ann, ...
+          test_db.comp);
+    switch opt.err_type
+      case 'rms'
+        err(i) = rms_err;
+      case 'p2p'
+        err(i) = p2p_err;
+      case 'ram'
+        err(i) = ram_err;
+      case 'hel'
+        err(i) = hel_err;
+    end
+    k = k + 1;
   end
 end
 

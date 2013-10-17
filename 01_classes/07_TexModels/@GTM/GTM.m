@@ -7,22 +7,19 @@ classdef (Abstract) GTM < TM
     pc
     ev
     
-    cropped_pc
-    
     n_pc
     
     variance
   end
   
   methods
-    function obj = GTM(img,rf,smoother,Lp)
-      obj@TM(rf,smoother);
+    function obj = GTM(img,rf,Lp)
+      obj@TM(rf);
       
-      % number of channels of the original images
-      obj.n_ch_img = size(img,3);
+      % number of features
+      obj.n_ch = size(img,3);
       
-      % convert images to textures (features)
-      [obj.n_ch,obj.n_face_features1,obj.n_face_features2] = obj.SetNCh();
+      % convert images to textures (vectors)
       tex = obj.TransformAll(img);
       
       % compute pca
@@ -30,16 +27,10 @@ classdef (Abstract) GTM < TM
       [obj.mu,obj.pc,obj.ev] = obj.pca.Compute(tex);
       obj.n_pc = size(obj.pc,2);
       
-      % obtain and orthonormalize the cropped pc (necessary to correctly
-      % handle possible innacuracies when computing gradients on the 
-      % reference frame)
-%       obj.cropped_pc = obj.Img2CroppedTex(obj.Tex2Img(obj.pc));
-%       [obj.cropped_pc, ~] = qr(obj.cropped_pc,0);
-      
       % initialize dinamic size properties
       obj.n_c = obj.n_pc;
       
-      % compute the discarted variance
+      % set discarted variance to 0
       obj.variance = 0;
     end
     
@@ -48,10 +39,11 @@ classdef (Abstract) GTM < TM
   end
   
   methods (Abstract) 
-    tex = TransformCh(obj,img)
-    
+    tex = Transform(obj,img)
     t = GetMean(obj)
-    t = ProjectOut(obj,t,n_c)
+    t = ProjectOut(obj,t)
+    t = Compute_DtS(obj,t)
+    t = Compute_DwS(obj,t)
   end
   
 end

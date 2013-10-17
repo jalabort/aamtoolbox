@@ -11,7 +11,7 @@ classdef (Abstract) F_2D < M_2D & handle
   
   methods
     function obj = F_2D(m)
-      obj = obj@M_2D(m.sm,m.w,m.tm);
+      obj = obj@M_2D(m.sm,m.w,m.tm,m.smoother);
     end
     
     obj = InitializeDense(obj)
@@ -19,6 +19,7 @@ classdef (Abstract) F_2D < M_2D & handle
     fann = FitDense(obj,img,ann)
     fann = FitSparse(obj,img,ann)
     rann = Reconstruct(obj,ann)
+    [img,ann] = ComputeFeaturesSpace(obj,img,ann,i)
   end
   
   methods (Abstract)
@@ -27,7 +28,6 @@ classdef (Abstract) F_2D < M_2D & handle
     [delta,c] = Optimize(obj,i,j,tex,c,p)
     [ann,p] = UpdateDenseAnn(obj,i,ann,delta,p)
     [ann,p] = UpdateSparseAnn(obj,i,ann,delta,p)
-
   end
   
 end

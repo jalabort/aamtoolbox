@@ -1,17 +1,12 @@
-function [n_level,w,sm,tm] = AddLevel(obj,nw,nsm,ntm)
+function [obj] = AddLevel(obj,sm,w,tm,smoother)
   %ADDLEVEL Summary of this function goes here
   %   Detailed explanation goes here
 
-  n_level = obj.n_ + 1;
-  
-  w = obj.w;
-  w{n_level} = nw;
-  
-  sm = obj.sm;
-  sm{n_level} = nsm;
-  
-  tm = obj.tm;
-  tm{n_level} = ntm;
+  obj.n_level = obj.n_level + 1;
+  obj.sm{n_level} = sm;
+  obj.w{n_level} = w;
+  obj.tm{n_level} = tm;
+  obj.smoother{n_level} = smoother;
   
 end
 

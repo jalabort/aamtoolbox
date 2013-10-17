@@ -1,4 +1,4 @@
-classdef (Abstract) F_Afc < F_2D & iU_Compositional
+classdef (Abstract) F_Afc < F_2D & iU_Compositional & handle
   %F_Aic Summary of this class goes here
   %   Detailed explanation goes here
   

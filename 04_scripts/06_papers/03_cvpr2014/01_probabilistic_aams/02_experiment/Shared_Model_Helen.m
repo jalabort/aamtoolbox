@@ -4,7 +4,7 @@ opt.m.bin_root = ...
    'binarydb' filesep];
 opt.m.name = 'helen-rescaled';
 opt.m.type = 'train';
-opt.m.ann = 'our';
+opt.m.ann = 'original';
 train_db = DB([opt.m.name '-' opt.m.type '-' opt.m.ann],opt.m.bin_root);
 
 % training dataset

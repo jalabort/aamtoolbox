@@ -57,8 +57,10 @@ function Build(obj,scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch)
 
       [~,img_name] = fileparts([img_path img_list(i).name]);
 
-      img = imread([img_path img_list(i).name]);
-      img = imresize(img,scale);
+      img = double(imread([img_path img_list(i).name])) / 255;
+      if scale ~= 1
+        img = imresize(img,scale);
+      end
       
       ann = annread([ann_path ann_list(i).name], n_vert);
       ann = ann .* scale;

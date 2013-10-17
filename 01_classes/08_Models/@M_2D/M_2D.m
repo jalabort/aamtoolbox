@@ -7,17 +7,19 @@ classdef (HandleCompatible) M_2D
     sm
     w
     tm
+    smoother
   end
   
   methods
-    function obj = M_2D(sm,w,tm)
+    function obj = M_2D(sm,w,tm,smoother)
       obj.n_level = length(sm);
       obj.sm = sm;
       obj.w = w;
       obj.tm = tm;
+      obj.smoother = smoother;
     end
     
-    [n_level,w,sm,tm] = AddLevel(obj,w,sm,tm)
+    [n_level,tm,smoother] = AddLevel(obj,tm,smoother)
     
     Save(obj,opt)
   end

@@ -11,7 +11,7 @@ function [wimg] = WarpSparse(obj,ann,img)
     aux = zeros(obj.rf.res);
     c = ba_interp2(img(:,:,i),xy(:,1),xy(:,2),obj.interp);
     aux(uv_vec) = c; 
-    wimg(:,:,i) = max(min(aux,1),0);
+    wimg(:,:,i) = aux;
   end
 
 end

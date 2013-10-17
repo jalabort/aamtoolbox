@@ -1,16 +1,23 @@
-function [delta,c] = Optimize(obj,i,~,tex,c0,~)
+function [delta,ck] = Optimize(obj,i,~,tex,c0,~)
   %Optimize Summary of this function goes here
   %   Detailed explanation goes here
   
-  c = obj.tm{i}.Tex2C(tex);
+  ck = obj.tm{i}.Tex2C(tex);
   %-----
-  if obj.tex_reg ~= 0
-    inv_sigma = obj.tm{i}.inv_sigma_c0 + obj.tm{i}.inv_sigma_ck;
-    c = inv_sigma \ (obj.tm{i}.inv_sigma_ck * c + obj.tm{i}.inv_sigma_c0 * c0);
+  if obj.tex_reg == 1
+    inv_sigma_c0 = inv(obj.tm{i}.sigma_c0); 
+    inv_sigma_ck = inv(obj.tm{i}.sigma_ck);
+    sigma = inv(inv_sigma_c0 + inv_sigma_ck);
+    ck = sigma * (inv_sigma_ck * ck + inv_sigma_c0 * c0);
     %obj.tm{i}.sigma_c0 = sigma;
+  elseif obj.tex_reg == 2
+    P = obj.tm{i}.sigma_c0 + obj.tm{i}.sigma_ck;
+    K = P  / (P + inv(obj.tm{i}.sigma_ck));
+    ck = c0 + K * (ck - c0);
+    obj.tm{i}.sigma_ck = (eye(size(K)) - K) * P;
   end
   %-----
-  t = obj.tm{i}.C2Tex(c);
+  t = obj.tm{i}.C2Tex(ck);
   
   [dtdx,dtdy] = obj.tm{i}.Compute_dtdxy(t);
   [dtexdx,dtexdy] = obj.tm{i}.Compute_dtdxy(tex);

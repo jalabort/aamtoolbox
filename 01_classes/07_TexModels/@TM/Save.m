@@ -4,27 +4,7 @@ function Save(obj,opt,i)
   
   n_level = length(opt.level);
   
-  if n_level == length(opt.erode1)
-    erode1 = opt.erode1{i}; 
-  else
-    erode1 = cell2mat(opt.erode1); 
-  end
-  if n_level == length(opt.erode2)
-    erode2 = opt.erode2{i};
-  else
-    erode2 = cell2mat(opt.erode2);
-  end
-  if n_level == length(opt.interp)
-    interp = opt.interp{i};
-  else
-    interp = cell2mat(opt.interp);
-  end
-  if n_level == length(opt.warp)
-    warp_type = opt.warp{i};
-  else
-    warp_type = cell2mat(opt.warp);
-  end
- if n_level > 1 && n_level == length(opt.shape_model)
+  if n_level > 1 && n_level == length(opt.shape_model)
     smoother_type = opt.smoother{i};
   else
     smoother_type = cell2mat(opt.smoother);
@@ -35,28 +15,40 @@ function Save(obj,opt,i)
     sigma = cell2mat(opt.sigma);
   end
   if n_level == length(opt.tex_model)
+    feature_type = opt.feature{i};
+  else
+    feature_type = cell2mat(opt.feature);
+  end
+  if n_level == length(opt.tex_model)
     tex_model_type = opt.tex_model{i};
   else
     tex_model_type = cell2mat(opt.tex_model);
   end
-  if n_level == length(opt.Lp)
-    Lp = opt.Lp{i}; 
+  if n_level == length(opt.tex_lp)
+    lp = opt.tex_lp{i}; 
   else
-    Lp = cell2mat(opt.Lp); 
+    lp = cell2mat(opt.tex_lp); 
+  end
+  if n_level == length(opt.tex_alpha)
+    alpha = opt.tex_alpha{i}; 
+  else
+    alpha = cell2mat(opt.tex_alpha); 
   end
 
   opt_str = [opt.name '_' ...
              opt.ann '_' ...
-             mat2str(opt.level{i}) '_' ...
-             mat2str(erode1) '_' ...
-             mat2str(erode2) '_' ...
-             mat2str(interp) '_' ...
-             mat2str(warp_type) '_' ...
-             mat2str(Lp) '_' ...
-             mat2str(smoother_type) '_' ...
-             mat2str(sigma) '_' ...
-             mat2str(tex_model_type) '_' ...
-             int2str(opt.dense)];
+             int2str(opt.level{i}) '_' ...
+             int2str(opt.erode1) '_' ...
+             int2str(opt.erode2) '_' ...
+             opt.interp '_' ...
+             opt.warp '_' ...
+             smoother_type '_' ...
+             num2str(sigma) '_' ...
+             feature_type '_' ...
+             int2str(opt.dense) '_' ...
+             tex_model_type '_' ...
+             num2str(lp) '_' ...
+             num2str(alpha)];
           
   hash_code = DataHash(opt.reg_exp_query);
   file_name = [opt_str '_' hash_code '.mat'];

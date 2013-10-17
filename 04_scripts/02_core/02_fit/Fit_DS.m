@@ -6,7 +6,12 @@ assert(loaded,'test dataset could not be loaded!');
 
 display('- fitting');
 
-fann = zeros(train_db.n_vert,2,test_ds.n_data);
+if  opt.noise_scale == 0 || strcmp(opt.detector,'matlab')
+  n_fittings = test_ds.n_data;
+else
+  n_fittings = 25 * test_ds.n_data;
+end
+fann = zeros(train_db.n_vert,2,n_fittings);
 
 % fitting loop
 if opt.parallel

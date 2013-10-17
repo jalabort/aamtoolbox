@@ -3,8 +3,6 @@ classdef (Abstract) TM
   %   Detailed explanation goes here
   
   properties
-    smoother
-    
     res
     n_pixels
     
@@ -18,21 +16,22 @@ classdef (Abstract) TM
     
     n_c
     n_ch
-    n_ch_img
+
+    feature_type
+    factor
     
-   sigma_ck
-   sigma_c0
+    sigma_ck
+    sigma_c0
   end
   
   methods
-    function obj = TM(rf,smoother)
+    function obj = TM(rf)
       obj.res = rf.res;
       obj.n_pixels = rf.n_pixels;
       obj.mask1 = rf.mask1;
       obj.n_face_pixels1 = rf.n_face_pixels1;
       obj.mask2 = rf.mask2;
       obj.n_face_pixels2 = rf.n_face_pixels2;
-      obj.smoother = smoother;
     end
     
     img = Tex2Img(obj,tex,n_ch)
@@ -44,8 +43,6 @@ classdef (Abstract) TM
     tex_ch = getTexCh(obj,tex,i)
     ctex_ch = getCroppedTexCh(obj,ctex,i)
     
-    [n_ch,n_face_features1,n_face_features2] = SetNCh(obj)
-    
     img = C2Img(obj,c)
     c = Img2C(obj,img)
     img = ProjectImg(obj,img)
@@ -56,9 +53,6 @@ classdef (Abstract) TM
   end
   
   methods (Static)
-    img = ColorTransform(img);
-    img = ColorTransformAll(img);
-    
     [obj,loaded] = Load(opt,i)
   end
   
@@ -68,8 +62,6 @@ classdef (Abstract) TM
     
     tex = TransformAll(obj,img);
     tex = Transform(obj,img);
-    tex = TransformWithoutSmoothing(obj,img);
-    stex = TransformWithSmoothing(obj,img);
     
     [dtdx,dtdy] = Compute_dtdxy(obj,t)
     dAdc = Compute_dAdc(obj)
