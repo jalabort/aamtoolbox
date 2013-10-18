@@ -21,6 +21,7 @@ classdef (Abstract) TM
     factor
     
     sigma_ck
+    sigma_ckk
     sigma_c0
   end
   

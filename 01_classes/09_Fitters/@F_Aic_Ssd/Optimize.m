@@ -19,7 +19,6 @@ function [delta,ck] = Optimize(obj,i,~,tex,c0,~)
   %-----
   t = obj.tm{i}.C2Tex(ck);
   
-  
   [dtdx,dtdy] = obj.tm{i}.Compute_dtdxy(t);
   
   J = obj.tm{i}.Compute_dtdp(dtdx,dtdy,obj.dWdp{i});

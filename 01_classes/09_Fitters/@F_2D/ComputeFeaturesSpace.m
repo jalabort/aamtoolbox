@@ -13,11 +13,11 @@ function [img,ann] = ComputeFeaturesSpace(obj,img,ann,i)
     case 'igo'
       img = img2igo(img);
     case 'igo-double'
-      img = img2igodouble(img,alpha);
+      img = img2igodouble(img);
     case 'gi'
-      img = img2gidouble(img,alpha);
+      img = img2gi(img);
     case 'gi-double'
-      img = img2gidouble(img,alpha);
+      img = img2gidouble(img);
     case 'euler'
       img = img2euler(img,alpha);
     case 'euler-double'

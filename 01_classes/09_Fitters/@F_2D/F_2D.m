@@ -16,8 +16,8 @@ classdef (Abstract) F_2D < M_2D & handle
     
     obj = InitializeDense(obj)
     obj = InitializeSparse(obj)
-    fann = FitDense(obj,img,ann)
-    fann = FitSparse(obj,img,ann)
+    [fann,iann,oann] = FitDense(obj,img,ann)
+    [fann,iann,oann] = FitSparse(obj,img,ann)
     rann = Reconstruct(obj,ann)
     [img,ann] = ComputeFeaturesSpace(obj,img,ann,i)
   end

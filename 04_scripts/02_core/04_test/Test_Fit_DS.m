@@ -45,24 +45,20 @@ set(gca, 'xtick', xtick);
 
 % compute error
 err = zeros(n_fittings,1);
-k = 1;
-for i = 1:test_ds.n_data
-  for j = 1:n_fittings/test_ds.n_data
-    [rms_err,p2p_err,ram_err,hel_err] = computeerr(fann(opt.point_list,:,j), ...
-          test_ds.data{i}.ann(opt.point_list,:), ...
-          test_ds.data{i}.ann, ...
-          test_db.comp);
-    switch opt.err_type
-      case 'rms'
-        err(i) = rms_err;
-      case 'p2p'
-        err(i) = p2p_err;
-      case 'ram'
-        err(i) = ram_err;
-      case 'hel'
-        err(i) = hel_err;
-    end
-    k = k + 1;
+for i = 1:n_fittings
+  [rms_err,p2p_err,ram_err,hel_err] = computeerr(fann(opt.point_list,:,i), ...
+        oann(opt.point_list,:,i), ...
+        oann(:,:,i), ...
+        test_db.comp);
+  switch opt.err_type
+    case 'rms'
+      err(i) = rms_err;
+    case 'p2p'
+      err(i) = p2p_err;
+    case 'ram'
+      err(i) = ram_err;
+    case 'hel'
+      err(i) = hel_err;
   end
 end
 
@@ -76,8 +72,8 @@ for i = list
 end
 
 plot(list,cerr,opt.symbol,'MarkerSize',2,'linewidth',1);
-method = [cell2mat(opt.m.shape_model) ' - ' ...
-  cell2mat(opt.m.tex_model) ' - ' ...
+method = [opt.m.shape_model ' - ' ...
+  cell2mat(opt.m.feature) ' - ' ...
   opt.fitter];
 legend(method, 'Location', 'SouthEast');
 

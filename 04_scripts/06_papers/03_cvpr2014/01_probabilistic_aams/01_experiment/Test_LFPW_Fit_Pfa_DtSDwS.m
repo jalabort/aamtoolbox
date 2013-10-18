@@ -7,7 +7,7 @@ Shared_Model_LFPW
 %% Create F_2D
 
 % specific options
-opt.fitter = 'p-sc-dts-dws';
+opt.fitter = 'p-fc-dts-dws';
 
 % shared options
 Shared_Fitter_LFPW

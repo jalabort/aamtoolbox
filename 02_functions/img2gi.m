@@ -7,10 +7,9 @@ function [gi_img] = img2gi(img)
   [gx,gy] = gradient(img);
   aux = gx + 1i*gy;
   gmag = abs(aux);
-  n = gmag(obj.mask1) + median(gmag);
-  norm_factor = repmat(n,[2,1]);
-  gi_img(:,:,1) = gx ./ norm_factor;
-  gi_img(:,:,2) = gy ./ norm_factor;
+  n = gmag + median(gmag(:));
+  gi_img(:,:,1) = gx ./ n;
+  gi_img(:,:,2) = gy ./ n;
   
 end
 

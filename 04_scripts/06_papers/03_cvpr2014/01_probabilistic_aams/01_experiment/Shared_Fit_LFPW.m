@@ -2,17 +2,17 @@
 opt.bin_root = ...
   ['..' filesep, ... 
    'binarydb' filesep];
-opt.name = 'lfpw';
+opt.name = 'helen';
 opt.type = 'test';
 opt.ann = 'our';
 test_db = DB([opt.name '-' opt.type '-' opt.ann],opt.bin_root);
 
 % test dataset
-opt.id = 1:100%test_db.n_data;
+opt.id = 1:test_db.n_data;
 opt.reg_exp_query = test_db.RegExpQuery(opt.id);
 
 % control options
-opt.parallel = true;
+opt.parallel = false;
 opt.save_ann = false;
 opt.verbose = true;
 opt.show = true;
