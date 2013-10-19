@@ -1,11 +1,12 @@
-function [fann] = FitSparse(obj,img,ann)
+function [fann,iann,oann] = FitSparse(obj,img,oann)
   %FitSparse Summary of this function goes here
   %   Detailed explanation goes here
   
   fann = zeros([size(obj.sm{1}.mu_ann),obj.n_it+1]);
   
-  [img,ann,scale] = normalizefacesize(img,ann,obj.sm{1});
+  [img,ann,scale] = normalizefacesize(img,oann,obj.sm{1});
   [ann,detected,~] = obj.detector.Run(obj.sm{1},img,ann);
+  iann = ann ./ scale;
   
   if detected
     
