@@ -7,7 +7,7 @@ classdef (Abstract) FD
   end
   
   methods
-    [ann,q,detected] = Run(obj,sm,img,grtr_ann)
+    [ann,detected,sm,p] = Run(obj,sm,img,grtr_ann)
   end
   
 end
