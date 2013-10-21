@@ -52,7 +52,7 @@ end
 display('  - warper');
 
 % build ...RF... reference frame
-ref_ann = train_ds.ComputeRefAnn(); 
+ref_ann = train_ds.ComputeRefAnn();
 parts = train_ds.parts; 
 rf = RF(ref_ann,parts,opt.m.erode1,opt.m.erode2);
 assert(isa(rf,'RF') ,'undifiened reference frame!');
@@ -66,6 +66,9 @@ switch opt.m.warp
     w_ = W_TPS(rf,opt.m.interp); 
 end
 assert(isa(w_,'W') ,'undifiened warper!');
+
+% normalize face size
+train_ds = train_ds.NormalizeFaceSize(sm_);
 
 % for every level
 for i = 1:n_level
@@ -112,10 +115,8 @@ for i = 1:n_level
         smoother{i} = [];
     end
     
-    % normalize face size
-    train_ds2 = train_ds.NormalizeFaceSize(sm_);
     % multiresolution
-    train_ds2 = train_ds2.Scale(factor,smoother{i});
+    train_ds2 = train_ds.Scale(factor,smoother{i});
     % compute features if necessary
     if n_level == length(opt.m.tex_alpha)
       alpha = opt.m.tex_alpha{i}; 

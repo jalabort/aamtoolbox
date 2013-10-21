@@ -67,7 +67,7 @@ list = 0:step:limit;
 cerr = zeros(size(list));
 count = 1;
 for i = list
-  cerr(count) = length(find(err < i)) / (test_ds.n_data);
+  cerr(count) = length(find(err < i)) / (n_fittings);
   count = count + 1;
 end
 

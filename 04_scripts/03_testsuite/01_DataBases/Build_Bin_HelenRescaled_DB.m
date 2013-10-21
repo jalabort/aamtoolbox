@@ -8,9 +8,9 @@ clc
 bin_root = ['..' ... 
   filesep 'binarydb' ...
   filesep];
-name = 'helen';
-type = 'test';
-ann = 'our';
+name = 'helen-rescaled';
+type = 'train';
+ann = 'original';
 db = DB([name '-' type  '-' ann],bin_root);
 
 img_path = [filesep 'data' ...
@@ -28,9 +28,9 @@ ann_path = [filesep 'data' ...
   filesep];
 img_type = 'jpg';
 ann_type = 'pts';
-n_vert = 68;
+n_vert = 194;
 n_ch = 3;
-scale = 0.33;
+scale = 1;
 
 db.Build(scale,img_path,ann_path,img_type,ann_type,n_vert,n_ch);
 

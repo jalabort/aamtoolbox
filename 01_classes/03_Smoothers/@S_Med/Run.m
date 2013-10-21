@@ -2,11 +2,9 @@ function [img] = Run(obj,img)
   %Run Summary of this function goes here
   %   Detailed explanation goes here
   
-  if size(img,3) == 3
-    img = rgb2gray(img);
+  for i = 1:size(img,3)
+    img(:,:,i) = medfilt2(img(:,:,i),obj.K);
   end
-  
-  img = medfilt2(img,obj.K);
 
 end
 

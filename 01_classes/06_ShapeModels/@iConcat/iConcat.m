@@ -15,6 +15,9 @@ classdef (Abstract) iConcat
     [U,PU] = ConstructConcatBasis(obj);
     [sim_basis] = GetSimBasis(obj)
     [pc] = GetPCs(obj)
+    
+    [A,t] = ComputeSimilarityMatrixForm(obj,ann)
+    [A,t] = Q2MatForm(obj,q)
   end
   
 end

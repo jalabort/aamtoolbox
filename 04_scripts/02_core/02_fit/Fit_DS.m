@@ -4,6 +4,9 @@ display('- loading test dataset');
 [test_ds,loaded] = test_db.Load(opt.reg_exp_query);
 assert(loaded,'test dataset could not be loaded!'); 
 
+% normalize face size
+%train_ds = test_ds.NormalizeFaceSize(f.sm{1});
+
 display('- fitting');
 
 if  opt.noise_scale == 0 || strcmp(opt.detector,'matlab')
