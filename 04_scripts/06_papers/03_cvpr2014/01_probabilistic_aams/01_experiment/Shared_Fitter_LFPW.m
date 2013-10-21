@@ -1,5 +1,5 @@
 % fitter options
-opt.n_it = 50; 
+opt.n_it = 25; 
 opt.n_c = ... % # of appearance eigenvectors
   {200, ...
    200, ...

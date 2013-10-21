@@ -22,9 +22,9 @@ function [ann,detected,sm,p] = Run(obj,sm,~,grtr_ann)
   ann = sm{1}.mu_ann * noisy_A + repmat(noisy_t,[sm{1}.n_vert,1]);
   
   for i = 1:length(sm)
-    sm{i}.mu = ann(:);
-    sm{i}.sim_mu = sm{i}.mu;
     sm{i}.mu_ann = ann;
+    sm{i}.mu = ann(:);
+    sm{i}.sim_mu = ann(:);
   end
   
   p = sm{1}.Ann2SRT(ann);

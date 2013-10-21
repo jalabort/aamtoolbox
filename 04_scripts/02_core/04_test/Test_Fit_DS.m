@@ -32,7 +32,7 @@ switch opt.err_type
     xlabel('mean face-size normalized poit-to-point error', ...
       'Interpreter','tex','fontsize',font_size);
     limit = 0.05;
-    step = 0.0005;
+    step = 0.00025;
     xtick = 0:0.01:limit;
   case 'hel'
     xlabel('mean interocular-distance normalized poit-to-point error', ...

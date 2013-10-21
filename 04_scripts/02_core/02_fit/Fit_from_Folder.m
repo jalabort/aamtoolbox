@@ -1,89 +1,50 @@
-display('- Creating fitter');
+path = 'C:\Users\Joan\Desktop\FacialFeatureDetection&Tracking_v12\FacialFeatureDetection&Tracking_v12\data\afw\';
+ext = '.jpg';
+ext2 = '.pts';
+data = dir([path '*' ext]);
+data2 = dir([path '*' ext2]);
+
+fann = zeros(train_db.n_vert,2,n_fittings);
+oann = fann;
+iann = fann;
+
+parfor i = 1:n_fittings
+
+  j = floor((i-1)/n_rand) + 1;
   
-switch opt.fitter
-  case 'pic-ssd'
-    f = F_PicSsd(m);
-  case 'pic-ecc'
-    f = F_PicEcc(m);
-  case 'aic-ssd'
-    f = F_AicSsd(m);
-  case 'aic-ecc'
-    f = F_AicEcc(m);
-  case 'sic-ssd'
-    f = F_SicSsd(m);
-  case 'sic-ecc'
-    f = F_SicEcc(m);
-end
-clear m
-
-if strcmp(opt.m.warp,'pwa')
-  switch opt.composition 
-    case 'baker'
-      for i = 1:f.n_level
-        f.w{i} = W_PWA_1(f.w{i});
-      end
-    case 'papandreou'
-      for i = 1:f.n_level
-        f.w{i} = W_PWA_2(f.w{i});
-      end
-  end
-end
-
-switch opt.m.tex_model 
-  case 'df-igo'
-    for i = 1:f.n_level
-      f.tm{i}.n_bin = opt.n_bin{i};
-      f.tm{i}.bin = f.tm{i}.SetBin();
-      siz = 2*opt.sigma{i}+1;
-      H = fspecial3('gaussian',[siz siz siz],opt.sigma{i});
-      f.tm{i}.smoother.H = H;
+  % read image from input file
+  img=imread([path data(j).name]);
+  fitt = annread([path data2(j).name],68);
+  
+  [fit,ini,ori] = f.FitSparse(img,fitt);
+  fann(:,:,i) = fit(:,:,end);
+  iann(:,:,i) = ini(:,:,end);
+  oann(:,:,i) = ori(:,:,end);
+  
+  % show the fitting
+  if 0
+    if all(all(fit(:,:,end)))
+      h = 1;
+      aamshow(h,img,fit,test_db.parts);
     end
-end
-
-switch opt.face_detector 
-  case 'gr-tr'
-    f.face_det = FD_GrTr();
-  case 'matlab'
-    f.face_det = FD_Mat();
-end
-
-for i = 1:f.n_level
-  f.tm{i}.n_c = opt.n_c{i};
-  if strcmp(opt.m.shape_model{i}(1:2),'cb')
-    f.sm{i}.n_p = opt.n_p2{i};
-    f.sm{i}.n_r = [opt.n_r{:,i}];
-    f.sm{i}.n_qpr = f.sm{i}.n_q + opt.n_p2{i} + sum([opt.n_r{:,i}]);
-  else
-    f.sm{i}.n_p = opt.n_p1{i};
-    f.sm{i}.n_qpr = f.sm{i}.n_q  + opt.n_p1{i};
   end
-end
-
-f.n_it = opt.n_it;
-f.show_fitting = opt.show_fitting;
-
-display('- Initializing fitter');
-
-f = f.Initialize();
-
-display('- Fitting');
-
-data = dir([opt.folder opt.sequence '*' opt.img_ext]);
-n_data = length(data);
-
-fann = zeros(train_db.n_vert,2,n_data);
-ann = [];
-
-for i = 1:n_data
-
-  img = imread('/data/matlab/iccv2011_modified/02_data/obama1.jpg');
   
-  fann(:,:,i) = f.Track(img,[]);
-  
-  if 1
-    h = displayparts(1,img,fann(:,:,i),train_db.parts,train_db.n_parts,'green');
-    if opt.save_img
-      print(h,'-dpng',['../Fitting/Results/' data(i).name]);
+  if 1 
+    if all(all(fit(:,:,end)))
+      [rms_err,p2p_err,ram_err,hel_err] = computeerr(fit(:,:,end), ...
+        fitt, ...
+        fitt, ...
+        test_db.comp);
+      fprintf(['  - img: ' int2str(j) '/' int2str(test_ds.n_data) ...
+        '\t\t  rms_err: ' num2str(rms_err) ...
+        '\t  p2p_err: ' num2str(p2p_err) ...
+        '\t  ram_err: ' num2str(ram_err) ...
+        '\t  hel_err: ' num2str(hel_err) ...
+        '\n']);
+    else
+      fprintf([' - image: ' int2str(j) '/' int2str(test_ds.n_data) ...
+        '\t face not detected!' ...
+        '\n']);
     end
   end
 

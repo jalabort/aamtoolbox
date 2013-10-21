@@ -10,7 +10,7 @@ if  opt.noise_scale == 0 || strcmp(opt.detector,'matlab')
   n_rand = 1;
   n_fittings = test_ds.n_data;
 else
-  n_rand = 5;
+  n_rand = 10;
   n_fittings = n_rand * test_ds.n_data;
 end
 fann = zeros(train_db.n_vert,2,n_fittings);
@@ -19,9 +19,9 @@ oann = fann;
 
 % fitting loop
 if opt.parallel
-  Fit_Parallel
+  Fit_from_Folder
 else
-  Fit_Sequential
+  Fit_from_Folder
 end
 
 % save fitted ann

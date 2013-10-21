@@ -5,7 +5,7 @@ function [fann,iann,oann] = FitSparse(obj,img,oann)
   fann = zeros([size(obj.sm{1}.mu_ann),obj.n_it+1]);
   
   [img,ann,scale] = normalizefacesize(img,oann,obj.sm{1});
-  [ann,detected,~] = obj.detector.Run(obj.sm{1},img,ann);
+  [ann,detected,~] = obj.detector.Run(obj.sm,img,ann);
   iann = ann ./ scale;
   
   if detected

@@ -2,7 +2,7 @@
 opt.bin_root = ...
   ['..' filesep, ... 
    'binarydb' filesep];
-opt.name = 'helen';
+opt.name = 'lfpw';
 opt.type = 'test';
 opt.ann = 'our';
 test_db = DB([opt.name '-' opt.type '-' opt.ann],opt.bin_root);
