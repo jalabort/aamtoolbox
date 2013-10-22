@@ -27,7 +27,7 @@ opt.m.warp = 'pwa';
 opt.m.interp = 'linear';
 
 opt.m.level = {1,0.5,0.25};
-opt.m.smoother = {'median'};
+opt.m.smoother = {'gaussian'};
 opt.m.sigma = {1,2,4};
 opt.m.feature = {'igo-double'};
 opt.m.tex_model = {'cent-norm'};

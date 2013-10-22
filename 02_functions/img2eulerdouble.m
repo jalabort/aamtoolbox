@@ -8,7 +8,7 @@ function [deuler_img] = img2eulerdouble(img)
   ny = sin(dir);
   nx2 = cos(dir2);
   ny2 = sin(dir2);
-  deuler_img = [nx;ny;nx2;ny2] / (2*numel(img)).^(1/2);
+  deuler_img = [nx;ny;nx2;ny2];
   
 end
 

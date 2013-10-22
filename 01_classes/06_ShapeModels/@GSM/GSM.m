@@ -34,7 +34,8 @@ classdef (Abstract) GSM < SM
       [obj.sim_mu,obj.sim_basis] = obj.ComputeSimilarityBasis();
       
       % set static size properties
-      obj.n_pc = size(obj.pc,2);
+      obj.n_pc = min(size(obj.pc,2),30);
+      obj.pc = obj.pc(:,1:obj.n_pc);
       obj.n_sim_basis = size(obj.sim_basis,2);
       
       % initialize dinamic size properties

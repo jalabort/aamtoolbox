@@ -7,9 +7,8 @@ function [euler_img] = img2euler(img,alpha)
   dir = img * alpha * pi;
   nx = cos(dir);
   ny = sin(dir);
-  norm_factor = sqrt(numel(img));
-  euler_img(:,:,1) = nx / norm_factor;
-  euler_img(:,:,2) = ny / norm_factor;
+  euler_img(:,:,1) = nx;
+  euler_img(:,:,2) = ny;
   
 end
 

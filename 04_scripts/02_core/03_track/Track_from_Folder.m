@@ -1,113 +1,64 @@
-display('- Creating fitter');
+display('- tracking');
+
+% read folder
+data = dir([path '*.' img_type]);
+n_fittings =  length(data);
+
+fann = zeros(train_db.n_vert,2,n_fittings);
+iann = fann;
+oann = fann;
+
+ini = annread([path data(1).name(1:strfind(data(1).name,'.')) ann_type],68);
+
+for i = 1:n_fittings
+
+  % read image from input file
+  img = imread([path data(i).name]);
+  ori = annread([path data(i).name(1:strfind(data(i).name,'.')) ann_type],68);
+
+  [fit] = f.TrackSparse(img,ini);
+  fann(:,:,i) = fit(:,:,end);
+  oann(:,:,i) = ori;
+  ini = fit(:,:,end);
   
-switch opt.algorithm
-  case 'pic-ssd'
-    f = F_PicSsd(m);
-  case 'pic-ecc'
-    f = F_PicEcc(m);
-  case 'aic-ssd'
-    f = F_AicSsd(m);
-  case 'aic-ecc'
-    f = F_AicEcc(m);
-  case 'sic-ssd'
-    f = F_SicSsd(m);
-  case 'sic-ecc'
-    f = F_SicEcc(m);
-end
-clear m
-
-if strcmp(opt.m.warp,'pwa')
-  switch opt.composition 
-    case 'baker'
-      for i = 1:f.n_level
-        f.w{i} = W_PWA_1(f.w{i});
-      end
-    case 'papandreou'
-      for i = 1:f.n_level
-        f.w{i} = W_PWA_2(f.w{i});
-      end
-  end
-end
-
-switch opt.m.tex_model 
-  case 'df-igo'
-    for i = 1:f.n_level
-      f.tm{i}.n_bin = opt.n_bin{i};
-      f.tm{i}.bin = f.tm{i}.SetBin();
-      siz = 2*opt.sigma{i}+1;
-      H = fspecial3('gaussian',[siz siz siz],opt.sigma{i});
-      f.tm{i}.smoother.H = H;
+  % show the fitting
+  if opt.show
+    if all(all(fit(:,:,end)))
+      h = 1;
+      aamshow(h,img,fit,test_db.parts);
+      drawnow
     end
-end
-
-switch opt.face_detector 
-  case 'gr-tr'
-    f.face_det = FD_GrTr();
-  case 'matlab'
-    f.face_det = FD_Mat();
-end
-
-for i = 1:f.n_level
-  f.tm{i}.n_c = opt.n_c{i};
-  if strcmp(opt.m.shape_model{i}(1:2),'cb')
-    f.sm{i}.n_p = opt.n_p2{i};
-    f.sm{i}.n_r = [opt.n_r{:,i}];
-    f.sm{i}.n_qpr = f.sm{i}.n_q + opt.n_p2{i} + sum([opt.n_r{:,i}]);
-  else
-    f.sm{i}.n_p = opt.n_p1{i};
-    f.sm{i}.n_qpr = f.sm{i}.n_q  + opt.n_p1{i};
-  end
-end
-
-f.n_it = opt.n_it;
-f.show_fitting = opt.show_fitting;
-
-display('- Initializing fitter');
-
-f = f.Initialize();
-
-display('- Tracking');
-
-data = dir([opt.folder opt.sequence '*' opt.img_ext]);
-n_data = length(data);
-
-t_anns = zeros(train_db.n_vert,2,n_data);
-ecc = 0;
-
-for i = 1:n_data
-
-  %img = imread([opt.folder opt.sequence data(i).name]);
-  img = a(:,:,:,i);
-  
-  if ecc < 0.05
-    ann = [];
-  end 
-  
-  [ann,ecc] = f.Track(img,ann);
-  t_anns(:,:,i) = ann;
-  
-  disp([' - Image: ' int2str(i) '/' int2str(n_data) '\t ecc: ' num2str(ecc)]);
-  displayparts(1,img,t_anns(:,:,i),train_db.parts,train_db.n_parts,'green');
-  
-end
-
-if opt.create_video
-  
-  writerObj = VideoWriter([opt.folder opt.sequence 'vid.avi']);
-  writerObj.FrameRate =  xyloObj.FrameRate;
-  writerObj.Quality = 100;
-  open(writerObj)
-
-  for k = 1:200
-%     img = imread([opt.folder opt.sequence data(k).name]);
-    img = a(:,:,:,k);
-    displayparts(1,img,t_anns(:,:,k),train_db.parts,train_db.n_parts,'green');
-    frame = getframe;
-    writeVideo(writerObj,frame);
+    % save images
+    if opt.save_img
+      frame = getframe(h);
+      imwrite(frame.cdata,[opt.img_root int2str(i)],'png'); 
+    end
   end
 
-  close(writerObj);
-  
+  if opt.verbose 
+    if all(all(fit(:,:,end)))
+      [rms_err,p2p_err,ram_err,hel_err] = computeerr(fit(:,:,end), ...
+        ori, ...
+        ori, ...
+        test_db.comp);
+      fprintf(['  - img: ' int2str(i) '/' int2str(test_db.n_data) ...
+        '\t\t  rms_err: ' num2str(rms_err) ...
+        '\t  p2p_err: ' num2str(p2p_err) ...
+        '\t  ram_err: ' num2str(ram_err) ...
+        '\t  hel_err: ' num2str(hel_err) ...
+        '\n']);
+    else
+      fprintf([' - image: ' int2str(i) '/' int2str(test_db.n_data) ...
+        '\t face not detected!' ...
+        '\n']);
+    end
+  end
+    
 end
-  
+
+
+% save fitted ann
+if opt.save_ann
+  saveann(opt,fann);
+end
 

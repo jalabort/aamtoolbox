@@ -25,7 +25,10 @@ classdef (Abstract) GTM < TM
       % compute pca
       obj.pca.Lp = Lp;
       [obj.mu,obj.pc,obj.ev] = obj.pca.Compute(tex);
-      obj.n_pc = size(obj.pc,2);
+      
+      % set static size properties
+      obj.n_pc = min(size(obj.pc,2),300);
+      obj.pc = obj.pc(:,1:obj.n_pc);
       
       % initialize dinamic size properties
       obj.n_c = obj.n_pc;

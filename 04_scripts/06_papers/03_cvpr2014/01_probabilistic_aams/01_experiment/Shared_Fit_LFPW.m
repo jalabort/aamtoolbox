@@ -7,6 +7,8 @@ opt.type = 'test';
 opt.ann = 'our';
 test_db = DB([opt.name '-' opt.type '-' opt.ann],opt.bin_root);
 
+path = ['..' filesep 'data' filesep opt.name filesep];
+
 % test dataset
 opt.id = 1:test_db.n_data;
 opt.reg_exp_query = test_db.RegExpQuery(opt.id);
@@ -18,4 +20,4 @@ opt.verbose = true;
 opt.show = true;
 opt.save_img = false;
 
-Fit_DS
+Fit_from_Folder

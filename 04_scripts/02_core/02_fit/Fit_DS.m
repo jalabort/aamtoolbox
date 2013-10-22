@@ -22,9 +22,9 @@ oann = fann;
 
 % fitting loop
 if opt.parallel
-  Fit_from_Folder
+  Fit_Parallel
 else
-  Fit_from_Folder
+  Fit_Sequential
 end
 
 % save fitted ann

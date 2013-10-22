@@ -11,11 +11,10 @@ function [digo_img] = img2igodouble(img)
   ngy = sin(gdir);
   ngx2 = cos(gdir2);
   ngy2 = sin(gdir2);
-  norm_factor = (2*numel(img)).^(1/2);
-  digo_img(:,:,1) = ngx / norm_factor;
-  digo_img(:,:,2) = ngy / norm_factor;
-  digo_img(:,:,3) = ngx2 / norm_factor;
-  digo_img(:,:,4) = ngy2 / norm_factor;
+  digo_img(:,:,1) = ngx;
+  digo_img(:,:,2) = ngy;
+  digo_img(:,:,3) = ngx2;
+  digo_img(:,:,4) = ngy2;
   
   
 end

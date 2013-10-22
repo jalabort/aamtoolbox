@@ -8,9 +8,8 @@ function [igo_img] = img2igo(img)
   gdir = angle(gx + 1j*gy);
   ngx = cos(gdir);
   ngy = sin(gdir);
-  norm_factor = sqrt(numel(img));
-  igo_img(:,:,1) = ngx / norm_factor;
-  igo_img(:,:,2) = ngy / norm_factor;
+  igo_img(:,:,1) = ngx;
+  igo_img(:,:,2) = ngy;
   
 end
 
