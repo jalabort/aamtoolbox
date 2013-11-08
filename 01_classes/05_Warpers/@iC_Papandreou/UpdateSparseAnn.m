@@ -17,15 +17,12 @@ function [ann,pk] = UpdateSparseAnn(obj,sm,ann,delta,p0,reg)
   pk = p0 + Jp * delta;
   %-----
   if reg == 1
-    sigma_pk = inv(Jp * obj.sigma_inv_p * Jp);
-    inv_sigma_p0 = inv(obj.sigma_p0); 
-    inv_sigma_pk = inv(sigma_pk);
-    sigma = inv(inv_sigma_p0 + inv_sigma_pk);
-    pk = sigma * (inv_sigma_pk * pk + inv_sigma_p0 * p0);
-    %obj.sigma_p0 = sigma;
+    sigma_pk = Jp * obj.sigma_inv_p * Jp;
+    inv_sigma = inv(obj.sigma_p0) + inv(sigma_pk);
+    pk = inv_sigma \ (sigma_pk \ pk + obj.sigma_p0 \ p0);
   elseif reg == 2
     P = obj.sigma_p0 + obj.sigma_pk;
-    K = P  / (P + inv(Jp * obj.sigma_inv_p * Jp));
+    K = P  / (P + Jp * obj.sigma_inv_p * Jp);
     pk = p0 + K * (pk - p0);
     obj.sigma_pk = (eye(size(K)) - K) * P;
   end

@@ -4,12 +4,12 @@ if  opt.noise_scale == 0 || strcmp(opt.detector,'matlab')
   n_rand = 1;
   n_fittings = test_db.n_data;
 else
-  n_rand = 10;
+  n_rand = 1;
   n_fittings = n_rand * test_db.n_data;
 end
-fann = zeros(train_db.n_vert,2,n_fittings);
-iann = fann;
-oann = fann;
+fann = zeros(train_db.n_vert,2,opt.n_it+2,n_fittings);
+iann = zeros(train_db.n_vert,2,n_fittings);
+oann = iann;
 
 % read folder
 data = dir([path '*.' test_db.img_type]);

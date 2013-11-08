@@ -123,6 +123,7 @@ for i = 1:n_level
     else
       alpha = cell2mat(opt.m.tex_alpha); 
     end
+    % covert to intensity
     train_ds2 = train_ds2.ToIntensity();
     switch feature_type
       case 'igo'

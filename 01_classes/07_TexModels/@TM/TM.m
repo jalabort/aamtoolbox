@@ -20,9 +20,8 @@ classdef (Abstract) TM
     feature_type
     factor
     
-    sigma_ck
-    sigma_ckk
     sigma_c0
+    sigma_ck
   end
   
   methods

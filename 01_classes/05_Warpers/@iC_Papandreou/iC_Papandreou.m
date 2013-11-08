@@ -4,7 +4,6 @@ classdef (Abstract) iC_Papandreou < iC & handle
   
   properties
     sigma_inv_p
-    inv_sigma_p0
     sigma_p0
     sigma_pk
   end

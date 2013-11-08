@@ -5,16 +5,13 @@ function [delta,ck] = Optimize(obj,i,~,tex,c0,~)
   ck = obj.tm{i}.Tex2C(tex);
   %-----
   if obj.tex_reg == 1
-    inv_sigma_c0 = inv(obj.tm{i}.sigma_c0); 
-    inv_sigma_ck = inv(obj.tm{i}.sigma_ck);
-    sigma = inv(inv_sigma_c0 + inv_sigma_ck);
-    ck = sigma * (inv_sigma_ck * ck + inv_sigma_c0 * c0);
-    %obj.tm{i}.sigma_c0 = sigma;
+    inv_sigma = (inv(obj.tm{i}.sigma_c0) + inv(obj.tm{i}.sigma_ck{i}));
+    ck = inv_sigma \ (obj.sigma_ck{i} \ ck + obj.tm{i}.sigma_c0 \ c0);
   elseif obj.tex_reg == 2
-    P = obj.tm{i}.sigma_c0 + obj.tm{i}.sigma_ck;
+    P = obj.tm{i}.sigma_c0 + obj.sigma_ck{i};
     K = P  / (P + inv(obj.tm{i}.sigma_ck));
     ck = c0 + K * (ck - c0);
-    obj.tm{i}.sigma_ck = (eye(size(K)) - K) * P;
+    obj.sigma_ck{i} = (eye(size(K)) - K) * P;
   end
   %-----
   t = obj.tm{i}.C2Tex(ck);
@@ -35,7 +32,7 @@ function [delta,ck] = Optimize(obj,i,~,tex,c0,~)
   
   %-----
   if obj.shape_reg ~= 0
-    obj.w{i}.sigma_inv_p = obj.tm{i}.variance^2 * inv(H);
+    obj.w{i}.sigma_inv_p = obj.tm{i}.variance * inv(H);
   end
   %-----
   

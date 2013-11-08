@@ -11,6 +11,8 @@ if ~loaded
   
   % load training dataset
   [train_ds,loaded] = train_db.Load(opt.m.reg_exp_query);
+  % crop facial region
+  train_ds = train_ds.CropFaces();
   assert(loaded,'training set could not be loaded!'); 
   
   n_level = length(opt.m.level);

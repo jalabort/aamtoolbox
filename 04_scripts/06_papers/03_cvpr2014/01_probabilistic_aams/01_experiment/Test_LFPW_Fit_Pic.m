@@ -14,6 +14,7 @@ Shared_Fitter_LFPW
  
 
 %% Fit DS
+
 opt.ann_root =  ...
   ['..' filesep, ... 
    'result' filesep, ...
@@ -31,5 +32,5 @@ Shared_Fit_LFPW
 %% Test DS
 
 % shared options
-Shared_Test_LFPW
+Shared_Test_Fit_LFPW
 

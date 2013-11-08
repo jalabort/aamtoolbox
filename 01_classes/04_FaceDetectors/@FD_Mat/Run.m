@@ -9,17 +9,17 @@ function [ann,detected,p] = Run(obj,sm,img,~)
   if ~isempty(bbox)
     % if detected
     detected = true;
-    aux = (max(sm.Shape2Ann(sm.mu)) -  min(sm.Shape2Ann(sm.mu))); %ideally this should be part of sm...
-    scale = 0.9 * bbox(end,3) / aux(1); 
-    trans = repmat([(bbox(end,1)+bbox(end,3)/2),(bbox(end,2)+bbox(end,4)/1.65)],sm.n_vert,1);
-    ann = scale * sm.mu_ann +  trans;
+    aux = (max(sm{1}.Shape2Ann(sm{1}.mu)) -  min(sm{1}.Shape2Ann(sm{1}.mu))); %ideally this should be part of sm{1}...
+    scale = 1 * bbox(end,3) / aux(1); 
+    trans = repmat([(bbox(end,1)+bbox(end,3)/2),(bbox(end,2)+bbox(end,4)/1.65)],sm{1}.n_vert,1);
+    ann = scale * sm{1}.mu_ann +  trans;
   
     if obj.rotation
       % if rotation flag is on
-      p = sm.Ann2SRT(ann);
+      p = sm{1}.Ann2SRT(ann);
     else
       % if not
-      p = sm.Ann2SRT(ann);
+      p = sm{1}.Ann2SRT(ann);
     end
     
   else

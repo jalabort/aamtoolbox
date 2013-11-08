@@ -6,7 +6,7 @@ font_size = 12;
 set(gca,'FontWeight','bold');
 
 % title
-title(opt.name,'Interpreter','tex','fontsize',font_size);
+%title(opt.name,'Interpreter','tex','fontsize',font_size);
 
 % grid
 grid on
@@ -32,7 +32,7 @@ switch opt.err_type
     xlabel('mean face-size normalized poit-to-point error', ...
       'Interpreter','tex','fontsize',font_size);
     limit = 0.05;
-    step = 0.00025;
+    step = 0.0005;
     xtick = 0:0.01:limit;
   case 'hel'
     xlabel('mean interocular-distance normalized poit-to-point error', ...
@@ -46,7 +46,7 @@ set(gca, 'xtick', xtick);
 % compute error
 err = zeros(n_fittings,1);
 for i = 1:n_fittings
-  [rms_err,p2p_err,ram_err,hel_err] = computeerr(fann(opt.point_list,:,i), ...
+  [rms_err,p2p_err,ram_err,hel_err] = computeerr(squeeze(fann(opt.point_list,:,i)), ...
         oann(opt.point_list,:,i), ...
         oann(:,:,i), ...
         test_db.comp);

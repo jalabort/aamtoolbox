@@ -42,7 +42,9 @@ function [delta,ck] = Optimize(obj,i,~,tex,c0,~)
   
   %-----
   if obj.shape_reg ~= 0
-    obj.w{i}.sigma_inv_p = obj.tm{i}.variance^2 * inv(H);
+    var = (error' * error) / (obj.tm{i}.n_face_pixels2 - obj.sm{i}.n_p);
+    var = mean(obj.sm{i}.ev(obj.sm{i}.n_p+1:end));
+    obj.w{i}.sigma_inv_p = var * inv(H);
   end
   %-----
 

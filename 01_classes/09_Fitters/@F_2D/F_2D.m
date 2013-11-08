@@ -5,8 +5,12 @@ classdef (Abstract) F_2D < M_2D & handle
   properties
     detector
     n_it
+    
     shape_reg
+    sigma_pk
+    
     tex_reg
+    sigma_ck
   end
   
   methods

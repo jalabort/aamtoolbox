@@ -8,7 +8,7 @@ opt.ann = 'our';
 test_db = DB([opt.name '-' opt.type '-' opt.ann],opt.bin_root);
 
 % folder
-sequence = '1786_02_006_sylvester_stallone';
+sequence = '0681_01_012_gloria_estefan';
 name = ['youtube' filesep sequence];
 path = ['..' filesep 'data' filesep name filesep];
 img_type = 'png';
@@ -16,7 +16,7 @@ ann_type = 'pts';
 
 % control options
 opt.save_ann = false;
-opt.verbose = true;
+opt.verbose = false;
 opt.show = true;
 opt.save_img = false;
 

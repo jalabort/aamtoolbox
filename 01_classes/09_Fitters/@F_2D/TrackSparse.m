@@ -2,6 +2,8 @@ function [fann] = TrackSparse(obj,img,iann)
   %TrackSparse Summary of this function goes here
   %   Detailed explanation goes here
   
+  obj.ResetPriors();
+  
   fann = zeros([size(obj.sm{1}.mu_ann),obj.n_it+1]);
   
   if isempty(iann)

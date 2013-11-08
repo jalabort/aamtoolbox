@@ -41,6 +41,7 @@ classdef DS
     ann = GetAnn(obj)
     ref_ann = ComputeRefAnn(obj)
     [data] = NormalizeFaceSize(obj,sm)
+    [data] = CropFaces(obj,sm)
     [data] = Scale(obj,scale,smoother)
   end
   

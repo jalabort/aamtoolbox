@@ -5,16 +5,24 @@ function [delta,ck,H] = Optimize(obj,i,~,tex,c0,~)
   ck = obj.tm{i}.Tex2C(tex);
   %-----
   if obj.tex_reg == 1
-    inv_sigma_c0 = inv(obj.tm{i}.sigma_c0); 
-    inv_sigma_ck = inv(obj.tm{i}.sigma_ck);
-    sigma = inv(inv_sigma_c0 + inv_sigma_ck);
-    ck = sigma * (inv_sigma_ck * ck + inv_sigma_c0 * c0);
-    %obj.tm{i}.sigma_c0 = sigma;
+    t2 = obj.tm{i}.C2Tex(ck);
+    t2 = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(t2));
+    tex2 = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(tex));
+    error2 = t2 - tex2;
+    var = (error2' * error2) / (obj.tm{i}.n_face_pixels2 - obj.tm{i}.n_c);
+    sigma_aux =  var * (obj.tm{i}.pc(:,1:obj.tm{i}.n_c)' * obj.tm{i}.pc(:,1:obj.tm{i}.n_c));
+    inv_sigma = inv(obj.tm{i}.sigma_c0) + inv(sigma_aux);
+    ck = inv_sigma \ (sigma_aux \ ck + obj.tm{i}.sigma_c0 \ c0);
   elseif obj.tex_reg == 2
-    P = obj.tm{i}.sigma_c0 + obj.tm{i}.sigma_ck;
-    K = P  / (P + inv(obj.tm{i}.sigma_ck));
+    t2 = obj.tm{i}.C2Tex(ck);
+    t2 = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(t2));
+    tex2 = obj.tm{i}.Img2CroppedTex(obj.tm{i}.Tex2Img(tex));
+    error2 = t2 - tex2;
+    var = (error2' * error2) / (obj.tm{i}.n_face_pixels2 - obj.tm{i}.n_c);
+    P = obj.tm{i}.sigma_c0 + obj.sigma_ck{i};
+    K = P  / (P + var * (obj.tm{i}.pc(:,1:obj.tm{i}.n_c)' * obj.tm{i}.pc(:,1:obj.tm{i}.n_c)));
     ck = c0 + K * (ck - c0);
-    obj.tm{i}.sigma_ck = (eye(size(K)) - K) * P;
+    obj.sigma_ck{i} = (eye(size(K)) - K) * P;
   end
   %-----
   t = obj.tm{i}.C2Tex(ck);
@@ -39,9 +47,10 @@ function [delta,ck,H] = Optimize(obj,i,~,tex,c0,~)
   delta = 0.5 * H \ J_x_error;
   delta = [delta; delta];
   
-   %-----
+  %-----
   if obj.shape_reg ~= 0
-    obj.w{i}.sigma_inv_p = obj.tm{i}.variance^2 * inv(H);
+    var = (error' * error) / (obj.tm{i}.n_face_pixels2 - obj.sm{i}.n_p);
+    obj.w{i}.sigma_inv_p = var * inv(H);
   end
   %-----
   

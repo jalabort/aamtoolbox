@@ -2,7 +2,7 @@ clear all
 close all
 clc
 
-pathA = '/data/databases/afw/images/test/';
+pathA = '/data/databases/combined-rescaled/images/train/';
 
 list = dir([pathA '*.jpg']);
 n = length(list);

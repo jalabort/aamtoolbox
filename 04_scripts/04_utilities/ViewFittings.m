@@ -1,19 +1,33 @@
-parfor i = 1:n_fittings
+% options
+opt.show = true;
+opt.print_img = true;
+opt.verbose = true;
+
+for i = 1:n_fittings
 
   j = floor((i-1)/n_rand) + 1;
 
   % read image from input file
   img=imread([path data(j).name]);
-  ori = annread([path data(j).name(1:strfind(data(j).name,'.')) test_db.ann_type],68);
+  ori = annread([path data2(j).name],test_db.n_vert);
 
-  [fit,ini,~] = f.FitSparse(img,ori);
-  fann(:,:,:,i) = fit;
-  iann(:,:,i) = ini;
-  oann(:,:,i) = ori;
+  % show the fitting
+  if opt.show
+    if all(all(fann(:,:,i)))
+      h = 1;
+      aamshow(h,img,fann(:,:,i),test_db.parts);
+      drawnow
+      % print images
+      if opt.print_img
+        print(h, '-dpng', '-r1000', '-opengl', [opt.img_root int2str(i) '.png']);
+      end
+    end
+  end
 
-  if opt.verbose
-    if all(all(fit(:,:,end)))
-      [rms_err,p2p_err,ram_err,hel_err] = computeerr(fit(:,:,end), ...
+  % verbose
+  if opt.verbose 
+    if all(all(fann(:,:,i)))
+      [rms_err,p2p_err,ram_err,hel_err] = computeerr(fann(:,:,i), ...
         ori, ...
         ori, ...
         test_db.comp);
@@ -29,5 +43,5 @@ parfor i = 1:n_fittings
         '\n']);
     end
   end
-  
+    
 end
