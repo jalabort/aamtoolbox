@@ -2,8 +2,6 @@ function [fann,iann,oann] = FitSparse(obj,img,oann)
   %FitSparse Summary of this function goes here
   %   Detailed explanation goes here
   
-  obj.ResetPriors();
-  
   fann = zeros([size(obj.sm{1}.mu_ann),obj.n_it+1]);
   
   [iann,detected,~] = obj.detector.Run(obj.sm,img,oann);
@@ -12,7 +10,7 @@ function [fann,iann,oann] = FitSparse(obj,img,oann)
     
     [img,ann,scale] = normalizefacesize(img,iann,obj.sm{1});
     n_it_level = ceil(obj.n_it / obj.n_level);
-    fann(:,:,1) = ann ./ scale;
+    fann(:,:,1) = ann;
     it = 1;
     
     for i = obj.n_level:-1:1
